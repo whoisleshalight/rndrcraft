@@ -28,21 +28,27 @@ const marquee = () => {
 		};
 	};
 
-	const onWindowWidthResize = (cb) => {
-		if (!cb && !isFunction(cb)) return;
-
-		let prevWidth = 0;
+	const onElementResize = (element, cb) => {
+		let prevWidth;
+		let prevHeight;
+		let prevViewportWidth;
 
 		const handleResize = () => {
-			const currentWidth = window.innerWidth;
+			const currentWidth = element.clientWidth;
+			const currentHeight = element.clientHeight;
 
-			if (prevWidth !== currentWidth) {
+			if (prevWidth !== currentWidth || prevHeight !== currentHeight || prevViewportWidth !== window.innerWidth) {
 				prevWidth = currentWidth;
-				cb();
+				prevHeight = currentHeight;
+				prevViewportWidth = window.innerWidth;
+				if (currentWidth > 0 && currentHeight > 0) cb();
 			}
 		};
 
-		window.addEventListener("resize", debounce(50, handleResize));
+		const scheduleResize = debounce(50, handleResize);
+		const resizeObserver = new ResizeObserver(scheduleResize);
+		resizeObserver.observe(element);
+		window.addEventListener("resize", scheduleResize);
 
 		handleResize();
 	};
@@ -254,7 +260,7 @@ const marquee = () => {
 			target.style.animationPlayState = type === "mouseenter" ? "paused" : "running";
 		};
 
-		onWindowWidthResize(onResize);
+		onElementResize($wrapper, onResize);
 	});
 };
 
