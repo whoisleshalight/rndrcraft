@@ -1,6 +1,33 @@
-@use "sass:math";
-@use "@styles/settings.scss" as *;
-@use "@styles/includes/mixins.scss" as *;
+//!! ================================================ Demo version style for main section product home page
+.main__mobile-left {
+	.main__item:nth-child(2) {
+		@media (min-width: toEm(320)) {
+			height: 210px;
+		}
+
+		@media (min-width: toEm(480)) {
+			height: toRem(250);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			height: toRem(250);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			height: 300px;
+		}
+
+		@media (min-width: toEm(991.98)) {
+			height: toRem(350);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			height: auto;
+		}
+	}
+}
+
+//!! ================================================
 
 .main {
 	@media (min-width: toEm(320)) {

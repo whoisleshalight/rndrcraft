@@ -1,32 +1,3 @@
-@use "sass:math";
-@use "@styles/settings.scss" as *;
-@use "@styles/includes/mixins.scss" as *;
-
-.asside {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-
-	@media (min-width: toEm(320)) {
-		gap: toRem(80);
-		margin-bottom: toRem(80);
-	}
-
-	@media (min-width: toEm(767.98)) {
-		gap: toRem(120);
-		margin-bottom: toRem(120);
-	}
-
-	@media (min-width: toEm(1279.98)) {
-		gap: toRem(24);
-		margin-bottom: toRem(0);
-	}
-}
-
-.asside__wrapper {
-	flex: 1 1 auto;
-}
-
 .item-collection-info {
 	&__preview {
 		display: flex;
@@ -166,7 +137,7 @@
 	}
 }
 
-.product-info {
+.collection-info.product-info {
 	@media (min-width: toEm(320)) {
 		padding-top: calc(32px + 50px);
 	}

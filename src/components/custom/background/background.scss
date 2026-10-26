@@ -1,0 +1,26 @@
+._background {
+	&::before {
+		content: "";
+		background: url("@img/home/bg.png");
+		background-position: left top;
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: -1;
+
+		@media (min-width: toEm(1940)) {
+			// height: auto;
+		}
+	}
+
+	&.catalog {
+		background-size: contain;
+	}
+}
+
+//========================================================================================================================================================
+// ** Subscribe section

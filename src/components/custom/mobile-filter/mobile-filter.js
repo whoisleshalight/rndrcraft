@@ -1,3 +1,5 @@
+import './mobile-filter.scss';
+
 import { bodyLock, bodyUnlock, bodyLockStatus } from '@js/common/functions.js';
 
 const root = document.documentElement;

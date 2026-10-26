@@ -1,3 +1,6 @@
+import './slider.scss';
+import './collection-preview.scss';
+
 import Swiper from 'swiper';
 import { Autoplay, Navigation, Pagination } from 'swiper/modules';
 

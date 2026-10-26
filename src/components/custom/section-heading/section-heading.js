@@ -1,0 +1,1 @@
+import './section-heading.scss';

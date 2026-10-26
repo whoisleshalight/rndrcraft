@@ -1,0 +1,52 @@
+@use "@components/custom/icon/_mixins.scss" as icons;
+.breadcrumb {
+	ul {
+		display: flex;
+		align-items: center;
+		flex-wrap: wrap;
+		gap: toRem(8);
+
+		li {
+			display: flex;
+			align-items: center;
+			flex-direction: row-reverse;
+			gap: toRem(8);
+
+			&:not(:last-child) {
+				&::before {
+					@include icons.svgIcon("cube");
+					font-size: toRem(8);
+				}
+			}
+
+			&:last-child {
+				pointer-events: none;
+			}
+
+			a {
+				font-weight: 500;
+				text-transform: uppercase;
+				color: $blackLightColor;
+				transition: all 0.4s;
+
+				@media (any-hover: hover) {
+					&:hover {
+						color: $mainColor;
+					}
+				}
+
+				@media (min-width: toEm(320)) {
+					font-size: toRem(14);
+				}
+
+				@media (min-width: toEm(575.98)) {
+					font-size: toRem(16);
+				}
+			}
+		}
+	}
+
+	&:not(:last-child) {
+		margin-bottom: toRem(8);
+	}
+}

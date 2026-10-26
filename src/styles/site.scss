@@ -3,7 +3,7 @@
 @use "@styles/includes/mixins.scss" as *;
 
 body {
-	max-width: 100vw;
+	width: 100vw;
 	overflow-x: hidden;
 	transition: all 0.4s;
 
@@ -138,3 +138,6 @@ body {
 
 // Підключення базових стилів, шаблонів (заготівель) та допоміжних класів
 // Для підключення/вимкнення конкретних стилів дивись base.scss
+[class*="__container"] {
+	transition: all 0.4s;
+}

@@ -1,32 +1,7 @@
-@use "sass:math";
-@use "@styles/settings.scss" as *;
-@use "@styles/includes/mixins.scss" as *;
-
-.top-catalog {
-
-	&__box {
-		display: flex;
-		justify-content: space-between;
-		gap: toRem(32);
-		@media (min-width:toEm(320)){
-			  flex-direction: column;
-		}
-		@media (min-width:toEm(575.98)){
-		flex-direction: row;
-		align-items: center;
-
-		}
-	}
-
-	&__title {}
-
-	&__filter-mobile {}
-}
-
 .mobile-filter {
 	position: relative;
 
-	&__btn {
+	.mobile-filter__btn {
 		@media (min-width:toEm(320)){
 			  width: 100%;justify-content: center;
 		}

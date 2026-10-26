@@ -1,3 +1,4 @@
+import './select.scss';
 // Підключення функціоналу "Чортоги Фрілансера"
 import { isMobile, slideUp, slideDown, slideToggle, FLS } from "@js/common/functions.js";
 // Підключення функціоналу модуля форм

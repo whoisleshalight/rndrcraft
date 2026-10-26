@@ -1,0 +1,13 @@
+.actions {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	@media (min-width: toEm(320)) {
+		margin-top: toRem(40);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		margin-top: toRem(64);
+	}
+}

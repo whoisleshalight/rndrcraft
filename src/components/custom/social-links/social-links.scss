@@ -1,0 +1,114 @@
+._social-list {
+	display: flex;
+
+	background-color: $greenColor;
+	border-radius: $radius50;
+
+	.social & {
+		@media (max-width: toEm(575.98)) {
+			width: 100%;
+		}
+	}
+
+	@media (min-width: toEm(320)) {
+		gap: toRem(35);
+	}
+
+	@media (max-width: toEm(575.98)) {
+		justify-content: space-between;
+	}
+
+	@media (min-width: toEm(320)) {
+		padding-top: toRem(8);
+		padding-bottom: toRem(8);
+		padding-left: toRem(32);
+		padding-right: toRem(32);
+	}
+
+	@media (min-width: toEm(575.98)) {
+		padding-right: toRem(51);
+		padding-left: toRem(51);
+		gap: toRem(40);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-right: toRem(47.5);
+		padding-left: toRem(47.5);
+		padding-top: toRem(16);
+		padding-bottom: toRem(16);
+		gap: toRem(24);
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		padding-right: toRem(44.5);
+		padding-left: toRem(44.5);
+		gap: toRem(32);
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		padding-right: toRem(69);
+		padding-left: toRem(69);
+	}
+
+	&:not(:last-child) {
+		margin-bottom: toRem(24);
+	}
+
+	li a {
+		transition: all 0.6s;
+		position: relative;
+		border-radius: toRem(24);
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		// &::after{
+		// 	content:'';
+		// 	position: absolute;bottom: 0;left: 50%;width: 0;height: 2px;transform: translateX(-50%);
+		// 	background-color: $mainColor;transition: all 0.4s;
+		// }
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: #000;
+
+				&::before {
+					color: $greenColor;
+					transform: scale(0.8);
+				}
+			}
+		}
+
+		&::before {
+			transition: all 0.6s;
+			color: $mainColor;
+
+			@media (min-width: toEm(320)) {
+				font-size: toRem(40);
+			}
+
+			@media (min-width: toEm(1439.98)) {
+				font-size: toRem(48);
+			}
+		}
+
+		// &._no-hover{
+		// transform: scale(.9);
+		// opacity: .4;
+		// opacity: 0;
+		// }
+		// &._hover{
+		// opacity: .4;
+		// &::after{width: 100%;}
+		// &::before{
+		// 	transform: translateY(toRem(-6));
+		// }
+		// transform: scale(1.1);
+		// transform: scale(1.1);
+		// &::before{
+		// 	color: $greenColor;
+		// }
+		// }
+	}
+}
+
+//========================================================================================================================================================

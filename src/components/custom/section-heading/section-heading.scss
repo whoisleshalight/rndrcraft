@@ -1,0 +1,74 @@
+.top-light {
+	background: url("@img/home/common/top/bg.jpg");
+	background-position: left top !important;
+	background-size: cover !important;
+
+	@media (min-width: toEm(320)) {
+		border-radius: toRem(24);
+		margin-bottom: toRem(16);
+		padding: toRem(24);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		border-radius: toRem(32);
+		padding: toRem(29) toRem(40);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		border-radius: $radius40;
+		margin-bottom: toRem(24);
+	}
+}
+
+.top {
+	display: flex;
+	gap: toRem(12);
+	background: url("@img/home/common/top/bg.jpg");
+	background-position: left top !important;
+	background-size: cover !important;
+
+	@media (min-width: toEm(320)) {
+		padding-top: toRem(24);
+		padding-bottom: toRem(24);
+		padding-right: toRem(24);
+		padding-left: toRem(24);
+		border-radius: $radius24;
+		flex-direction: column;
+	}
+
+	@media (min-width: toEm(767.98)) {
+		padding-top: toRem(32);
+		padding-bottom: toRem(32);
+		padding-right: toRem(32);
+		padding-left: toRem(32);
+		border-radius: $radius32;
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-top: toRem(22);
+		padding-bottom: toRem(22);
+		padding-right: toRem(40);
+		padding-left: toRem(40);
+		border-radius: $radius40;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		padding-top: toRem(20);
+		padding-bottom: toRem(20);
+		padding-right: toRem(40);
+		padding-left: toRem(40);
+	}
+
+	&:not(:last-child) {
+		@media (min-width: toEm(320)) {
+			margin-bottom: toRem(16);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			margin-bottom: toRem(24);
+		}
+	}
+}

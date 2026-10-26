@@ -1,0 +1,12 @@
+.more-collections {
+	@media (min-width: toEm(320)) {
+		padding-top: toRem(56);
+		padding-bottom: toRem(56);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-top: toRem(80);
+		padding-bottom: toRem(80);
+	}
+}
+

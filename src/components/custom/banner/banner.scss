@@ -1,0 +1,190 @@
+._title-banner {
+	font-weight: 500;
+	color: $whiteColor;
+
+	@media (min-width: toEm(320)) {
+		font-size: toRem(40);
+		max-width: toRem(298);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		font-size: toRem(56);
+		max-width: toRem(361);
+	}
+
+	@media (min-width: toEm(991.98)) {
+		max-width: 100%;
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		font-size: toRem(64);
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		font-size: toRem(72);
+	}
+
+	@media (min-width: toEm(1600)) {
+		font-size: toRem(88);
+	}
+
+	&:not(:last-child) {
+		@media (min-width: toEm(320)) {
+			margin-bottom: toRem(24);
+		}
+
+		@media (min-width: toEm(991.98)) {
+			margin-bottom: toRem(24);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			margin-bottom: toRem(40);
+		}
+	}
+}
+
+._logo-banner {
+	@media (min-width: toEm(320)) {
+		margin-bottom: toRem(176);
+	}
+
+	@media (min-width: toEm(575.98)) {
+		margin-bottom: toRem(134);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		margin-bottom: toRem(402);
+	}
+
+	@media (min-width: toEm(991.98)) {
+		margin-bottom: toRem(82);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		margin-bottom: toRem(74);
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		margin-bottom: toRem(98);
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		margin-bottom: toRem(80);
+	}
+
+	@media (min-width: toEm(1920)) {
+		margin-bottom: toRem(120);
+	}
+
+	img {
+		object-fit: contain;
+
+		@media (min-width: toEm(320)) {
+			max-width: toRem(208);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			max-width: toRem(291);
+		}
+
+		@media (min-width: toEm(1279.98)) {}
+
+		@media (min-width: toEm(1439.98)) {
+			max-width: toRem(416);
+		}
+	}
+}
+
+._banner-bg {
+	// border-radius: $radius24;
+	position: relative;
+	z-index: 2;
+	overflow: hidden;
+	// background: url("@img/home/subscribe/bg.jpg");
+	// background-repeat: no-repeat !important;
+	// background-position: center;
+	// background-size: cover !important;
+
+	&::before {
+		content: "";
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		z-index: 2;
+		height: 100%;
+		background: linear-gradient(90deg, rgba(0, 0, 0, 0.57) 0%, rgba(0, 0, 0, 0) 100%);
+	}
+
+	@media (min-width: toEm(320)) {
+		border-radius: $radius24;
+		padding-top: toRem(40);
+		padding-bottom: toRem(16);
+		padding-left: toRem(16);
+		padding-right: toRem(16);
+		margin-left: toRem(8);
+		margin-right: toRem(8);
+
+		.social & {
+			padding-left: toRem(8);
+			padding-right: toRem(8);
+		}
+	}
+
+	@media (min-width: toEm(575.98)) {
+		padding-left: toRem(40);
+		margin-left: toRem(16);
+		margin-right: toRem(16);
+		padding-bottom: toRem(40);
+		padding-right: toRem(40);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		border-radius: $radius32;
+		margin-left: toRem(31);
+		margin-right: toRem(31);
+	}
+
+	@media (min-width: toEm(991.98)) {
+		margin-left: toRem(16);
+		margin-right: toRem(16);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-top: toRem(48);
+		padding-bottom: toRem(48);
+		border-radius: $radius40;
+	}
+
+	@media (min-width: toEm(1440)) {
+		padding-top: toRem(64);
+		padding-bottom: toRem(64);
+	}
+
+	@media (min-width: toEm(1600)) {
+		padding-top: toRem(83);
+		padding-bottom: toRem(83);
+	}
+
+	@media (min-width: toEm(1920)) {
+		padding-top: toRem(104);
+		padding-bottom: toRem(104);
+	}
+
+	@media (min-width: toEm(2500)) {
+		//  padding-top: 20.5rem;
+		//   padding-bottom: 20.5rem;
+		padding-top: toRem(200);
+		padding-bottom: toRem(200);
+		max-width: 2400px;
+		margin: 0 auto;
+	}
+}
+
+.subscribe__container,
+.social__container {
+	position: relative;
+	z-index: 3;
+}
+
+//========================================================================================================================================================

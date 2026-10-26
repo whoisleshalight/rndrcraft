@@ -1,7 +1,3 @@
-@use "sass:math";
-@use "@styles/settings.scss" as *;
-@use "@styles/includes/mixins.scss" as *;
-
 .blog {
 	@media (min-width: toEm(320)) {
 		padding-top: toRem(56);

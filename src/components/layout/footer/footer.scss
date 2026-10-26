@@ -1,6 +1,51 @@
-@use "sass:math";
-@use "@styles/settings.scss" as *;
-@use "@styles/includes/mixins.scss" as *;
+// Заголовки, загальні БЕМ блоки та інше...
+// ** BTN
+._footer-social-create-btn {
+	display: flex;
+	align-items: center;
+	gap: toRem(8);
+	border: 2px solid $mainColor;
+	padding-top: toRem(6);
+	padding-right: toRem(4);
+	padding-bottom: toRem(6);
+	padding-left: toRem(22);
+	background-color: $greenColor;
+	font-weight: 500;
+	justify-content: center;
+	transition: all 0.4s;
+	white-space: nowrap;
+	background-color: $mainColor;
+	border: 2px solid $greenColor;
+	border-radius: $radius24;
+	width: 100%;
+	color: $greenColor;
+
+	span:nth-child(1) {
+		font-weight: 500;
+	}
+
+	span:nth-child(2) {
+		background-color: $greenColor;
+		color: $mainColor;
+		font-weight: 600;
+		border-radius: $radius18;
+		padding: toRem(14);
+		transition: all 0.4s;
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			background-color: $greenColor;
+			color: $mainColor;
+			border: 2px solid $mainColor;
+
+			span:nth-child(2) {
+				background-color: $mainColor;
+				color: $greenColor;
+			}
+		}
+	}
+}
 
 //====================================================================================================
 .footer {

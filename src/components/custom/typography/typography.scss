@@ -1,0 +1,63 @@
+._title {
+	font-weight: 600;
+
+	@media (min-width: toEm(320)) {
+		font-size: toRem(24);
+	}
+
+	@media (min-width: toEm(575.98)) {
+		font-size: toRem(32);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		font-size: toRem(40);
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		font-size: toRem(48);
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		font-size: toRem(56);
+	}
+}
+
+._title-two {
+	font-weight: 600;
+
+	@media (min-width: toEm(320)) {
+		font-size: toRem(24);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		font-size: toRem(32);
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		font-size: toRem(40);
+	}
+}
+
+._text {
+	font-weight: 500;
+
+	@media (min-width: toEm(320)) {
+		font-size: toRem(14);
+	}
+
+	@media (min-width: toEm(575.98)) {
+		font-size: toRem(16);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		font-size: toRem(20);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		flex: 0 0 toRem(536);
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		font-size: toRem(24);
+	}
+}

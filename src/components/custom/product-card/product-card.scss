@@ -1,8 +1,3 @@
-@use "@components/custom/icon/icon.scss" as icons;
-@use "sass:math";
-@use "@styles/settings.scss" as *;
-@use "@styles/includes/mixins.scss" as *;
-
 .cart-action {
 	z-index: 2;
 	background-color: transparent;
@@ -378,3 +373,95 @@
 }
 
 //========================================================================================================================================================
+
+.trending__item {
+		@media (max-width: toEm(575.98)) {
+			&:not(:last-child) {
+				margin-bottom: toRem(16);
+			}
+		}
+
+		a {
+			@media (max-width: toEm(1279.98)) {
+				position: relative;
+				width: 100%;
+				height: toRem(460);
+
+				border-bottom-right-radius: 16px;
+				border-bottom-left-radius: 16px;
+				overflow: hidden;
+			}
+
+			@media (max-width: toEm(991.98)) {
+				height: toRem(348);
+			}
+
+			@media (max-width: toEm(767.98)) {
+				height: toRem(268);
+			}
+
+			@media (max-width: toEm(575.98)) {
+				// height: toRem(359);
+				height: auto;
+				padding-bottom: 100%;
+			}
+
+			&.cart-action__buy {
+				@media (max-width: toEm(1279.98)) {
+					height: auto !important;
+					padding-bottom: toRem(0);
+				}
+			}
+		}
+	}
+.cart {
+	overflow: hidden;
+	position: relative;
+
+	@media (min-width: toEm(320)) {
+		border-radius: 24px;
+	}
+
+	@media (min-width: toEm(767.98)) {
+		border-top-left-radius: 32px;
+		border-top-right-radius: 32px;
+		border-bottom-right-radius: 32px;
+		border-bottom-left-radius: 32px;
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		border-radius: $radius40;
+	}
+
+	img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	&__btn {
+		position: absolute;
+		bottom: toRem(8);
+		left: toRem(8);
+		width: calc(100% - toRem(16));
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-bottom: 96.413%;
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		padding-bottom: 96.413%;
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		padding-bottom: 96.777%;
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		padding-bottom: 100%;
+	}
+}

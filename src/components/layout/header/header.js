@@ -1,3 +1,4 @@
+import './header.scss';
 import { bodyUnlock } from '@js/common/functions.js';
 
 const root = document.documentElement;

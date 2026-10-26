@@ -1,9 +1,4 @@
-@use "sass:math";
-@use "@styles/settings.scss" as *;
-@use "@styles/includes/mixins.scss" as *;
-
-.more-products,
-.more-collections {
+.more-products {
 	@media (min-width: toEm(320)) {
 		padding-top: toRem(56);
 		padding-bottom: toRem(56);

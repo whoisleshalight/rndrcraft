@@ -1,7 +1,3 @@
-@use "sass:math";
-@use "@styles/settings.scss" as *;
-@use "@styles/includes/mixins.scss" as *;
-
 // .menu {
 // 	// .menu__icon
 // 	&__icon {
@@ -105,6 +101,277 @@
 			&::after {
 				bottom: calc(50% - toRem(1));
 				transform: rotate(45deg);
+			}
+		}
+	}
+}
+
+
+.menu {
+	// display: none;
+
+	&__icon {}
+
+	&__body {}
+
+	&__list {
+		padding-top: toRem(30);
+		padding-bottom: toRem(30);
+		display: flex;
+		align-items: center;
+
+		text-transform: uppercase;
+		row-gap: toRem(8);
+
+		@media (min-width: toEm(1199.98)) {
+			gap: toRem(16);
+		}
+
+		@media (min-width: toEm(1440)) {
+			gap: toRem(24);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			column-gap: toRem(48);
+		}
+	}
+
+	&__item {}
+
+	&__link {
+		font-weight: 500;
+		white-space: nowrap;
+		line-height: 120%;
+		transition: all 0.3s;
+
+		@media (any-hover: hover) {
+			&:hover {
+				color: $greenColor;
+			}
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			font-size: toRem(14);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			font-size: toRem(16);
+		}
+	}
+}
+
+.menub {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: calc(var(--vh, 1vh) * 100);
+	z-index: 19;
+	background: url('@img/burger_bg.jpg') right top / cover no-repeat;
+	transition: all 0.3s;
+	opacity: 0;
+	visibility: hidden;
+	pointer-events: none;
+
+	[data-fls-menu-open] & {
+		opacity: 1;
+		visibility: visible;
+		pointer-events: all;
+	}
+
+	@media (min-width:toEm(320)) {
+		padding-top: toRem(49);
+	}
+
+	@media (min-width:toEm(991.98)) {
+		padding-top: toRem(81);
+	}
+
+	&__box {
+		display: flex;
+		height: 100%;
+	}
+
+	&__body {
+		flex: 1 1 auto;
+		display: flex;
+		flex-direction: column;
+
+		nav {
+			overflow: auto;
+			padding-left: 2.5rem;
+			padding-top: 5.625rem;
+			padding-bottom: toRem(40);
+			flex: 1 1 auto;
+			// @media (min-width:toEm(320)) {
+			// 	flex: 0 0 calc(100vh - 138px);
+
+			// }
+
+			// @media (min-width:toEm(991.98)) {
+			// 	flex: 0 0 calc(100vh - 170px);
+			// }
+
+			ul {
+				li {
+					transform: translateX(-40px);
+					opacity: 0;
+					visibility: hidden;
+
+					[data-fls-menu-open] &:nth-child(1) {
+						transition: all 0.3s;
+					}
+
+					[data-fls-menu-open] &:nth-child(2) {
+						transition: all 0.3s ease .1s;
+					}
+
+					[data-fls-menu-open] &:nth-child(3) {
+						transition: all 0.3s ease .14s;
+
+					}
+
+					[data-fls-menu-open] &:nth-child(4) {
+						transition: all 0.3s ease .2s;
+
+					}
+
+					[data-fls-menu-open] &:nth-child(5) {
+						transition: all 0.3s ease .25s;
+
+					}
+
+					[data-fls-menu-open] &:nth-child(6) {
+						transition: all 0.3s ease .3s;
+
+					}
+
+					[data-fls-menu-open] &:nth-child(7) {
+						transition: all 0.3s ease .35s;
+
+					}
+
+
+					[data-fls-menu-open] & {
+						transform: translateX(0);
+						opacity: 1;
+						visibility: visible;
+					}
+
+					a {
+						font-size: toRem(24);
+						font-weight: 600;
+						position: relative;
+						z-index: 2;
+					}
+
+					&:not(:last-child) {
+						margin-bottom: toRem(48);
+					}
+				}
+			}
+		}
+	}
+
+	&__bottom {
+		border-top: 1px solid hsla(0, 0%, 0%, 0.08);
+		position: relative;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: -119%;
+			left: 50%;
+			transform: translateX(-50%);
+			background: url('@img/burger-icon.svg') center bottom / contain no-repeat;
+			width: 50.112%;
+			height: 118.19%;
+			pointer-events: none;
+		}
+
+		a {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding-top: toRem(32);
+			padding-bottom: toRem(32);
+			font-size: toRem(24);
+			font-weight: 600;
+			transform: translateY(40px);
+			opacity: 0;
+			visibility: hidden;
+
+			[data-fls-menu-open] & {
+				transition: all 0.3s;
+				transform: translateY(0);
+				opacity: 1;
+				visibility: visible;
+			}
+		}
+	}
+
+	&__social {
+		padding-top: toRem(90);
+		border-left: 1px solid hsla(0, 0%, 0%, 0.08);
+		flex: 0 0 toRem(94);
+
+		ul {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			gap: toRem(80);
+
+			li {
+				transform: translateX(40px);
+				opacity: 0;
+				visibility: hidden;
+
+				[data-fls-menu-open] &:nth-child(1) {
+					transition: all 0.3s;
+				}
+
+				[data-fls-menu-open] &:nth-child(2) {
+					transition: all 0.3s ease .1s;
+				}
+
+				[data-fls-menu-open] &:nth-child(3) {
+					transition: all 0.3s ease .2s;
+
+				}
+
+				[data-fls-menu-open] &:nth-child(4) {
+					transition: all 0.3s ease .3s;
+
+				}
+
+				[data-fls-menu-open] &:nth-child(5) {
+					transition: all 0.3s ease .4s;
+
+				}
+
+				[data-fls-menu-open] &:nth-child(6) {
+					transition: all 0.3s ease .5s;
+
+				}
+
+				[data-fls-menu-open] &:nth-child(7) {
+					transition: all 0.3s ease .6s;
+				}
+
+				[data-fls-menu-open] & {
+					transform: translateX(0);
+					opacity: 1;
+					visibility: visible;
+				}
+
+				a {
+					svg {
+						width: 40px;
+						height: 40px;
+						object-fit: contain;
+						object-position: center;
+					}
+				}
 			}
 		}
 	}

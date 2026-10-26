@@ -1,7 +1,4 @@
-@use "@components/custom/icon/icon.scss" as icons;
-@use "sass:math";
-@use "@styles/settings.scss" as *;
-@use "@styles/includes/mixins.scss" as *;
+@use "@components/custom/icon/_mixins.scss" as icons;
 
 ._product-title {
 	font-weight: 600;
@@ -723,33 +720,27 @@
 	}
 }
 
-//!! ================================================ Demo version style for main section product home page
-.main__mobile-left {
-	.main__item:nth-child(2) {
-		@media (min-width: toEm(320)) {
-			height: 210px;
-		}
+.asside {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 
-		@media (min-width: toEm(480)) {
-			height: toRem(250);
-		}
+	@media (min-width: toEm(320)) {
+		gap: toRem(80);
+		margin-bottom: toRem(80);
+	}
 
-		@media (min-width: toEm(575.98)) {
-			height: toRem(250);
-		}
+	@media (min-width: toEm(767.98)) {
+		gap: toRem(120);
+		margin-bottom: toRem(120);
+	}
 
-		@media (min-width: toEm(767.98)) {
-			height: 300px;
-		}
-
-		@media (min-width: toEm(991.98)) {
-			height: toRem(350);
-		}
-
-		@media (min-width: toEm(1279.98)) {
-			height: auto;
-		}
+	@media (min-width: toEm(1279.98)) {
+		gap: toRem(24);
+		margin-bottom: toRem(0);
 	}
 }
 
-//!! ================================================
+.asside__wrapper {
+	flex: 1 1 auto;
+}
