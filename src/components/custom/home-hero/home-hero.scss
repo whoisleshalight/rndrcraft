@@ -1,0 +1,829 @@
+@use "sass:math";
+@use "@styles/settings.scss" as *;
+@use "@styles/includes/mixins.scss" as *;
+
+.main {
+	@media (min-width: toEm(320)) {
+		padding-bottom: toRem(44);
+		padding-top: toRem(80);
+	}
+
+	@media (min-width: toEm(575.98)) {
+		padding-bottom: toRem(56);
+	}
+
+	@media (min-width: toEm(991.98)) {
+		padding-top: toRem(112);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-top: toRem(144);
+		padding-bottom: toRem(80);
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		padding-top: toRem(163);
+	}
+
+	&__container {}
+
+	&__top {}
+
+	&__body {
+		display: flex;
+
+		@media (min-width: toEm(320)) {
+			gap: toRem(8);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			gap: toRem(16);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			gap: toRem(24);
+		}
+	}
+
+	&__item {
+		position: relative;
+		overflow: hidden;
+
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		align-items: flex-end;
+
+		&._big {
+			@media (min-width: toEm(1279.98)) {
+				min-height: toRem(480);
+			}
+
+			@media (min-width: toEm(1439.98)) {
+				min-height: toRem(520);
+			}
+
+			@media (min-width: toEm(1599.98)) {
+				min-height: toRem(576);
+			}
+
+			@media (min-width: toEm(1919.98)) {
+				min-height: toRem(720);
+			}
+		}
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		@media (min-width: toEm(320)) {
+			border-radius: $radius24;
+		}
+
+		@media (min-width: toEm(767.98)) {
+			border-radius: $radius32;
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			flex: 0 0 calc(33.333% - toRem(10.666));
+			padding: toRem(8);
+			border-radius: $radius40;
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			flex: 0 0 calc(33.333% - toRem(16));
+		}
+	}
+
+	&__box {
+		display: flex;
+		flex-direction: column;
+
+		.main__item._lite {
+			@media (min-width: toEm(1279.98)) {
+				flex: 0 0 calc(50% - toRem(8));
+			}
+
+			@media (min-width: toEm(1919.98)) {
+				flex: 0 0 calc(50% - toRem(12));
+			}
+		}
+
+		@media (max-width: toEm(1279.98)) {
+			display: none;
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			gap: toRem(16);
+			flex: 0 0 calc(33.333% - toRem(10.666));
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			flex: 0 0 calc(33.333% - toRem(16));
+			gap: toRem(24);
+		}
+	}
+
+	&__item-create {
+		background-color: $greenColor;
+
+		p {
+			font-weight: 500;
+
+			@media (min-width: toEm(320)) {
+				font-size: toRem(13);
+
+				span {
+					font-size: toRem(15);
+				}
+			}
+
+			@media (min-width: toEm(575.98)) {
+				font-size: toRem(18);
+
+				span {
+					font-size: toRem(18);
+				}
+
+				br {
+					display: none;
+				}
+			}
+
+			@media (min-width: toEm(767.98)) {
+				font-size: toRem(24);
+
+				span {
+					font-size: toRem(24);
+				}
+			}
+
+			@media (min-width: toEm(991.98)) {
+				font-size: toRem(32);
+
+				span {
+					font-size: toRem(32);
+				}
+			}
+
+			@media (min-width: toEm(1279.98)) {
+				font-size: toRem(24);
+
+				span {
+					font-size: toRem(24);
+				}
+			}
+
+			@media (min-width: toEm(1439.98)) {
+				font-size: toRem(28);
+
+				span {
+					font-size: toRem(28);
+				}
+			}
+
+			@media (min-width: toEm(1599.98)) {
+				font-size: toRem(32);
+
+				span {
+					font-size: toRem(32);
+				}
+			}
+
+			span {
+				font-weight: 600;
+			}
+
+			&:not(:last-child) {
+				@media (min-width: toEm(320)) {
+					margin-bottom: toRem(8);
+				}
+
+				@media (min-width: toEm(575.98)) {
+					margin-bottom: toRem(16);
+				}
+
+				@media (min-width: toEm(1919.98)) {
+					margin-bottom: toRem(26);
+				}
+			}
+		}
+
+		@media (min-width: toEm(320)) {
+			border: 2px solid $mainColor;
+			padding-top: toRem(23);
+			padding-bottom: toRem(6);
+			padding-left: toRem(6);
+			padding-right: toRem(6);
+			border-radius: $radius24;
+		}
+
+		@media (min-width: toEm(575.98)) {
+			padding-top: toRem(22);
+			padding-bottom: toRem(14);
+			padding-left: toRem(14);
+			padding-right: toRem(14);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			padding-top: toRem(37);
+			padding-bottom: toRem(22);
+			padding-left: toRem(22);
+			padding-right: toRem(22);
+			border-radius: $radius32;
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			flex: 0 0 calc(50% - toRem(8));
+			padding-top: toRem(46);
+			padding-bottom: toRem(20);
+			padding-left: toRem(20);
+			padding-right: toRem(20);
+			border: 4px solid $mainColor;
+			border-radius: $radius40;
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			padding: toRem(35) toRem(20) toRem(20) toRem(20);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			padding: toRem(36) toRem(32) toRem(32) toRem(32);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			padding: toRem(48) toRem(44);
+			flex: 0 0 calc(50% - toRem(12));
+		}
+	}
+}
+
+.main__mobile-right,
+.main__mobile-left {
+	@media (min-width: toEm(1279.98)) {
+		display: none;
+	}
+
+	@media (max-width: toEm(1279.98)) {
+		flex: 0 0 calc(50% - toRem(4));
+		display: flex;
+		flex-direction: column;
+		gap: toRem(8);
+	}
+}
+
+.main__mobile-left {
+	@media (max-width: toEm(1279.98)) {
+		.main__item.item-link._big {
+			height: toRem(504);
+		}
+	}
+
+	@media (max-width: toEm(767.98)) {
+		.main__item.item-link._big {
+			height: toRem(454);
+		}
+	}
+
+	@media (max-width: toEm(575.98)) {
+		.main__item.item-link._big {
+			height: toRem(299);
+		}
+	}
+}
+
+@media (max-width: toEm(1279.98)) {
+	.item-link {
+		background-color: $mainColor;
+	}
+
+	.cart-action__image-link {
+		position: relative;
+		height: 100%;
+		width: 100%;
+		display: block;
+		overflow: hidden;
+		border-bottom-left-radius: toRem(16);
+		border-bottom-right-radius: toRem(16);
+		// border-top-left-radius: toRem(32);
+		// border-top-right-radius: toRem(32);
+	}
+}
+
+.main__mobile-right {
+	.main__item.item-link._lite {
+		height: toRem(360);
+
+		@media (max-width: toEm(767.98)) {
+			height: toRem(272);
+		}
+
+		@media (max-width: toEm(575.98)) {
+			height: toRem(203);
+		}
+	}
+
+	.main__item.item-link._big {
+		flex: 1 1 auto;
+		// height: 100%;
+	}
+}
+
+.top-main {
+	display: flex;
+
+	@media (min-width: toEm(320)) {
+		flex-direction: column;
+		gap: toRem(16);
+		margin-bottom: toRem(32);
+	}
+
+	@media (min-width: toEm(991.98)) {}
+
+	@media (min-width: toEm(1279.98)) {
+		gap: toRem(136);
+		align-items: center;
+		flex-direction: row;
+		margin-bottom: toRem(64);
+	}
+
+	@media (min-width: toEm(1449.98)) {
+		gap: toRem(24);
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		gap: toRem(40);
+	}
+
+	&__info {
+		flex: 1 1 auto;
+
+		@media (min-width: toEm(767.98)) {
+			max-width: toRem(630);
+			width: 100%;
+		}
+
+		@media (min-width: toEm(991.98)) {
+			max-width: toRem(726);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			max-width: 100%;
+		}
+	}
+
+	&__uptitle {
+		font-weight: 500;
+		text-transform: uppercase;
+		line-height: 120%;
+
+		&:not(:last-child) {
+			margin-bottom: toRem(8);
+		}
+
+		@media (min-width: toEm(320)) {
+			font-size: toRem(14);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			font-size: toRem(20);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			font-size: toRem(24);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			font-size: toRem(20);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			font-size: toRem(24);
+		}
+	}
+
+	&__title {
+		font-weight: 600;
+		text-transform: uppercase;
+
+		@media (min-width: toEm(320)) {
+			font-size: toRem(24);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			font-size: toRem(40);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			font-size: toRem(48);
+		}
+
+		@media (min-width: toEm(991.98)) {
+			font-size: toRem(56);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			font-size: toRem(40);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			font-size: toRem(48);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			font-size: toRem(56);
+		}
+	}
+
+	&__body {
+		display: flex;
+		border-radius: $radius40;
+		border: 1px solid $grayLightColor;
+		overflow: hidden;
+
+		@media (min-width: toEm(320)) {
+			border-radius: $radius16;
+		}
+
+		@media (min-width: toEm(575.98)) {
+			border-radius: $radius24;
+		}
+
+		@media (min-width: toEm(767.98)) {
+			border-radius: $radius32;
+		}
+
+		@media (min-width: toEm(991.98)) {
+			width: 100%;
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			flex: 0 0 toRem(558);
+			border-radius: $radius40;
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			flex: 0 0 toRem(725);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			flex: 0 0 toRem(778);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			flex: 0 0 toRem(1017);
+		}
+	}
+
+	&__users {
+		@media (min-width: toEm(320)) {
+			flex: 0 0 50%;
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			flex: 1 1 auto;
+		}
+	}
+}
+
+.count-top-main {
+	@media (min-width: toEm(320)) {
+		flex: 0 0 50%;
+		padding-top: toRem(20);
+		padding-bottom: toRem(20);
+		padding-left: toRem(12);
+		padding-right: toRem(4);
+	}
+
+	@media (min-width: toEm(575.98)) {
+		padding-top: toRem(27.5);
+		padding-bottom: toRem(27.5);
+		padding-left: toRem(60);
+		padding-right: toRem(60);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		padding-top: toRem(25);
+		padding-bottom: toRem(25);
+		padding-left: toRem(82);
+		padding-right: toRem(82);
+	}
+
+	@media (min-width: toEm(991.98)) {
+		padding-top: toRem(30);
+		padding-bottom: toRem(30);
+		padding-left: toRem(80);
+		padding-right: toRem(80);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-top: toRem(33.5);
+		padding-bottom: toRem(33.5);
+		padding-left: toRem(26.5);
+		padding-right: toRem(26.5);
+		flex: 1 1 auto;
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		padding-top: toRem(41);
+		padding-bottom: toRem(41);
+		padding-left: toRem(45);
+		padding-right: toRem(45);
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		padding-top: toRem(49.5);
+		padding-bottom: toRem(49.5);
+		padding-left: toRem(33);
+		padding-right: toRem(33);
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		padding-top: toRem(51.5);
+		padding-bottom: toRem(51.5);
+		padding-left: toRem(88.5);
+		padding-right: toRem(88.5);
+	}
+
+	&__value {
+		@media (min-width: toEm(320)) {
+			font-size: toRem(24);
+			font-weight: 500;
+		}
+
+		@media (min-width: toEm(575.98)) {
+			font-size: toRem(40);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			font-size: toRem(56);
+		}
+
+		@media (min-width: toEm(991.98)) {
+			font-size: toRem(64);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			font-size: toRem(40);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			font-size: toRem(56);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			font-size: toRem(72);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			font-size: toRem(96);
+
+			&:not(:last-child) {
+				margin-bottom: toRem(10);
+			}
+		}
+	}
+
+	&__info {
+		font-weight: 500;
+
+		@media (min-width: toEm(320)) {
+			font-size: toRem(14);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			font-size: toRem(16);
+		}
+
+		@media (min-width: toEm(991.98)) {
+			font-size: toRem(24);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			font-size: toRem(16);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			font-size: toRem(20);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			font-size: toRem(24);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			margin-left: toRem(12);
+		}
+	}
+}
+
+.users-top-main__bg {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+.users-top-main {
+	position: relative;
+	overflow: hidden;
+
+	@media (min-width: toEm(320)) {
+		border-radius: $radius16;
+		padding: toRem(20.75) toRem(10) toRem(20.75) toRem(12);
+	}
+
+	@media (min-width: toEm(575.98)) {
+		border-radius: $radius24;
+		padding: toRem(27.75) toRem(21) toRem(27.75) toRem(24);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		border-radius: $radius32;
+		padding: toRem(25) toRem(11) toRem(25) toRem(24);
+	}
+
+	@media (min-width: toEm(991.98)) {
+		padding: toRem(30) toRem(43) toRem(30) toRem(32);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding: toRem(30) toRem(17) toRem(30) toRem(24);
+		border-radius: $radius40;
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		padding: toRem(41) toRem(37) toRem(41) toRem(24);
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		padding: toRem(49.63) toRem(22) toRem(49.62) toRem(32);
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		padding: toRem(46.5) toRem(43.5) toRem(46.5) toRem(43.5);
+	}
+
+	&__value {
+		font-weight: 500;
+		color: $whiteColor;
+		position: relative;
+
+		@media (max-width: toEm(575.98)) {
+			display: flex;
+			align-items: center;
+			gap: toRem(8);
+			margin-bottom: toRem(8);
+		}
+
+		@media (min-width: toEm(320)) {
+			font-size: toRem(24);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			font-size: toRem(40);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			font-size: toRem(56);
+		}
+
+		@media (min-width: toEm(991.98)) {
+			font-size: toRem(64);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			font-size: toRem(40);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			font-size: toRem(56);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			font-size: toRem(72);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			font-size: toRem(96);
+		}
+	}
+
+	&__box {
+		position: relative;
+		display: flex;
+		align-items: center;
+		margin-top: toRem(-6);
+
+		@media (min-width: toEm(575.98)) {
+			gap: toRem(4);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			gap: toRem(8);
+		}
+
+		@media (min-width: toEm(1599.98)) {}
+
+		@media (min-width: toEm(1919.98)) {
+			gap: toRem(24);
+		}
+	}
+
+	&__info {
+		font-weight: 500;
+		color: $greenColor;
+
+		@media (min-width: toEm(320)) {
+			font-size: toRem(14);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			font-size: toRem(18);
+		}
+
+		@media (min-width: toEm(991.98)) {
+			font-size: toRem(24);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			font-size: toRem(16);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			font-size: toRem(20);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			font-size: toRem(24);
+		}
+	}
+
+	&__list {
+		display: flex;
+	}
+
+	&__item {
+		position: relative;
+		border-radius: 50%;
+		border: 2px solid $gray2LightColor;
+		overflow: hidden;
+
+		@media (min-width: toEm(320.98)) {
+			width: toRem(24);
+			height: toRem(24);
+			flex: 0 0 toRem(24);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			width: toRem(28);
+			height: toRem(28);
+			flex: 0 0 toRem(28);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			width: toRem(40);
+			height: toRem(40);
+			flex: 0 0 toRem(40);
+
+			&:nth-child(5) {
+				display: none;
+			}
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			&:nth-child(5) {
+				display: block;
+			}
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			width: toRem(56);
+			height: toRem(56);
+			flex: 0 0 toRem(56);
+		}
+
+		img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		&:not(:first-child) {
+			margin-left: toRem(-16);
+
+			@media (max-width: toEm(575.98)) {
+				margin-left: toRem(-7);
+			}
+		}
+	}
+}
+
+//====================================================================================================

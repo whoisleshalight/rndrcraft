@@ -1,0 +1,27 @@
+@mixin svgIcon($name) {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    background-color: currentColor;
+    mask: url("@img/icons/#{$name}.svg") center / contain no-repeat;
+}
+
+[class*="svg-icon--"]::before {
+    content: "";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    flex-shrink: 0;
+    background-color: currentColor;
+    mask-position: center;
+    mask-size: contain;
+    mask-repeat: no-repeat;
+}
+
+@each $name in search, close, arrow, arrow-big, behance, instagram, twitter, facebook, cube, ps {
+    .svg-icon--#{$name}::before { mask-image: url("@img/icons/#{$name}.svg"); }
+}
+
+.svg-icon--close-xl::before { mask-image: url("@img/icons/close.svg"); }

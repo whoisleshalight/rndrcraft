@@ -1,56 +1,109 @@
+@use "sass:math";
+@use "@styles/settings.scss" as *;
+@use "@styles/includes/mixins.scss" as *;
+
 .options {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-start;
-	// .options__item
+
 	&__item {
 		position: relative;
 		cursor: pointer;
+
 		&:not(:last-child) {
-			margin-bottom: 5px;
+			margin-bottom: toRem(4);
 		}
 	}
-	// .options__input
+
 	&__input {
 		width: 0;
 		height: 0;
 		opacity: 0;
 		position: absolute;
-		&:focus-visible + .options__text {
-			outline: 1px solid #000;
+
+		&:checked+.options__label:before {
+			background-color: $mainColor;
 		}
-		&:checked + .options__text:before {
+
+		&:checked+.options__label {
+			border: 1px solid $mainColor;
+
 		}
-		&:checked + .options__text:after {
+
+		&:checked+.options__label:after {
 			transform: scale(1);
 		}
 	}
-	// .options__text
-	&__text {
-		display: inline-flex;
+
+	&__label {
+		display: flex;
 		align-items: center;
 		cursor: pointer;
+		flex-direction: row-reverse;
+		transition: all 0.4s;
 		gap: 10px;
+		justify-content: space-between;
+		border-radius: toRem(12);
+		border: 1px solid rgba(0, 0, 0, 0.10);
+		min-height: toRem(50);
 		&:before {
 			content: "";
 			align-self: flex-start;
-			width: 20px;
-			height: 20px;
-			flex: 0 0 20px;
+			width: 24px;
+			height: 24px;
+			flex: 0 0 24px;
 			border-radius: 50%;
-			border: 1px solid #a7a9ac;
+			border: 1px solid rgba(0, 0, 0, 0.20);
+			background-color: transparent;
+			transition: all 0.4s;
 		}
+
 		&:after {
 			content: "";
 			transition: all 0.3s ease 0s;
 			transform: scale(0);
-			width: 10px;
-			height: 10px;
+			width: toRem(11);
+			flex: 0 0 toRem(11);
+			height: toRem(11);
 			border-radius: 50%;
-			background-color: #7a956b;
+			background-color: $greenColor;
 			position: absolute;
-			left: 5px;
-			top: 5px;
+
+			@media (min-width:toEm(320)){
+				right: toRem(19.5);
+				top: toRem(19.5);
+			}
+			@media (min-width:toEm(575.98)){
+				right: toRem(23);
+				top: toRem(23);
+				width: toRem(12);
+				flex: 0 0 toRem(12);
+				height: toRem(12);
+			}
+		}
+
+		@media (min-width:toEm(320)) {
+			padding-left: toRem(12);
+			padding-right: toRem(12);
+			padding-top: toRem(12);
+			padding-bottom: toRem(12);
+		}
+
+		@media (min-width:toEm(575.98)) {
+			padding-left: toRem(16);
+			padding-right: toRem(16);
+			padding-top: toRem(16);
+			padding-bottom: toRem(16);
+		}
+	}
+
+	&__text {
+		@media (min-width:toEm(320)) {
+			font-size: toRem(16);
+		}
+
+		@media (min-width:toEm(575.98)) {
+			font-size: toRem(20);
 		}
 	}
 }

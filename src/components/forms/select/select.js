@@ -8,7 +8,6 @@ import { formValidate } from "../_functions.js";
 Сніппет (HTML): sel
 */
 
-import "./select.scss";
 
 // Клас побудови Select
 class SelectConstructor {

@@ -1,0 +1,755 @@
+@use "@components/custom/icon/icon.scss" as icons;
+@use "sass:math";
+@use "@styles/settings.scss" as *;
+@use "@styles/includes/mixins.scss" as *;
+
+._product-title {
+	font-weight: 600;
+
+	span {
+		color: hsla(0, 0%, 0%, 0.2);
+	}
+
+	@media (min-width: toEm(320)) {
+		font-size: toRem(24);
+	}
+
+	@media (min-width: toEm(575.98)) {
+		font-size: toRem(32);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		font-size: toRem(40);
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		font-size: toRem(48);
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		font-size: toRem(56);
+	}
+}
+
+._product-info {
+	line-height: 120%;
+
+	@media (min-width: toEm(320)) {
+		font-size: toRem(14);
+	}
+
+	@media (min-width: toEm(575.98)) {
+		font-size: toRem(16);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		font-size: toRem(20);
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		font-size: toRem(24);
+	}
+
+	&:not(:first-child) {
+		@media (min-width: toEm(320)) {
+			margin-top: toRem(12);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			margin-top: toRem(16);
+		}
+	}
+}
+
+//========================================================================================================================================================
+.asside {
+	padding-top: toRem(96);
+
+	// overflow: clip;
+	@media (min-width: toEm(320)) {
+		width: auto;
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		flex: 0 0 toRem(498);
+		width: toRem(498);
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		flex: 0 0 toRem(560);
+		width: toRem(560);
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		flex: 0 0 toRem(624);
+		width: toRem(624);
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		flex: 0 0 toRem(726);
+	}
+
+	&__box {
+		border: 1px solid #dbdbdb;
+		overflow: hidden;
+
+		position: sticky;
+		top: 104px;
+
+		@media (min-width: toEm(320)) {
+			padding-top: toRem(24);
+			padding-left: toRem(24);
+			padding-right: toRem(24);
+			padding-bottom: toRem(8);
+			border-radius: toRem(24);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			padding-top: toRem(40);
+			padding-left: toRem(32);
+			padding-right: toRem(32);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			padding-right: toRem(40);
+			padding-left: toRem(40);
+			border-radius: toRem(32);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			padding-right: toRem(32);
+			padding-left: toRem(32);
+			padding-top: toRem(32);
+			padding-bottom: toRem(32);
+			border-radius: $radius40;
+		}
+
+		@media (min-width: toEm(1599.98)) {}
+
+		@media (min-width: toEm(1919.98)) {
+			padding-right: toRem(48);
+			padding-left: toRem(48);
+		}
+	}
+
+	&__breadcrumb {}
+
+	&__title {
+		margin-top: toRem(8);
+		font-weight: 600;
+		text-transform: uppercase;
+
+		@media (min-width: toEm(320)) {
+			font-size: toRem(24);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			font-size: toRem(40);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			font-size: toRem(48);
+		}
+
+		@media (min-width: toEm(991.98)) {
+			font-size: toRem(56);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			font-size: toRem(40);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			font-size: toRem(48);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			font-size: toRem(56);
+		}
+	}
+
+	&__subtitle {
+		margin-top: toRem(16);
+		line-height: 120%;
+
+		@media (min-width: toEm(320)) {
+			font-size: toRem(14);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			font-size: toRem(20);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			font-size: toRem(24);
+		}
+	}
+
+	&__info {
+		margin-top: toRem(8);
+	}
+
+	&__list {
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: toRem(48);
+
+		@media (min-width: toEm(320)) {
+			margin-top: toRem(16);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			margin-top: toRem(24);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			row-gap: toRem(16);
+		}
+
+		li {
+			font-weight: 500;
+			display: flex;
+			align-items: center;
+			gap: toRem(8);
+			line-height: 160%;
+
+			&::before {
+				@include icons.svgIcon("cube");
+				font-size: toRem(16);
+				flex: 0 0 toRem(16);
+			}
+
+			@media (min-width: toEm(320)) {
+				font-size: toRem(16);
+				flex: 0 0 100%;
+			}
+
+			@media (min-width: toEm(575.98)) {
+				flex: 0 0 calc(50% - toRem(24));
+				font-size: toRem(18);
+			}
+
+			@media (min-width: toEm(1439.98)) {
+				font-size: toRem(24);
+			}
+		}
+	}
+
+	&__actions {
+		@media (min-width: toEm(320)) {
+			margin-top: toRem(24);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			margin-top: toRem(40);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			margin-top: toRem(32);
+		}
+
+		div.bottom-item-colections__price {
+			@media (min-width: toEm(320)) {
+				min-width: toRem(130);
+			}
+		}
+
+		div.bottom-item-colections__price,
+		.bottom-item-colections__price a.btn-2l {
+			@media (max-width: toEm(767.98)) {
+				border-radius: toRem(16);
+				font-size: toRem(24) !important;
+				padding-left: toRem(8);
+				padding-right: toRem(8);
+			}
+
+			@media (min-width: toEm(767.98)) {
+				border-radius: $radius24;
+				font-size: toRem(40) !important;
+			}
+		}
+
+		.bottom-item-colections__price {
+			justify-content: center;
+
+			&:not(:last-child) {
+				margin-bottom: toRem(8);
+			}
+		}
+
+		&._actions-asside-column {
+			display: flex;
+			gap: toRem(8);
+
+			@media (min-width: toEm(320)) {
+				margin-left: toRem(-16);
+				margin-right: toRem(-16);
+			}
+
+			@media (min-width: toEm(575.98)) {
+				margin-left: toRem(-24);
+				margin-right: toRem(-24);
+			}
+
+			@media (min-width: toEm(767.98)) {
+				margin-left: toRem(-32);
+				margin-right: toRem(-32);
+			}
+
+			@media (min-width: toEm(1279.98)) {
+				margin-left: toRem(0);
+				margin-right: toRem(0);
+			}
+
+			.bottom-item-colections__price {
+				margin-bottom: toRem(0);
+				font-size: toRem(40);
+				padding-top: toRem(16);
+				padding-bottom: toRem(16);
+				padding-right: toRem(38);
+				padding-left: toRem(38);
+				font-weight: 600;
+				color: rgba(255, 255, 255, 1);
+				background-color: #000;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+
+			a {
+				flex: 1 1 auto;
+
+				@media (min-width: toEm(320)) {
+					font-size: toRem(24);
+					padding-left: toRem(16);
+					padding-right: toRem(16);
+				}
+
+				@media (min-width: toEm(767.98)) {
+					font-size: toRem(40);
+				}
+			}
+		}
+	}
+}
+
+.info-asside {
+	border: 2px solid rgba(0, 0, 0, 0.08);
+	border-radius: $radius16;
+	overflow: hidden;
+	display: inline-flex;
+	align-items: center;
+
+	&__item {
+		font-size: toRem(32);
+		font-weight: 500;
+		padding-top: toRem(16);
+		padding-bottom: toRem(16);
+		padding-right: toRem(38);
+		padding-left: toRem(38);
+
+		&:not(:last-child) {
+			border-right: 2px solid rgba(0, 0, 0, 0.08);
+		}
+
+		&._light {
+			padding-top: toRem(11);
+
+			padding-bottom: toRem(11);
+			display: flex;
+			align-items: center;
+			gap: toRem(16);
+
+			@media (min-width: toEm(320)) {
+				font-size: toRem(16);
+				padding-left: toRem(23);
+				padding-right: toRem(23);
+			}
+
+			@media (min-width: toEm(767.98)) {
+				font-size: toRem(20);
+				padding-left: toRem(31);
+				padding-right: toRem(31);
+			}
+
+			@media (min-width: toEm(1599.98)) {
+				font-size: toRem(24);
+			}
+
+			svg {
+				object-fit: contain;
+				object-position: center;
+
+				@media (min-width: toEm(320)) {
+					width: toRem(24);
+					height: toRem(24);
+					flex: 0 0 toRem(24);
+				}
+
+				@media (min-width: toEm(767.98)) {
+					width: toRem(32);
+					height: toRem(32);
+					flex: 0 0 toRem(32);
+				}
+			}
+		}
+	}
+}
+
+.actions-asside-bottom {
+	background-color: $mainColor;
+	color: $whiteColor;
+	overflow: hidden;
+
+	@media (min-width: toEm(320)) {
+		padding-top: toRem(18);
+		padding-bottom: toRem(8);
+		padding-left: toRem(8);
+		padding-right: toRem(8);
+		border-radius: toRem(24);
+	}
+
+	@media (min-width: toEm(575.98)) {}
+
+	@media (min-width: toEm(767.98)) {
+		padding-top: toRem(24);
+		border-radius: toRem(32);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding: toRem(24);
+		border-radius: $radius40;
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		padding-top: toRem(32);
+		padding-bottom: toRem(32);
+		padding-right: toRem(48);
+		padding-left: toRem(48);
+	}
+}
+
+.actions-asside {
+	&.actions-asside-bottom {
+		@media (min-width: toEm(320)) {
+			margin-top: toRem(56);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			margin-top: toRem(80);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			margin-top: toRem(0);
+		}
+	}
+
+	&__title {
+		font-weight: 600;
+
+		@media (min-width: toEm(320)) {
+			padding-left: toRem(16);
+			padding-right: toRem(16);
+			font-size: toRem(24);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			padding-left: toRem(24);
+			padding-right: toRem(24);
+			font-size: toRem(32);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			padding-left: toRem(32);
+			padding-right: toRem(32);
+			font-size: toRem(40);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			padding: 0;
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			font-size: toRem(48);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			font-size: toRem(56);
+		}
+	}
+
+	&__info {
+		@media (min-width: toEm(320)) {
+			padding-left: toRem(16);
+			padding-right: toRem(16);
+			font-size: toRem(14);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			padding-left: toRem(24);
+			padding-right: toRem(24);
+			font-size: toRem(16);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			padding-left: toRem(32);
+			padding-right: toRem(32);
+			font-size: toRem(20);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			padding: 0;
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			font-size: toRem(24);
+		}
+
+		&:not(:first-child) {
+			@media (min-width: toEm(320)) {
+				margin-top: toRem(4);
+			}
+
+			@media (min-width: toEm(767.98)) {
+				margin-top: toRem(16);
+			}
+		}
+	}
+
+	&__pictures {
+		&:not(:first-child) {
+			@media (min-width: toEm(320)) {
+				margin-top: toRem(16);
+			}
+
+			@media (min-width: toEm(767.98)) {
+				margin-top: toRem(24);
+			}
+
+			@media (min-width: toEm(991.98)) {
+				margin-top: toRem(32);
+			}
+		}
+	}
+
+	&__action {
+		display: flex;
+
+		a {
+			width: 100%;
+
+			@media (any-hover: hover) {
+				&:hover {
+					border: 3px solid $greenColor;
+				}
+			}
+
+			@media (min-width: toEm(320)) {
+				padding-left: toRem(30);
+				padding-right: toRem(30);
+			}
+
+			@media (min-width: toEm(575.98)) {}
+
+			@media (min-width: toEm(767.98)) {}
+
+			@media (min-width: toEm(991.98)) {}
+
+			@media (min-width: toEm(1279.98)) {}
+
+			@media (min-width: toEm(1439.98)) {}
+
+			@media (min-width: toEm(1599.98)) {}
+		}
+
+		&:not(:first-child) {
+			@media (min-width: toEm(320)) {
+				margin-top: toRem(8);
+			}
+
+			@media (min-width: toEm(1279.98)) {
+				margin-top: toRem(32);
+			}
+		}
+	}
+}
+
+.pictures-actions-asside {
+	display: flex;
+	align-items: center;
+	gap: toRem(2);
+	justify-content: center;
+
+	&__item {
+		position: relative;
+
+		overflow: hidden;
+
+		@media (min-width: toEm(320)) {
+			border-radius: toRem(4);
+			// width: toRem(66);
+			height: auto;
+			padding-bottom: calc(20% - 0.4px);
+			width: calc(20% - 0.4px);
+			flex: 0 0 calc(20% - 0.4px);
+			// flex: 0 0 toRem(66);
+
+			&:nth-child(1),
+			&:nth-child(2),
+			&:nth-child(3) {
+				display: none;
+			}
+		}
+
+		@media (min-width: toEm(576.98)) {
+			width: toRem(104);
+			height: toRem(104);
+			flex: 0 0 toRem(104);
+			padding-bottom: toRem(0);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			border-radius: toRem(8);
+			width: toRem(80);
+			height: toRem(80);
+			flex: 0 0 toRem(80);
+
+			&:nth-child(1),
+			&:nth-child(2),
+			&:nth-child(3) {
+				display: block;
+			}
+		}
+
+		@media (min-width: toEm(991.98)) {
+			width: toRem(112);
+			height: toRem(112);
+			flex: 0 0 toRem(112);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			width: toRem(54);
+			height: toRem(54);
+			flex: 0 0 toRem(54);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			width: toRem(62);
+			height: toRem(62);
+			flex: 0 0 toRem(62);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			width: toRem(64);
+			height: toRem(64);
+			flex: 0 0 toRem(64);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			width: toRem(77);
+			height: toRem(77);
+			flex: 0 0 toRem(77);
+		}
+
+		span {
+			position: absolute;
+			font-weight: 500;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			z-index: 3;
+
+			@media (min-width: toEm(320)) {
+				font-size: toRem(24);
+			}
+
+			@media (min-width: toEm(575.98)) {
+				font-size: toRem(40);
+			}
+
+			@media (min-width: toEm(767.98)) {
+				font-size: toRem(28);
+			}
+
+			@media (min-width: toEm(991.98)) {
+				font-size: toRem(40);
+			}
+
+			@media (min-width: toEm(1279.98)) {
+				font-size: toRem(28);
+			}
+
+			@media (min-width: toEm(1439.98)) {
+				font-size: toRem(32);
+			}
+
+			@media (min-width: toEm(1919.98)) {
+				font-size: toRem(40);
+			}
+		}
+
+		// &:last-child {
+		// 	&::before {
+		// 		content: "";
+		// 		position: absolute;
+		// 		top: 0;
+		// 		left: 0;
+		// 		width: 100%;
+		// 		height: 100%;
+		// 		z-index: 2;
+		// 		background-color: hsla(0, 0%, 0%, 0.5);
+		// 		backdrop-filter: blur(8px);
+		// 		overflow: hidden;
+		// 		@media (min-width:toEm(320)){
+		// 			  				border-radius: toRem(4);
+
+		// 		}
+		// 		@media (min-width:toEm(767.98)){
+		// 			  				border-radius: toRem(8);
+
+		// 		}
+		// 	}
+		// }
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+		}
+	}
+}
+
+//!! ================================================ Demo version style for main section product home page
+.main__mobile-left {
+	.main__item:nth-child(2) {
+		@media (min-width: toEm(320)) {
+			height: 210px;
+		}
+
+		@media (min-width: toEm(480)) {
+			height: toRem(250);
+		}
+
+		@media (min-width: toEm(575.98)) {
+			height: toRem(250);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			height: 300px;
+		}
+
+		@media (min-width: toEm(991.98)) {
+			height: toRem(350);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			height: auto;
+		}
+	}
+}
+
+//!! ================================================

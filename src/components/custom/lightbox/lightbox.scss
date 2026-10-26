@@ -1,0 +1,13 @@
+.gnext,
+.gprev { display: none !important; }
+.goverlay {
+    backdrop-filter: blur(20px);
+    background-color: hsla(0, 0%, 100%, 0.7) !important;
+}
+.glightbox-clean .gslide-media {
+    box-shadow: none;
+    border-radius: 16px;
+    overflow: hidden;
+}
+.gclose.gbtn { transition: all 0.3s; }
+.ginner-container { padding: 10px; }

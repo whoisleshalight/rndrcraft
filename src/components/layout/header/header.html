@@ -1,5 +1,39 @@
-<header data-fls-header class="header">
-	<div class="header__container">
-		<!-- <include src="@components/layout/menu/menu.html" locals='{"active":"[[active]]"}'></include> -->
+<header data-fls-header data-fls-header-scroll class="header">
+	<div class="header__wrapper">
+		<a href="index.html" class="header__logo"><img src="@img/logo.svg" alt="Logo"></a>
+		<div class="header__box">
+			<div class="header__menu menu">
+				<nav class="menu__body">
+					<ul class="menu__list">
+						<li class="menu__item"><a href="all_mockups.html" class="menu__link">All Mockups</a></li>
+						<li class="menu__item"><a href="collections.html" class="menu__link">Collections</a></li>
+						<li class="menu__item"><a href="devices.html" class="menu__link">Devices</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Branding</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Out-of-home</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Posters</a></li>
+						<li class="menu__item"><a href="" class="menu__link">Free</a></li>
+					</ul>
+				</nav>
+			</div>
+		</div>
+		<div data-fls-lp class="header__actions actions-header">
+			<button type="button" aria-label="Open search" class="button search-open-btn  btn-s svg-icon--search"></button>
+
+			<ul class="actions-header__list">
+				<li class="actions-header__item">
+					<a href="#" class="actions-header__link btn-l">Log In</a>
+				</li>
+				<li class="actions-header__item">
+					<a href="#" class="actions-header__link btn-xl">
+						<span>Create account</span>
+						<span>-15%</span>
+					</a>
+				</li>
+			</ul> <a href="#" class="actions-header__account-mobile btn-3l">
+				<span>Account</span>
+			</a>
+			<button type="button" data-fls-menu aria-label="Open menu" aria-expanded="false" class="menu__icon icon-menu"><span></span></button>
+		</div>
 	</div>
 </header>
+<include src="@components/layout/menu/menu.html"></include>

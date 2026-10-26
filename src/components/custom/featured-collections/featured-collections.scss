@@ -1,0 +1,244 @@
+@use "sass:math";
+@use "@styles/settings.scss" as *;
+@use "@styles/includes/mixins.scss" as *;
+
+.collections {
+	@media (min-width: toEm(320)) {
+		padding-top: toRem(56);
+		padding-bottom: toRem(56);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-top: toRem(80);
+		padding-bottom: toRem(80);
+	}
+
+	&__body {
+		display: grid;
+		gap: toRem(16);
+
+		@media (min-width: toEm(320)) {
+			grid-template-columns: 1fr;
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			grid-template-columns: 1fr 1fr;
+		}
+
+		@media (min-width: toEm(1439.98)) {}
+
+		@media (min-width: toEm(1919.98)) {
+			gap: toRem(24);
+		}
+	}
+
+	&__item {}
+
+	&__actions {}
+}
+
+.collections__item-buy {
+	@media (max-width: toEm(1279.98)) {
+		margin-top: toRem(2);
+		border-top-left-radius: toRem(8);
+		border-top-right-radius: toRem(8);
+	}
+
+	@media (max-width: toEm(767.98)) {
+		border-top-left-radius: toRem(4);
+		border-top-right-radius: toRem(4);
+		border-bottom-left-radius: toRem(24);
+		border-bottom-right-radius: toRem(24);
+	}
+}
+
+.item-collections {
+	overflow: hidden;
+	background-color: transparent !important;
+
+	@media (min-width: toEm(320)) {
+		border-radius: $radius24;
+	}
+
+	@media (min-width: toEm(767.98)) {
+		border-radius: $radius32;
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		border-radius: $radius40;
+	}
+
+	&__top {
+		position: relative;
+		border-radius: $radius8;
+		// padding-bottom: 64.554%;
+		overflow: hidden;
+
+		@media (min-width: toEm(320)) {
+			// height: toRem(228);
+			padding-bottom: 59.056%;
+		}
+
+		@media (min-width: toEm(575.98)) {
+			height: toRem(359);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			height: toRem(424);
+		}
+
+		@media (min-width: toEm(991.98)) {
+			height: toRem(546);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			height: toRem(381);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			height: toRem(412);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			height: toRem(466);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			height: toRem(560);
+		}
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+	}
+}
+
+.bottom-item-collections {
+	display: flex;
+	gap: toRem(2);
+
+	@media (max-width: toEm(767.98)) {
+
+		.bottom-item-collections__image:nth-child(5),
+		.bottom-item-collections__image:nth-child(6),
+		.bottom-item-collections__image:nth-child(7) {
+			display: none;
+		}
+	}
+
+	&:not(:first-child) {
+		margin-top: toRem(2);
+	}
+
+	&__image {
+		overflow: hidden;
+		position: relative;
+
+		@media (min-width: toEm(320)) {
+			border-radius: toRem(4);
+			height: toRem(70);
+			flex: 0 0 calc(20% - toRem(1.6));
+		}
+
+		@media (min-width: toEm(575.98)) {
+			height: toRem(110);
+		}
+
+		@media (min-width: toEm(767.98)) {
+			height: toRem(86);
+			border-radius: $radius8;
+			flex: 0 0 calc(12.5% - toRem(1.75));
+		}
+
+		@media (min-width: toEm(991.98)) {
+			height: toRem(114);
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			height: toRem(73);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			height: toRem(82);
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			height: toRem(92);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			height: toRem(108);
+		}
+
+		img {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
+
+		&:last-child {
+			span {
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				z-index: 3;
+				color: $whiteColor;
+				font-weight: 500;
+
+				@media (min-width: toEm(320)) {
+					font-size: toRem(24);
+				}
+
+				@media (min-width: toEm(575.98)) {
+					font-size: toRem(40);
+				}
+
+				@media (min-width: toEm(1279.98)) {
+					font-size: toRem(28);
+				}
+
+				@media (min-width: toEm(1439.98)) {
+					font-size: toRem(32);
+				}
+
+				@media (min-width: toEm(1919.98)) {
+					font-size: toRem(40);
+				}
+			}
+
+			&::before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
+				background-color: hsla(0, 0%, 0%, 0.5);
+				z-index: 2;
+				backdrop-filter: blur(toRem(8));
+				-webkit-backdrop-filter: blur(8px);
+				overflow: hidden;
+
+				@media (min-width: toEm(320)) {
+					border-radius: toRem(4);
+				}
+
+				@media (min-width: toEm(767.98)) {
+					border-radius: $radius8;
+				}
+			}
+		}
+	}
+}
+
+//====================================================================================================
+// ** Blog

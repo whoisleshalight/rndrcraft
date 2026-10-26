@@ -57,7 +57,7 @@ export default {
 		devfiles: true,
 	},
 	fonts: {
-		iconsfont: true,
+		iconsfont: false,
 		download: false,
 	},
 	images: {

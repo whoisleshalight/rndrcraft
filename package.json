@@ -88,6 +88,7 @@
   "dependencies": {
     "@fancyapps/ui": "^6.1.14",
     "accessibility": "^6.1.0",
+    "glightbox": "^3.3.1",
     "lightgallery": "^2.9.0",
     "open-nagish": "^1.1.5",
     "vanilla-lazyload": "^19.1.3"

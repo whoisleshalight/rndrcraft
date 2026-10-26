@@ -1,105 +1,37 @@
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Підключення CSS-змінних
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// @use "includes/variables.css";
+// Component order preserves the original RNDRCRAFT cascade.
+@use "@styles/libs/reset.scss";
+@use "@styles/site.scss";
+@use "@components/forms/input/input.scss";
+@use "@components/forms/checkbox/checkbox.scss";
+@use "@components/forms/radio/radio.scss";
+@use "@components/forms/select/select.scss";
+@use "@components/layout/menu/menu.scss";
+@use "@styles/base.scss";
+@use "@components/custom/icon/icon.scss";
+@use "@components/custom/buttons/buttons.scss";
+@use "@components/custom/subscribe/subscribe.scss";
+@use "@styles/common.scss";
+@use "@components/custom/product-card/product-card.scss";
+@use "@components/custom/catalog/catalog.scss";
+@use "@components/custom/product-details/product-details.scss";
+@use "@components/layout/header/header.scss";
+@use "@components/layout/footer/footer.scss";
+@use "@components/custom/home-hero/home-hero.scss";
+@use "@components/custom/trending/trending.scss";
+@use "@components/custom/categories/categories.scss";
+@use "@components/custom/social/social.scss";
+@use "@components/custom/featured-collections/featured-collections.scss";
+@use "@components/custom/blog/blog.scss";
+@use "@components/pages/collections/collections.scss";
+@use "@components/custom/search/search.scss";
+@use "@components/custom/more-products/more-products.scss";
+@use "@components/pages/collections-single/collections-single.scss";
+@use "@components/pages/product-single/product-single.scss";
+@use "@components/custom/collection-preview/collection-preview.scss";
+@use "@components/custom/mobile-filter/mobile-filter.scss";
+@use "@components/custom/collection-preview/slider.scss";
 
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Підключення загальних віддалених шрифтів (Google Fonts)
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Стилі тега BODY
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-body {
-	min-width: #{$minWidth}px;
-	color: $mainColor;
-	font-family: $fontFamily;
-	font-size: #{$fontSize}px;
-
-	// Скролл заблоковано
-	[data-fls-scrolllock] & {
-		overflow: hidden;
-		touch-action: none;
-		overscroll-behavior: none;
-	}
-	// Сайт завантажений
-	[data-fls-loaded] & {
-	}
-}
-
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Оболонка WRAPPER
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-.wrapper {
-	min-height: 100%;
-	display: flex;
-	flex-direction: column;
-	overflow: clip;
-	// Притискаємо footer
-	> main {
-		flex: 1 1 auto;
-	}
-	// Фікс для слайдерів
-	> * {
-		min-width: 0;
-	}
-}
-
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Обмежуючий контейнер
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
-// Стилі будуть застосовуватись до
-// всіх класів, що містять *__container
-// Наприклад header__container, main__container і т.п.
-// Сніппет (HTML): cnt
-
-@if ($responsiveType==1) {
-	// Чуйна
-	[class*="__container"] {
-		@if ($maxWidthContainer>0) {
-			max-width: #{$containerWidth}px;
-			margin: 0 auto;
-		}
-		@if ($containerPadding>0) {
-			@if ($maxWidthContainer>0) {
-				padding-left: #{math.div($containerPadding, 2)}px;
-				padding-right: #{math.div($containerPadding, 2)}px;
-			} @else {
-				@include adaptiveValue("padding-left", math.div($containerPadding, 2), 15);
-				@include adaptiveValue("padding-right", math.div($containerPadding, 2), 15);
-			}
-		}
-	}
-} @else {
-	// Брейк-поїнтами
-	[class*="__container"] {
-		margin: 0 auto;
-		@if ($maxWidthContainer>0) {
-			max-width: #{$maxWidthContainer}px;
-		} @else {
-			@if ($containerPadding>0) {
-				padding-left: #{math.div($containerPadding, 2)}px;
-				padding-right: #{math.div($containerPadding, 2)}px;
-			}
-		}
-		@media (max-width: toEm($pc)) {
-			max-width: 970px;
-		}
-		@media (max-width: toEm($tablet)) {
-			max-width: 750px;
-		}
-		@media (max-width: toEm($mobile)) {
-			max-width: none;
-			@if ($containerPadding>0 and $maxWidthContainer>0) {
-				padding-left: #{math.div($containerPadding, 2)}px;
-				padding-right: #{math.div($containerPadding, 2)}px;
-			}
-		}
-	}
-}
-
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-// Загальні стилі для усього сайту
-// ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+body::-webkit-scrollbar { width: 4px; }
+body::-webkit-scrollbar-thumb { background: #caf749; border-radius: 40px; }
+body::-webkit-scrollbar-track { background: #000; }
+::selection { background: #000; color: #fff; }

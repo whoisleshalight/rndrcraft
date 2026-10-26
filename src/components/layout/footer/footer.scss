@@ -1,5 +1,304 @@
+@use "sass:math";
+@use "@styles/settings.scss" as *;
+@use "@styles/includes/mixins.scss" as *;
+
+//====================================================================================================
 .footer {
-	// .footer__container
+	background-color: $mainColor;
+	color: $whiteColor;
+
 	&__container {
 	}
+
+	&__top {
+	}
+
+	&__body {
+	}
+
+	&__navigations {
+		display: flex;
+		@media (max-width: toEm(1279.98)){
+			max-width: 62rem;
+			padding-left: 2rem;
+			padding-right: 2rem;
+			margin: 0 auto;width: 100%;
+		}
+		@media (max-width: toEm(991.98)){
+			max-width: 48rem;
+		}
+		@media (max-width: toEm(767.98)){
+			max-width: 36rem;
+			padding-left: 1rem;
+			padding-right: 1rem;
+
+		}
+		@media (max-width: toEm(575.98)){
+			  max-width: none;
+			  padding-left: 0.5rem;
+			  padding-right: 0.5rem;
+		}
+		@media (min-width: toEm(320)) {
+			padding-top: toRem(40);
+			padding-bottom: toRem(40);
+			flex-wrap: wrap;
+			row-gap: toRem(56);
+		}
+		@media (min-width: toEm(575.98)) {
+			justify-content: space-between;
+
+			flex-wrap: nowrap;
+			row-gap: toRem(0);
+		}
+		@media (min-width: toEm(1279.98)) {
+			border-right: 1px solid $grayDarkColor;
+			flex: 1 1 auto;
+			border-bottom: none;
+			padding-right: toRem(66);
+			padding-top: toRem(48);
+			padding-bottom: toRem(48);
+		}
+		@media (min-width: toEm(1439.98)) {
+			padding-right: toRem(78);
+			padding-top: toRem(80);
+			padding-bottom: toRem(80);
+		}
+		@media (min-width: toEm(1599.98)) {
+			padding-right: toRem(64);
+		}
+		nav {
+			@media (max-width: toEm(575.98)) {
+				flex: 0 0 50%;
+			}
+		}
+		nav ul {
+			display: flex;
+			flex-direction: column;
+			@media (min-width: toEm(320)) {
+				gap: toRem(32);
+			}
+			@media (min-width: toEm(1279.98)) {
+				gap: toRem(48);
+			}
+			li a {
+				font-weight: 500;
+				transition: all 0.4s;
+				@media (min-width: toEm(320)) {
+					font-size: toRem(14);
+				}
+				@media (min-width: toEm(1279.98)) {
+					font-size: toRem(16);
+				}
+				@media (any-hover: hover) {
+					&:hover {
+						color: $greenColor;
+					}
+				}
+			}
+		}
+	}
+
+	&__social {
+		@media (max-width: toEm(575.98)){
+			padding-left: 0.5rem;
+			padding-right: 0.5rem;
+		}
+		@media (min-width:toEm(320)){
+			border-top: 1px solid #414141;
+		}
+		@media (min-width:toEm(1279.98)){
+			  border-top: none;
+		}
+	}
 }
+
+.top-footer {
+	border-bottom: 1px solid $grayDarkColor;
+	@media (min-width: toEm(320)) {
+		padding-top: toRem(40);
+		padding-bottom: toRem(40);
+	}
+
+	@media (min-width: toEm(991.98)) {
+		padding-left: toRem(16);
+		padding-right: toRem(16);
+	}
+	@media (min-width: toEm(1279.98)) {
+		padding-top: toRem(56);
+		padding-bottom: toRem(56);
+	}
+	@media (min-width: toEm(1439.98)) {
+		padding-top: toRem(72);
+		padding-bottom: toRem(72);
+	}
+	.top-footer__container {
+		display: flex;
+
+		gap: toRem(24);
+		@media (min-width: toEm(320)) {
+			flex-direction: column;
+		}
+		@media (min-width: toEm(1279.98)) {
+			align-items: center;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+	}
+
+	&__logo {
+		img {
+			object-fit: cover;
+			@media (min-width: toEm(320)) {
+				width: toRem(205);
+			}
+			@media (min-width: toEm(1279.98)) {
+				width: toRem(316);
+			}
+			@media (min-width: toEm(1439.98)) {
+				max-width: toRem(416);
+			}
+		}
+	}
+
+	&__info {
+		@media (min-width: toEm(320)) {
+			font-weight: 400;
+			font-size: toRem(14);
+			line-height: 130%;
+		}
+		@media (min-width: toEm(575.98)) {
+			font-size: toRem(16);
+		}
+		@media (min-width: toEm(767.98)) {
+			font-size: toRem(20);
+		}
+		@media (min-width: toEm(1279.98)) {
+			flex: 0 0 toRem(617);
+			line-height: 100%;
+		}
+		@media (min-width: toEm(1439.98)) {
+			font-size: toRem(24);
+		}
+		@media (min-width: toEm(1919.98)) {
+			font-weight: 500;
+		}
+	}
+
+	&__copyright {
+		border-top: 1px solid $grayDarkColor;
+		padding-top: toRem(16);
+		padding-bottom: toRem(16);
+
+		.top-footer__copyright-box {
+			display: flex;
+			align-items: center;
+			gap: toRem(8);
+			@media (min-width: toEm(320)) {
+				justify-content: center;
+			}
+			@media (min-width: toEm(1279.98)) {
+				justify-content: flex-start;
+			}
+			svg {
+				width: toRem(26);
+				object-fit: contain;
+			}
+
+			p {
+				font-weight: 600;
+				@media (min-width: toEm(320)) {
+					font-weight: 500;
+					font-size: toRem(12);
+				}
+				@media (min-width: toEm(1279.98)) {
+					font-size: toRem(16);
+				}
+			}
+		}
+	}
+}
+
+.footer__wrapper {
+	display: flex;
+	@media (max-width: toEm(1279.98)){
+		max-width: 100%;
+		padding: 0;
+	}
+	@media (min-width: toEm(320)) {
+		flex-direction: column;
+	}
+	@media (min-width: toEm(1279.98)) {
+		flex-direction: row;
+	}
+}
+
+.social-footer {
+	// flex: 0 0 toRem(617);
+
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	@media (min-width: toEm(320)) {
+		padding-top: toRem(40);
+		padding-bottom: toRem(40);
+	}
+	@media (min-width: toEm(1279.98)) {
+		padding-top: toRem(48);
+		padding-left: toRem(58);
+		padding-right: toRem(26);
+	}
+	@media (min-width: toEm(1439.98)) {
+		padding-left: toRem(80);
+		padding-right: toRem(45);
+		padding-top: toRem(80);
+	}
+	@media (min-width: toEm(1599.98)) {
+		padding-left: toRem(65);
+		padding-right: toRem(25);
+	}
+	@media (min-width: toEm(1919.98)) {
+		padding-left: toRem(132);
+		padding-right: toRem(60);
+	}
+	&__title {
+		font-size: toRem(24);
+		font-weight: 600;
+		text-align: center;
+
+		&:not(:last-child) {
+			margin-bottom: toRem(16);
+		}
+	}
+
+	&__item {
+	}
+
+	&__link {
+	}
+
+	&__actions {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
+	&__action {
+		text-align: center;
+		font-weight: 600;
+		font-size: toRem(32);
+		margin-top: toRem(32);
+		@media (any-hover: hover){
+			&:hover{
+				text-decoration: underline;
+			}
+		}
+	}
+}
+
+.social-footer__box {
+	@media (max-width: toEm(575.98)) {
+		width: 100%;
+	}
+}
+
+//====================================================================================================

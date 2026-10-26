@@ -1,0 +1,210 @@
+@use "sass:math";
+@use "@styles/settings.scss" as *;
+@use "@styles/includes/mixins.scss" as *;
+
+.blog {
+	@media (min-width: toEm(320)) {
+		padding-top: toRem(56);
+		padding-bottom: toRem(56);
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-top: toRem(80);
+		padding-bottom: toRem(80);
+	}
+
+	&__body {
+		display: flex;
+		flex-wrap: wrap;
+
+		@media (min-width: toEm(320)) {
+			gap: toRem(16);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			gap: toRem(24);
+		}
+	}
+
+	&__item {
+		padding: toRem(8);
+		overflow: hidden;
+
+		@media (min-width: toEm(320)) {
+			border-radius: $radius24;
+		}
+
+		@media (min-width: toEm(767.98)) {
+			border-radius: $radius32;
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			border-radius: $radius40;
+		}
+	}
+
+	&__actions {}
+}
+
+.item-blog {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	row-gap: toRem(168);
+	justify-content: space-between;
+
+	img {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@media (min-width: toEm(320)) {
+		min-height: toRem(260);
+	}
+
+	@media (min-width: toEm(575.98)) {
+		min-height: toRem(360);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		min-height: toRem(480);
+	}
+
+	@media (min-width: toEm(991.98)) {
+		min-height: toRem(600);
+	}
+
+	&:nth-child(1) {
+		@media (min-width: toEm(320)) {
+			flex: 1 1 100%;
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			min-height: toRem(540);
+			flex: 0 0 toRem(705);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			min-height: toRem(640);
+			flex: 0 0 calc(57.896% - toRem(8));
+		}
+
+		@media (min-width: toEm(1599.98)) {}
+
+		@media (min-width: toEm(1919.98)) {
+			min-height: toRem(720);
+			flex: 0 0 58.329%;
+			flex: 1 1 auto;
+		}
+	}
+
+	&:nth-child(2) {
+		@media (min-width: toEm(320)) {
+			flex: 1 1 100%;
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			min-height: toRem(540);
+			flex: 1 1 auto;
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			min-height: toRem(640);
+			flex: 0 0 calc(42.104% - toRem(8));
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			min-height: toRem(720);
+			flex: 0 0 calc((100% - 58.329%) - toRem(24));
+		}
+	}
+
+	&:nth-child(3) {
+		@media (min-width: toEm(320)) {
+			flex: 1 1 100%;
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			min-height: toRem(280);
+			flex: 0 0 calc(50% - toRem(8));
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			min-height: toRem(320);
+			flex: 0 0 calc((100% - 49.8013%) - toRem(24));
+		}
+	}
+
+	&:nth-child(4) {
+		@media (min-width: toEm(320)) {
+			flex: 1 1 100%;
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			min-height: toRem(228);
+			flex: 0 0 calc(50% - toRem(8));
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			min-height: toRem(280);
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			min-height: toRem(320);
+			flex: 0 0 49.8013%;
+		}
+	}
+
+	&__date {
+		position: relative;
+		z-index: 2;
+		font-weight: 600;
+		color: $whiteColor;
+		display: inline-block;
+		background-color: hsla(0, 0%, 0%, 0.7);
+		border-radius: $radius32;
+		line-height: 120%;
+
+		@media (min-width: toEm(320)) {
+			font-size: toRem(12);
+			padding: toRem(8) toRem(8);
+		}
+
+		@media (min-width: toEm(575.98)) {}
+
+		@media (min-width: toEm(767.98)) {
+			font-size: toRem(14);
+			padding: toRem(17) toRem(16);
+		}
+
+		@media (min-width: toEm(991.98)) {}
+
+		@media (min-width: toEm(1279.98)) {
+			font-size: toRem(16);
+			padding: toRem(24) toRem(28);
+		}
+
+		@media (min-width: toEm(1439.98)) {
+			font-size: toRem(20);
+		}
+	}
+
+	&__link {
+		position: relative;
+		z-index: 2;
+		width: 100%;
+
+		.item-blog_three &,
+		.item-blog_four & {
+			width: auto;
+			align-self: flex-end;
+		}
+	}
+}
+
+//====================================================================================================

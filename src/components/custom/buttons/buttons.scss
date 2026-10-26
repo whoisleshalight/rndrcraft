@@ -1,0 +1,626 @@
+@use "@components/custom/icon/icon.scss" as icons;
+@use "sass:math";
+@use "@styles/settings.scss" as *;
+@use "@styles/includes/mixins.scss" as *;
+
+
+// Заголовки, загальні БЕМ блоки та інше...
+// ** BTN
+._footer-social-create-btn {
+	display: flex;
+	align-items: center;
+	gap: toRem(8);
+	border: 2px solid $mainColor;
+	padding-top: toRem(6);
+	padding-right: toRem(4);
+	padding-bottom: toRem(6);
+	padding-left: toRem(22);
+	background-color: $greenColor;
+	font-weight: 500;
+	justify-content: center;
+	transition: all 0.4s;
+	white-space: nowrap;
+	background-color: $mainColor;
+	border: 2px solid $greenColor;
+	border-radius: $radius24;
+	width: 100%;
+	color: $greenColor;
+
+	span:nth-child(1) {
+		font-weight: 500;
+	}
+
+	span:nth-child(2) {
+		background-color: $greenColor;
+		color: $mainColor;
+		font-weight: 600;
+		border-radius: $radius18;
+		padding: toRem(14);
+		transition: all 0.4s;
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			background-color: $greenColor;
+			color: $mainColor;
+			border: 2px solid $mainColor;
+
+			span:nth-child(2) {
+				background-color: $mainColor;
+				color: $greenColor;
+			}
+		}
+	}
+}
+
+._dark-btn {
+	border-radius: toRem(16);
+	background-color: $mainColor;
+	color: $whiteColor;
+	display: flex;
+	align-items: center;
+	gap: toRem(8);
+	font-weight: 500;
+	font-size: toRem(18);
+	padding-left: toRem(22);
+	padding-right: toRem(30);
+	padding-top: toRem(14);
+	padding-bottom: toRem(14);
+	transition: all 0.4s;
+	border: 2px solid transparent;
+
+	span {
+		transition: all 0.4s;
+	}
+
+	svg {
+		width: toRem(24);
+		height: toRem(24);
+		object-fit: contain;
+		object-position: center;
+
+		path {
+			transition: all 0.4s;
+		}
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			border: 2px solid $mainColor;
+
+			background-color: $greenColor;
+
+			span {
+				color: $mainColor;
+			}
+
+			svg path {
+				fill: $mainColor;
+			}
+		}
+	}
+}
+
+._btn {
+	padding-top: toRem(24);
+	padding-bottom: toRem(24);
+	padding-right: toRem(72);
+	padding-left: toRem(72);
+	color: $mainColor;
+	border-radius: $radius24;
+	overflow: hidden;
+	font-weight: 600;
+	font-size: toRem(24);
+	text-transform: uppercase;
+	transition: all 0.4s;
+	border: 3px solid transparent;
+
+	&._light {
+		background-color: rgba(235, 235, 235, 1);
+
+		@media (any-hover: hover) {
+			&:hover {
+				color: $greenColor;
+				background-color: $mainColor;
+				border: 3px solid $greenColor;
+			}
+		}
+	}
+
+	&._green {
+		background-color: $greenColor;
+
+		@media (any-hover: hover) {
+			&:hover {
+				color: $greenColor;
+				background-color: $mainColor;
+				border: 3px solid $greenColor;
+			}
+		}
+	}
+}
+
+._btn-buy {
+	background-color: $mainColor;
+	color: $whiteColor;
+
+	display: flex;
+	align-items: center;
+	gap: toRem(8);
+	font-weight: 500;
+	transition: all 0.4s;
+
+	@media (min-width: toEm(320)) {
+		font-size: toRem(16);
+		padding-top: toRem(10);
+		padding-bottom: toRem(10);
+		padding-left: toRem(16);
+		padding-right: toRem(16);
+		border-radius: $radius12;
+	}
+
+	@media (min-width: toEm(565.98)) {
+		padding-top: toRem(16);
+		padding-bottom: toRem(16);
+		font-size: toRem(16);
+		padding-left: toRem(24);
+		padding-right: toRem(24);
+		border-radius: $radius20;
+	}
+
+	@media (min-width: toEm(767.98)) {
+		font-size: toRem(20);
+		padding-left: toRem(28);
+		padding-right: toRem(28);
+		border-radius: $radius24;
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			color: $greenColor;
+		}
+	}
+}
+
+.btn-2s {
+	padding: toRem(8);
+	background-color: $whiteColor;
+	border-radius: $radius20;
+	transition: all 0.4s;
+
+	&::before {
+		font-size: toRem(32);
+		transition: all 0.4s;
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			background-color: $mainColor;
+
+			&::before {
+				color: $greenColor;
+			}
+		}
+	}
+}
+
+.btn-s {
+	background-color: $whiteColor;
+	transition: all 0.4s;
+
+	&::before {
+		font-size: toRem(32);
+		transition: all 0.4s;
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			background-color: $mainColor;
+
+			&::before {
+				color: $greenColor;
+			}
+		}
+	}
+
+	@media (min-width: toEm(320)) {
+		border-radius: $radius16;
+		padding: toRem(8);
+		width: toRem(40);
+		height: toRem(40);
+		flex: 0 0 toRem(40);
+
+		&::before {
+			font-size: toRem(24);
+		}
+	}
+
+	@media (min-width: toEm(991.98)) {
+		border-radius: $radius20;
+		width: toRem(48);
+		height: toRem(48);
+		flex: 0 0 toRem(48);
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		border-radius: $radius24;
+		padding: toRem(12);
+		width: toRem(56);
+		height: toRem(56);
+		flex: 0 0 toRem(56);
+	}
+}
+
+.btn-m {
+	background-color: $greenColor;
+	color: $mainColor;
+	border-radius: $radius24;
+
+	font-weight: 600;
+	transition: all 0.4s;
+
+	@media (min-width: toEm(320)) {
+		font-size: toRem(12);
+		padding-left: toRem(16);
+		padding-right: toRem(16);
+		padding-top: toRem(14);
+		padding-bottom: toRem(14);
+	}
+
+	@media (min-width: toEm(767.98)) {
+		font-size: toRem(16);
+		padding-top: toRem(16);
+		padding-bottom: toRem(16);
+	}
+
+	@media (min-width: toEm(991.98)) {}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-left: toRem(28);
+		padding-right: toRem(28);
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		padding-top: toRem(14);
+		padding-bottom: toRem(14);
+		font-size: toRem(20);
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			color: $greenColor;
+			background-color: $mainColor;
+		}
+	}
+}
+
+.btn-l {
+	white-space: nowrap;
+
+	background-color: $whiteColor;
+	border-radius: $radius24;
+	font-weight: 500;
+	transition: all 0.4s;
+
+	@media (any-hover: hover) {
+		&:hover {
+			color: $greenColor;
+			background-color: $mainColor;
+		}
+	}
+
+	@media (min-width: toEm(991.98)) {
+		font-size: toRem(14);
+		padding-top: toRem(17);
+		padding-bottom: toRem(17);
+		padding-right: toRem(16);
+		padding-left: toRem(16);
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		font-size: toRem(16);
+		padding-top: toRem(20);
+		padding-bottom: toRem(20);
+		padding-right: toRem(24);
+		padding-left: toRem(24);
+	}
+}
+
+.btn-3l {
+	border-radius: $radius16;
+	overflow: hidden;
+	border: 1px solid $mainColor;
+	background-color: $greenColor;
+	padding-top: toRem(12);
+	padding-bottom: toRem(12);
+	padding-left: toRem(15);
+	padding-right: toRem(15);
+	font-size: toRem(14);
+	font-weight: 500;
+}
+
+.btn-2l {
+	border-radius: $radius24;
+	color: $mainColor;
+	background-color: $greenColor;
+	text-transform: uppercase;
+	font-weight: 600;
+	border: 3px solid $mainColor;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding-left: toRem(69);
+	padding-right: toRem(69);
+	padding-top: toRem(19);
+	padding-bottom: toRem(19);
+	transition: all 0.4s;
+
+	&._light-2l {
+		font-size: toRem(40);
+		text-transform: none;
+		padding-left: toRem(86);
+		padding-right: toRem(86);
+		padding-top: toRem(13);
+		padding-bottom: toRem(13);
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			color: $greenColor;
+			background-color: $mainColor;
+		}
+	}
+
+	@media (min-width: toEm(320)) {
+		font-size: toRem(20);
+		min-height: toRem(64);
+	}
+
+	@media (max-width: toEm(767.98)) {
+		width: 100%;
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		min-height: toRem(72);
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		font-size: toRem(24);
+	}
+}
+
+.btn-xl {
+	display: flex;
+	align-items: center;
+	gap: toRem(8);
+	border: 2px solid $mainColor;
+	padding-top: toRem(4);
+	padding-right: toRem(4);
+	padding-bottom: toRem(4);
+	padding-left: toRem(22);
+	background-color: $greenColor;
+	font-weight: 500;
+	justify-content: center;
+	transition: all 0.4s;
+	white-space: nowrap;
+
+	&._dark {
+		background-color: $mainColor;
+		border: 2px solid $greenColor;
+		color: $greenColor;
+
+		span {
+			&:last-child {
+				background-color: $greenColor;
+				color: $mainColor;
+			}
+		}
+	}
+
+	span {
+		&:nth-child(2) {
+			transition: all 0.4s;
+			background-color: $mainColor;
+			color: $whiteColor;
+			font-weight: 600;
+		}
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			color: $greenColor;
+			background-color: $mainColor;
+
+			span {
+				&:last-child {
+					background-color: $greenColor;
+					color: $mainColor;
+				}
+			}
+		}
+	}
+
+	@media (min-width: toEm(991.98)) {
+		font-size: toRem(14);
+		border-radius: $radius20;
+
+		span {
+			&:last-child {
+				padding-top: toRem(11);
+				padding-bottom: toRem(11);
+				border-radius: $radius14;
+				padding-left: toRem(8);
+				padding-right: toRem(8);
+			}
+		}
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		font-size: toRem(16);
+		border-radius: $radius24;
+
+		span {
+			&:last-child {
+				padding-top: toRem(14);
+				padding-bottom: toRem(14);
+				border-radius: $radius18;
+				padding-left: toRem(14);
+				padding-right: toRem(14);
+			}
+		}
+	}
+}
+
+.btn-2xl {
+	background-color: $mainColor;
+	color: $whiteColor;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	border-radius: $radius22;
+	border: 3px solid $mainColor;
+	transition: all 0.4s;
+
+	@media (any-hover: hover) {
+		&:hover {
+			color: $mainColor;
+			background-color: $greenColor;
+		}
+	}
+
+	@media (min-width: toEm(320)) {
+		gap: toRem(8);
+		padding-top: toRem(8);
+		padding-bottom: toRem(8);
+
+		span {
+			&:first-child {
+				font-weight: 600;
+				font-size: toRem(24);
+			}
+
+			&:last-child {
+				font-weight: 500;
+				font-size: toRem(14);
+			}
+		}
+	}
+
+	@media (min-width: toEm(575.98)) {
+		padding: toRem(8);
+
+		span {
+			&:first-child {
+				font-size: toRem(48);
+			}
+
+			&:last-child {
+				font-weight: 500;
+				font-size: toRem(24);
+			}
+		}
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		gap: toRem(24);
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		padding: toRem(16);
+
+		span {
+			&:last-child {
+				font-weight: 500;
+				font-size: toRem(28);
+			}
+		}
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		padding-left: toRem(67);
+		padding-right: toRem(67);
+		padding-top: toRem(16);
+		padding-bottom: toRem(16);
+
+		span {
+			&:first-child {
+				font-weight: 600;
+				font-size: toRem(56);
+			}
+
+			&:last-child {
+				font-weight: 500;
+				font-size: toRem(32);
+			}
+		}
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		span {
+			&:first-child {
+				font-size: toRem(80);
+			}
+
+			&:last-child {
+				font-size: toRem(32);
+			}
+		}
+	}
+}
+
+.btn-3xl {}
+
+.btn-4xl {}
+
+// ._cart-btn {
+// 	padding-left: toRem(32);
+// 	padding-right: toRem(32);
+// 	padding-top: toRem(20);
+// 	padding-bottom: toRem(20);
+// 	border-radius: $radius32;
+// 	background-color: $greenColor;
+// 	color: $mainColor;
+// 	font-size: toRem(24);
+// 	font-weight: 600;
+// 	transition: all 0.4s;
+
+// 	@media (any-hover: hover) {
+// 		&:hover {
+// 			color: $greenColor;
+// 			background-color: $mainColor;
+// 		}
+// 	}
+// }
+//========================================================================================================================================================
+.glightbox-open {
+	overflow: clip !important;
+}
+
+._background {
+	&::before {
+		content: "";
+		background: url("@img/home/bg.png");
+		background-position: left top;
+		background-repeat: no-repeat;
+		background-size: cover;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: -1;
+
+		@media (min-width: toEm(1940)) {
+			height: auto;
+		}
+	}
+
+	&.catalog {
+		background-size: contain;
+	}
+}
+
+//========================================================================================================================================================
+// ** Subscribe section
+
