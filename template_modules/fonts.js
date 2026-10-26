@@ -27,7 +27,7 @@ const iconsPreviewFiles = globSync('src/assets/svgicons/preview/*.*')
 const iconsFiles = globSync('src/assets/svgicons/*.svg')
 
 // Обробка шрифтів
-function fontWork() {
+async function fontWork() {
 	const fontsFiles = globSync('src/assets/fonts/*.{otf,ttf}', { posix: true })
 	// Конвертація шрифтів
 	if (fontsFiles.length) {
@@ -107,10 +107,15 @@ function addIconFonts() {
 				throw err;
 			}
 		});
+		fs.rm('src/assets/svgicons/fixed', { recursive: true, force: true }, err => {
+			if (err) {
+				throw err;
+			}
+		});
 		fs.writeFile(iconsCSSFile, '', cb)
 	}
 }
-// Додавання шрифту для WP
+// Додавання шрифту для WP 
 async function addWpFonts() {
 	const styles = []
 	styles.push(`import '@styles/fonts/fonts.css'`)
@@ -120,12 +125,9 @@ async function addWpFonts() {
 // Плагіни
 export const fontPlugins = [
 	// Обробка шрифтів
-	fontWork(),
+	await fontWork(),
 	// Створення шрифту з SVG іконок
-	(iconsFiles.length && templateConfig.fonts.iconsfont) ? await {
-		order: 'pre',
-		...svgOptimaze(iconsFiles).then(() => { logger('_FONTS_ICONS_DONE') })
-	} : [],
+	(iconsFiles.length && templateConfig.fonts.iconsfont) ? await svgOptimaze(iconsFiles) : [],
 	(iconsFiles.length && templateConfig.fonts.iconsfont) ? {
 		order: 'post',
 		...viteSvgToWebfont({
@@ -136,7 +138,7 @@ export const fontPlugins = [
 			dest: "src/assets/svgicons/preview",
 			cssTemplate: path.resolve('template_modules/iconfont/css.hbs'),
 			htmlTemplate: path.resolve('template_modules/iconfont/html.hbs'),
-			context: path.resolve('src/assets/svgicons'),
+			context: path.resolve('src/assets/svgicons/fixed'),
 			normalize: true,
 			inline: true,
 			generateFiles: true //!iconsPreviewFiles.length

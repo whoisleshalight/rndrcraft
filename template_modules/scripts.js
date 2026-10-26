@@ -11,6 +11,13 @@ import fs from 'fs'
 
 const isProduction = process.env.NODE_ENV === 'production'
 const isWp = process.argv.includes('--wp')
+const isAssets = templateConfig.server.isassets || isWp ? `assets/` : ``
+
+const pathPrefix = isWp ? `src/components/wordpress/fls-theme/build/${isAssets}` : `dist/${isAssets}`
+
+const pathToFiles = `${pathPrefix}js/*.js`
+const pathToDev = `${pathPrefix}js/dev`
+const pathToOptimize = `${pathPrefix}js`
 
 export const scriptsPlugins = [
 	// Обробка псевдонімів в JS-файлах
@@ -44,13 +51,13 @@ export const scriptsPlugins = [
 	...((isProduction && templateConfig.js.devfiles) ? [{
 		name: "js-devfiles",
 		apply: 'build',
-		enforce: 'post',
-		writeBundle: {
-			order: 'post',
-			handler: async ({ dir }) => {
-				const jsFiles = globSync(`${dir}/js/*.js`)
+		enforce: 'pre',
+		closeBundle: {
+			order: 'pre',
+			handler: async () => {
+				const jsFiles = globSync(pathToFiles)
 				// Створення копій
-				!fs.existsSync(`${dir}/js/dev`) ? fs.mkdirSync(`${dir}/js/dev`) : null
+				!fs.existsSync(pathToDev) ? fs.mkdirSync(pathToDev) : null
 				jsFiles.forEach(async (jsFile) => {
 					jsFile = normalizePath(jsFile)
 					const devJsFile = jsFile.replace('.min', '').replace('/js/', '/js/dev/')
@@ -62,7 +69,7 @@ export const scriptsPlugins = [
 					entryPoints: jsFiles,
 					allowOverwrite: true,
 					minify: true,
-					outdir: `${dir}/js`,
+					outdir: pathToOptimize,
 				})
 			}
 		}
@@ -80,7 +87,7 @@ export const scriptsPlugins = [
 ]
 async function insertModule(html) {
 	const modules = new Set()
-	const moduleJSFiles = new Glob(`src/components/**/*.js`, { ignore: ['**/_*.*', '**/plugins/**', '**/pages/**', '**/wordpress/**'] })
+	const moduleJSFiles = new Glob(`src/components/**/*.js`, { ignore: ['**/_*.*', '**/plugins/**', '**/wordpress/**'] })
 	const modulePlugins = new Map()
 	for (let moduleJSFile of moduleJSFiles) {
 		moduleJSFile = normalizePath(moduleJSFile).replace('src', '')

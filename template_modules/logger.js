@@ -12,8 +12,10 @@ export default async function logger(text, vars) {
 		} else {
 			text = lang[text] ? text.replace(text, lang[text].replace('@@', vars)) : text
 		}
-		if (text.startsWith('(!)')) {
-			console.log(`${chalk.yellow(text.replace('(!)', ''))}`)
+		if (text.startsWith('(?)')) {
+			console.log(`${chalk.magenta(text.replace('(?)', ''))}`)
+		} else if (text.startsWith('(!)')) {
+			console.log(`${chalk.yellow(text.replace('(!)', '! '))}`)
 		} else if (text.startsWith('(!!)')) {
 			console.log(`${chalk.red(text.replace('(!!)', ''))}`)
 		} else {

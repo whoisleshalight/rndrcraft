@@ -1,5 +1,5 @@
 import { defineConfig } from "vite";
-import { Glob, globSync } from 'glob'
+import { globSync } from 'glob'
 import path from 'path'
 import fs from 'fs'
 
@@ -11,17 +11,12 @@ import templateImports from './template_modules/template.imports.js'
 templateConfig.vscode.settings ? templateImports.vscodeSettings() : null
 // Генерація сніпетів для редактору
 templateConfig.vscode.snippets ? templateImports.addSnippets() : null
+// Створення сторінки компонентів
+templateConfig.devcomponents.enable ? templateImports.createComponentsPage() : null
+
 // Мова повідоблень
 const lang = JSON.parse(fs.readFileSync(`./template_modules/languages/${templateConfig.lang}.json`, 'UTF-8'))
-// Формування псевдонімів для Vite
-const makeAliases = (aliases) => {
-	return Object.entries(aliases).reduce((acc, [key, value]) => {
-		value = !value.startsWith(`./`) ? `./${value}` : value
-		acc[key] = path.resolve(process.cwd(), value)
-		return acc
-	}, {})
-}
-const aliases = makeAliases(templateConfig.aliases)
+
 // Логінг
 import logger from "./template_modules/logger.js";
 
@@ -30,12 +25,27 @@ const isInspect = process.argv.includes('--inspect')
 const isWp = process.argv.includes('--wp')
 const isGit = process.argv.includes('--git')
 const isHost = process.argv.includes('--host')
+const isZip = process.argv.includes('--zip')
+const isFtp = process.argv.includes('--ftp')
 
 import { ignoredDirs, ignoredFiles } from './template_modules/ignored.js'
 
 import Inspect from 'vite-plugin-inspect'
 import { getDev } from './template_modules/main.js'
 import qrcode from 'qrcode-terminal'
+
+const isAssets = templateConfig.server.isassets || isWp ? `assets/` : ``
+
+// Формування псевдонімів для Vite
+const makeAliases = (aliases) => {
+	return Object.entries(aliases).reduce((acc, [key, value]) => {
+		value = !value.startsWith(`./`) ? `./${value}` : value
+		acc[key] = path.resolve(process.cwd(), value)
+		return acc
+	}, {})
+}
+
+const aliases = makeAliases(templateConfig.aliases)
 
 export default defineConfig(({ command, mode, ssrBuild }) => {
 	return {
@@ -82,18 +92,14 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 			...templateImports.htmlPlugins,
 			// Робота з скриптами
 			...templateImports.scriptsPlugins,
+			// Робота з зображеннями
+			...templateImports.imagePlugins,
 			// Робота зі шрифтами
 			...templateImports.fontPlugins,
 			// Робота з стилями
 			...templateImports.stylesPlugins,
-			// Робота з зображеннями
-			...templateImports.imagePlugins,
 			// Робота з PHP
 			...templateImports.phpPlugins,
-			// Робота з архівом
-			...templateImports.zipPlugin,
-			// Робота з FTP
-			...templateImports.ftpPlugin,
 			// Обробка React
 			...(templateConfig.js.react ? [templateImports.react()] : []),
 			// Обробка Vue
@@ -116,8 +122,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 			})] : []),
 			// Робота з статистикою
 			...templateImports.statPlugins,
-			// Робота з GitHub
-			...(isProduction && isGit ? [...templateImports.gitPlugins] : []),
 			// Додавання версії файлів
 			...(isProduction && templateConfig.server.version ? [{
 				//templateImports.addVersion((new Date()).getTime())
@@ -125,9 +129,11 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 				apply: "build",
 				transformIndexHtml(html) {
 					const version = (new Date()).getTime()
-					const regex = /<script[^>]*src\s*=\s*["']([^"']+\.js)["'][^>]*><\/script>|<link[^>]*href\s*=\s*["']([^"']+\.css)["'][^>]*>/gi;
+					const regex = /<script[^>]*src\s*=\s*["']([^"']+\.js)["'][^>]*><\/script>|<link[^>]*href\s*=\s*["']([^"']+\.css)["'][^>]*>|<link[^>]*href\s*=\s*["']([^"']+\.js)["'][^>]*>/gi;
 					return html.replace(regex, (code) => {
-						return code.replace(/\.css|\.js/gi, ($0) => `${$0}?v=${version}`)
+						return code.replace(/\.css"|\.js"/gi, ($0) => {
+							return `${$0.replace('"', '')}?v=${version}"`
+						})
 					})
 				},
 			}] : []),
@@ -148,6 +154,14 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 				configureServer: {
 					order: 'post',
 					handler: (server) => {
+						// Повідомлення навігаційної панелі
+						if (!isWp) {
+							if (templateConfig.navpanel.dev && !isProduction) {
+								logger('_NAVPAN_DONE')
+							} else if (templateConfig.navpanel.build && isProduction) {
+								logger('_NAVPAN_WARN')
+							}
+						}
 						// Додавання QR-коду в термінал
 						if (isHost) {
 							setTimeout(() => {
@@ -178,20 +192,27 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 				name: 'message-build',
 				apply: 'build',
 				enforce: 'post',
-				writeBundle: {
-					order: 'post',
-					handler: () => {
+				closeBundle: {
+					order: 'pre',
+					handler: async () => {
 						logger(`_BUILD_DONE`)
 					}
 				},
 			},
-			...(isInspect ? [Inspect()] : [])
+			...(isInspect ? [Inspect()] : []),
+			// Робота з GitHub
+			...(isProduction && isGit ? [...templateImports.gitPlugins] : []),
+			// Робота з архівом
+			...(isProduction && isZip ? [...templateImports.zipPlugin] : []),
+			// Робота з FTP
+			...(isProduction && isFtp ? [...templateImports.ftpPlugin] : [])
 		],
 		css: {
 			devSourcemap: true,
 			preprocessorOptions: {
 				scss: {
-					silenceDeprecations: ["mixed-decls"],
+					//silenceDeprecations: ["mixed-decls"],
+					silenceDeprecations: [],
 					additionalData: `
 						@use "sass:math";
 						@use "@styles/includes/index.scss" as *;
@@ -203,7 +224,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 			},
 		},
 		build: {
-			outDir: isWp ? path.join(__dirname, "src/components/wordpress/fls-theme/assets/build") : path.join(__dirname, "dist"),
+			outDir: isWp ? path.join(__dirname, "src/components/wordpress/fls-theme/build") : path.join(__dirname, "dist"),
 			emptyOutDir: true,
 			manifest: false,
 			minify: !templateConfig.js.devfiles,
@@ -217,11 +238,16 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 				],
 				output: [{
 					manualChunks(id) {
-						if (templateConfig.js.bundle.enable) {
+						if (templateConfig.js.bundle.enable || templateConfig.server.buildforlocal) {
 							return 'app'
-						} else if (id.includes('js/custom')) {
-							const customName = id.split('/').pop().replace('.js', '')
-							return customName
+						} else {
+							if (id.includes('js/custom')) {
+								const customName = id.split('/').pop().replace('.js', '')
+								return customName
+							}
+							if (id.includes('/src/js/') && /(^|\/)app(\.js)?$/.test(id.split(path.sep).pop())) {
+								return 'common'
+							}
 						}
 					},
 					// Налаштування асетів
@@ -229,7 +255,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 						let getPath = asset.originalFileNames[0] && asset.names && asset.names.length > 0 ? asset.originalFileNames[0].replace(`/${asset.names[0]}`, '') : ''
 						let extType = asset.names && asset.names.length > 0 ? asset.names[0].split('.').pop() : ''
 						if (/css/.test(extType)) {
-							return templateConfig.js.bundle.enable ? `css/app.min[extname]` : `css/[name].min[extname]`
+							return templateConfig.js.bundle.enable || templateConfig.server.buildforlocal ? `${isAssets}css/app.min[extname]` : `${isAssets}css/[name].min[extname]`
 						} else {
 							if (/eot|otf|ttf|woff|woff2/.test(extType)) {
 								extType = "assets/fonts";
@@ -240,13 +266,14 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 						}
 					},
 					entryFileNames(name) {
-						return templateConfig.js.bundle.enable ? 'js/app.min.js' : `js/[name].min.js`
+						return templateConfig.js.bundle.enable || templateConfig.server.buildforlocal ? `${isAssets}js/app.min.js` : `${isAssets}js/[name].min.js`
 					},
 					chunkFileNames(name) {
-						return templateConfig.js.bundle.enable ? 'js/app.min.js' : `js/[name].min.js`
+						return templateConfig.js.bundle.enable || templateConfig.server.buildforlocal ? `${isAssets}js/app.min.js` : `${isAssets}js/[name].min.js`
 					}
 				}],
 			}
 		}
 	}
 })
+

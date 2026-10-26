@@ -1,19 +1,26 @@
 import path from 'path';
-const projectName = path.basename(path.resolve()).toLowerCase()
+const projectName = path.basename(path.resolve()).toLowerCase();
+
+const isProduction = process.env.NODE_ENV === 'production';
+const isWp = process.argv.includes('--wp');
 
 export default {
 	lang: 'ua', // Наразі тільки Українська
 	vscode: {
 		settings: true,
-		snippets: true
+		snippets: true,
 	},
 	devcomponents: {
 		enable: false,
-		filename: '_components.html'
+		filename: '_components.html',
+	},
+	newpage: {
+		copyfromindex: false,
+		usetemplate: 'main',
 	},
 	git: {
 		repo: ``,
-		branch: `main`
+		branch: `main`,
 	},
 	navpanel: {
 		dev: true,
@@ -21,24 +28,26 @@ export default {
 		position: 'left',
 		color: '#ffffff',
 		background: 'rgba(51, 51, 51, 0.5)',
-		transition: '300'
+		transition: '300',
 	},
 	statistics: {
 		enable: false,
-		showonbuild: false
+		showonbuild: false,
 	},
 	server: {
 		path: './',
+		isassets: false,
+		buildforlocal: false,
 		copyfiles: true,
 		version: true,
 		hostname: 'localhost',
-		port: '1111'
+		port: '1111',
 	},
 	html: {
 		beautify: {
 			enable: true,
-			indent: "tab"
-		}
+			indent: 'tab',
+		},
 	},
 	styles: {
 		tailwindcss: false,
@@ -48,34 +57,34 @@ export default {
 		devfiles: true,
 	},
 	fonts: {
-		iconsfont: false,
-		download: false
+		iconsfont: true,
+		download: false,
 	},
 	images: {
 		svgsprite: false,
 		optimize: {
-			enable: true,
-			edithtml: true,
+			enable: false,
+			edithtml: false,
 			sizes: [600, 1200],
 			dpi: [],
 			attrignore: 'data-fls-image-ignore',
 			modernformat: {
-				enable: true,
+				enable: false,
 				type: 'webp', // webp/avif
 				only: true,
-				quality: 80
+				quality: 80,
 			},
 			jpeg: {
-				quality: 80
+				quality: 80,
 			},
 			png: {
-				quality: 80
-			}
-		}
+				quality: 10,
+			},
+		},
 	},
 	js: {
 		hotmodules: true,
-		devfiles: true,
+		devfiles: false,
 		bundle: {
 			// Збирає в один JS та один CSS файли
 			// незалежно від налаштування
@@ -83,11 +92,11 @@ export default {
 			enable: false,
 		},
 		react: false,
-		vue: false
+		vue: false,
 	},
 	php: {
 		enable: false,
-		base: "./src/php/",
+		base: './src/php/',
 		hostname: 'localhost',
 		port: '1110',
 		binary: 'C:\\php\\php.exe',
@@ -108,14 +117,14 @@ export default {
 		terminal: true,
 		// Логи роботи модулів в консолі
 		console: {
-			enable: true,
-			removeonbuild: true
-		}
+			enable: false,
+			removeonbuild: true,
+		},
 	},
 	projectpage: {
 		enable: false,
 		projectname: '',
-		template: "src/projectpage/projectpage.html",
+		template: 'src/projectpage/projectpage.html',
 		outfilename: '',
 	},
 	aliases: {
@@ -127,19 +136,21 @@ export default {
 		'@styles': 'src/styles',
 		// Media & files
 		'@fonts': 'src/assets/fonts',
-		'@img': 'src/assets/img',
+		'@img': isWp && !isProduction ?
+			'src/wp-content/themes/fls-theme/assets/img' : 'src/assets/img',
 		'@video': 'src/assets/video',
 		'@files': 'src/files',
 		// Other
-		'@pug': 'src/pug'
+		'@pug': 'src/pug',
 	},
 	coffee: {
-		enable: true,
+		enable: false,
+		notification: false,
 		text: `(!!)Досить працювати, зроби перерву ☕️`,
-		interval: 45
+		interval: 45,
 	},
 	novaposhta: {
 		enable: false,
-		key: ''
-	}
-}
+		key: '',
+	},
+};

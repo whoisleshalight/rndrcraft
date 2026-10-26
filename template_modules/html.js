@@ -13,6 +13,8 @@ import posthtml from 'posthtml'
 import prerenderHTML from './posthtml/prerender.js'
 import posthtmBeautify from 'posthtml-beautify'
 
+import nunjucks from 'vite-plugin-nunjucks'
+
 import pugAliases from "pug-alias"
 import pugPlugin from "./pug.js"
 
@@ -22,12 +24,24 @@ const isWp = process.argv.includes('--wp')
 export const htmlPlugins = [
 	// Пре-обробка Inclue, Extend, Expressions
 	prerenderHTML({}),
+	// Nunjucks 
+	nunjucks(),
 	// Навігаційна панель
 	...((!isWp && ((!isProduction && templateConfig.navpanel.dev) || (isProduction && templateConfig.navpanel.build))) ? [{
 		name: 'nav-panel',
 		order: 'pre',
 		transformIndexHtml(html) {
 			html = html.replace("</body>", `${navPanel()}</body>`)
+			return html
+		},
+	}] : []),
+	// Для відкриття в провіднику
+	...((isProduction && templateConfig.server.buildforlocal) ? [{
+		name: 'build-for-local',
+		order: 'post',
+		transformIndexHtml(html) {
+			html = html.replace(new RegExp(`type="module"`, 'gi'), ``)
+			html = html.replace(new RegExp(`crossorigin`, 'gi'), `defer`)
 			return html
 		},
 	}] : []),
@@ -43,8 +57,8 @@ export const htmlPlugins = [
 		name: 'add-posthtml',
 		apply: 'build',
 		enforce: 'post',
-		writeBundle: async ({ dir }) => {
-			const htmlFiles = globSync(`${dir}/*.html`)
+		closeBundle: async () => {
+			const htmlFiles = globSync(`dist/*.html`)
 			htmlFiles.forEach(async htmlFile => {
 				let content = fs.readFileSync(htmlFile, 'utf-8')
 				// Шлихи SVG-спрайту
@@ -75,13 +89,13 @@ export const htmlPlugins = [
 					})
 					content = render.content
 				}
+
+				// Заміна common.js
+				content = content.replace(/<script\s+type="module"\s+crossorigin=""\s+src="(.\/js\/common\.min\.js\?v=\d+)"><\/script>/, '<link rel="modulepreload" crossorigin href="$1">')
+
 				fs.writeFileSync(htmlFile, content, 'utf-8');
 			})
 		}
 	}
 ]
-if (templateConfig.navpanel.dev && !isProduction) {
-	logger('_NAVPAN_DONE')
-} else if (templateConfig.navpanel.build && isProduction) {
-	logger('_NAVPAN_WARN')
-}
+

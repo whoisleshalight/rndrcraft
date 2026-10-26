@@ -49,7 +49,7 @@
 		"scope": "html",
 		"prefix": "tabs",
 		"body": [
-			"<div data-fls-tabs class=\"${1:tabs}\">\n\t<nav data-fls-tabs-titles class=\"${1:tabs}__navigation\">\n\t\t<button type=\"button\" class=\"${1:tabs}__title --tab-active\">Таб №1</button>\n\t\t<button type=\"button\" class=\"${1:tabs}__title\">Таб №2</button>\n\t\t<button type=\"button\" class=\"${1:tabs}__title\">Таб №3</button>\n\t</nav>\n\t<div data-fls-tabs-body class=\"${1:tabs}__content\">\n\t\t<div class=\"${1:tabs}__body\">\n\t\t\tВміст першого таба\n\t\t</div>\n\t\t<div class=\"${1:tabs}__body\">\n\t\t\tВміст другого таба\n\t\t</div>\n\t\t<div class=\"${1:tabs}__body\">\n\t\t\tВміст третього таба\n\t\t</div>\n\t</div>\n</div>"
+			"<div data-fls-tabs class=\"${1:tabs}\">\n\t<div data-fls-tabs-titles class=\"${1:tabs}__navigation\">\n\t\t<button type=\"button\" class=\"${1:tabs}__title --tab-active\">Таб №1</button>\n\t\t<button type=\"button\" class=\"${1:tabs}__title\">Таб №2</button>\n\t\t<button type=\"button\" class=\"${1:tabs}__title\">Таб №3</button>\n\t</div>\n\t<div data-fls-tabs-body class=\"${1:tabs}__content\">\n\t\t<div class=\"${1:tabs}__body\">\n\t\t\tВміст першого таба\n\t\t</div>\n\t\t<div class=\"${1:tabs}__body\">\n\t\t\tВміст другого таба\n\t\t</div>\n\t\t<div class=\"${1:tabs}__body\">\n\t\t\tВміст третього таба\n\t\t</div>\n\t</div>\n</div>"
 		],
 		"description": "Додає базовий HTML код табів"
 	},
@@ -380,37 +380,37 @@
 		"description": "Максимальная ширина"
 	},
 	"@media max": {
-		"scope": "scss",
-		"prefix": "md",
-		"body": [
-			"@media (max-width: toEm($1)){\n\t $2 \n}"
-		],
-		"description": "Додає медіазапит max-width з перекладом у EM"
-	},
-	"@media max (CSS)": {
-		"scope": "css",
-		"prefix": "md",
-		"body": [
-			"@media (max-width: $1px){\n\t $2 \n}"
-		],
-		"description": "Додає медіазапит max-width з перекладом у EM"
-	},
-	"@media min": {
-		"scope": "scss",
-		"prefix": "mmd",
-		"body": [
-			"@media (min-width:toEm($1)){\n\t $2 \n}"
-		],
-		"description": "Додає медіазапит min-width з перекладом у EM"
-	},
-	"@media min (CSS)": {
-		"scope": "css",
-		"prefix": "mmd",
-		"body": [
-			"@media (min-width:$1px){\n\t $2 \n}"
-		],
-		"description": "Додає медіазапит min-width з перекладом у EM"
-	},
+    "scope": "scss",
+    "prefix": "md",
+    "body": [
+      "@media (width <= toEm($1)){\n\t $2 \n}"
+    ],
+    "description": "Додає медіазапит width з перекладом у EM"
+  },
+  "@media max (CSS)": {
+    "scope": "css",
+    "prefix": "md",
+    "body": [
+      "@media (width <= $1px){\n\t $2 \n}"
+    ],
+    "description": "Додає медіазапит max-width з перекладом у EM"
+  },
+  "@media min": {
+    "scope": "scss",
+    "prefix": "mmd",
+    "body": [
+      "@media (width > toEm($1)){\n\t $2 \n}"
+    ],
+    "description": "Додає медіазапит min-width з перекладом у EM"
+  },
+  "@media min (CSS)": {
+    "scope": "css",
+    "prefix": "mmd",
+    "body": [
+      "@media (width > $1px){\n\t $2 \n}"
+    ],
+    "description": "Додає медіазапит min-width з перекладом у EM"
+  },
 	"Add data-popup": {
 		"scope": "html",
 		"prefix": "pl",
@@ -776,7 +776,7 @@
 	"hhv": {
 		"prefix": "hhv",
 		"body": [
-			"@media (any-hover: hover){\n\t&:hover{\n\t\t$0\n\t}\n}"
+			"html:not([data-fls-touch]) &{\n\t@media (any-hover: hover), (pointer: fine) {\n\t\t&:hover{\n\t\t\t$0\n\t\t}\n\t}\n}"
 		],
 		"description": "hhv"
 	},

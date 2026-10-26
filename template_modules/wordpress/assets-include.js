@@ -16,24 +16,24 @@ export default function wpAssetsInclude() {
 	data += `const VITE_HOST='http://${templateConfig.server.hostname}:${templateConfig.server.port}';`
 	data += `function add_vite() {`
 	if (isProduction) {
-		const jsFiles = globSync(`src/components/wordpress/fls-theme/assets/build/js/*.js`)
-		const cssFiles = globSync(`src/components/wordpress/fls-theme/assets/build/css/*.css`)
+		const jsFiles = globSync(`src/components/wordpress/fls-theme/build/assets/js/*.js`)
+		const cssFiles = globSync(`src/components/wordpress/fls-theme/build/assets/css/*.css`)
 		const files = [...jsFiles, ...cssFiles]
 		files.forEach(file => {
 			file = normalizePath(file)
 			const fileName = file.split('/').pop()
 			if (file.endsWith('.css')) {
-				data += `wp_enqueue_style('${fileName}','/wp-content/themes/fls-theme/assets/build/css/${fileName}',array(),null,'all');`
+				data += `wp_enqueue_style('${fileName}','/wp-content/themes/fls-theme/build/assets/css/${fileName}',array(),null,'all');`
 			}
 			if (file.endsWith('.js')) {
-				data += `wp_enqueue_script('${fileName}','/wp-content/themes/fls-theme/assets/build/js/${fileName}',array(),null,true);`
+				data += `wp_enqueue_script('${fileName}','/wp-content/themes/fls-theme/build/assets/js/${fileName}',array(),null,true);`
 				moduleType.push(fileName)
 			}
 		})
-		fs.writeFileSync(`src/components/wordpress/fls-theme/assets/build/js/custom.js`, '')
-		fs.writeFileSync(`src/components/wordpress/fls-theme/assets/build/css/custom.css`, '')
-		data += `wp_enqueue_style('vite-custom-css','/wp-content/themes/fls-theme/assets/build/css/custom.css',array(),null,'all');`
-		data += `wp_enqueue_script('vite-custom-js','/wp-content/themes/fls-theme/assets/build/js/custom.js',array(),null,true);`
+		fs.writeFileSync(`src/components/wordpress/fls-theme/build/assets/js/custom.js`, '')
+		fs.writeFileSync(`src/components/wordpress/fls-theme/build/assets/css/custom.css`, '')
+		data += `wp_enqueue_style('vite-custom-css','/wp-content/themes/fls-theme/build/assets/css/custom.css',array(),null,'all');`
+		data += `wp_enqueue_script('vite-custom-js','/wp-content/themes/fls-theme/build/assets/js/custom.js',array(),null,true);`
 	} else {
 		data += `wp_enqueue_script('vite-client',VITE_HOST.'/@vite/client',array(),null,true);`
 		data += `wp_enqueue_script('vite-app',VITE_HOST.'/components/wordpress/fls-theme/assets/app.js',array(),null,true);`

@@ -15,9 +15,13 @@ async function createFlsComponent() {
 			logger(`_CREATE_COMPONENT_EXIST`, [name, folderPath])
 		} else {
 			fs.mkdirSync(`src/components/custom/${name}`)
-			fs.writeFileSync(`src/components/custom/${name}/${name}.html`, '')
+			fs.writeFileSync(`src/components/custom/${name}/${name}.html`, `<section data-fls-${name} class="${name}">
+	<div class="${name}__container">
+		
+	</div>
+</section>`)
 			fs.writeFileSync(`src/components/custom/${name}/${name}.scss`, '')
-			fs.writeFileSync(`src/components/custom/${name}/${name}.js`, `import "./${name}.scss"`)
+			fs.writeFileSync(`src/components/custom/${name}/${name}.js`, `// Підключення функціоналу "Чортоги Фрілансера"\nimport { addTouchAttr, addLoadedAttr, isMobile, FLS } from "@js/common/functions.js"\n\nimport "./${name}.scss"`)
 			logger(`_CREATE_COMPONENT_DONE`, name)
 		}
 	}

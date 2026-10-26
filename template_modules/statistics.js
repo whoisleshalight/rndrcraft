@@ -156,10 +156,10 @@ function showStat(data) {
 		logger(`_STAT_SHOW_SESSIONS`, getSessions(dataSessions))
 		logger(`_STAT_SHOW_TIME_TITLE`)
 		getTimePerDay(dataSessions)
-		logger(`(!)`)
-		logger(`_STAT_SHOW_FILES_TITLE`)
-		getFiles(dataFiles, false)
-		logger(`(!)`)
+		//logger(`(!)`)
+		//logger(`_STAT_SHOW_FILES_TITLE`)
+		//getFiles(dataFiles, false)
+		//logger(`(!)`)
 	} else {
 		logger(`_STAT_NONE`)
 	}

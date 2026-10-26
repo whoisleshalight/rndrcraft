@@ -4,6 +4,7 @@ import templateConfig from '../template.config.js'
 import logger from './logger.js'
 
 const isProduction = process.env.NODE_ENV === 'production'
+const isWp = process.argv.includes('--wp')
 
 function getKeyByValue(object, value) {
 	return Object.keys(object).find(key => object[key] === value);
@@ -23,6 +24,6 @@ export default function generateConfigFiles() {
 	!fs.existsSync('.vscode') ? fs.mkdirSync('.vscode') : null
 	fs.writeFileSync(path.resolve('.vscode/settings.json'), JSON.stringify(vscodeSettings, null, 2))
 
-	!isProduction ? logger('Файл конфігурації шляхів створений') : null
+	!isProduction ? logger('_VS_SETTINGS') : null
 }
 

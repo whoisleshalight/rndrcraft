@@ -4,6 +4,8 @@ import templateConfig from '../template.config.js'
 import vscodeSettings from './vscode-settings.js'
 // Генерація сніпетів для редактору
 import addSnippets from './snippets-generate.js'
+// Створення сторінки компонентів
+import createComponentsPage from './createcomponentpage.js'
 // Генерація сторінки проєкту
 import projectPage from './projectpage.js'
 // Час для кави
@@ -42,6 +44,7 @@ import { viteStaticCopy } from 'vite-plugin-static-copy'
 import { statPlugins } from './statistics.js'
 
 export default {
+	createComponentsPage,
 	statPlugins,
 	gitPlugins,
 	novaPoshta,

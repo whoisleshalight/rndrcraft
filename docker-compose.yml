@@ -13,6 +13,7 @@ services:
       WORDPRESS_DB_PASSWORD: fls_password
     volumes:
       - ./backend/wordpress:/var/www/html
+      - ./src/assets/img:/var/www/html/wp-content/themes/fls-theme/assets/img
       - ./src/components/wordpress/fls-theme:/var/www/html/wp-content/themes/fls-theme
       - ./src/components/wordpress/fls-plugin:/var/www/html/wp-content/plugins/fls-plugin
       - ./template_modules/wordpress/wp-config.php:/var/www/html/wp-config.php
@@ -30,6 +31,21 @@ services:
       MYSQL_PASSWORD: fls_password
     volumes:
       - ./backend/database:/var/lib/mysql
+    networks:
+      - wordpress_network
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: wordpress_phpmyadmin
+    restart: always
+    environment:
+      PMA_HOST: db
+      PMA_USER: fls_user
+      PMA_PASSWORD: fls_password
+      MYSQL_ROOT_PASSWORD: fls_password
+    ports:
+      - "8081:80"
+    depends_on:
+      - db
     networks:
       - wordpress_network
 volumes:

@@ -17,6 +17,13 @@ import logger from './logger.js';
 
 const isProduction = process.env.NODE_ENV === 'production'
 const isWp = process.argv.includes('--wp')
+const isAssets = templateConfig.server.isassets || isWp ? `assets/` : ``
+
+const pathPrefix = isWp ? `src/components/wordpress/fls-theme/build/${isAssets}` : `dist/${isAssets}`
+
+const pathToFiles = `${pathPrefix}css/*.css`
+const pathToDev = `${pathPrefix}css/dev`
+const pathToOptimize = `${pathPrefix}css`
 
 export const stylesPlugins = [
 	// Підключення плагіну Tailwind
@@ -25,26 +32,31 @@ export const stylesPlugins = [
 	...((isProduction && templateConfig.styles.pxtorem) ? [{
 		name: "css-pxtorem",
 		apply: 'build',
-		writeBundle: async ({ dir }) => {
-			const cssFiles = globSync(`${dir}/css/*.css`)
-			cssFiles.forEach(async cssFile => {
-				let content = fs.readFileSync(cssFile, 'utf-8');
-				content = content.replace(new RegExp(/\d+(\.\d+)?px/, "g"), (data) => {
-					let value = `${parseFloat(data) / 16}rem`
-					return value
-				})
-				fs.writeFileSync(cssFile, content, 'utf-8');
-			});
+		enforce: 'pre',
+		closeBundle: {
+			order: 'pre',
+			handler: async () => {
+				const cssFiles = globSync(pathToFiles)
+				cssFiles.forEach(async cssFile => {
+					let content = fs.readFileSync(cssFile, 'utf-8');
+					content = content.replace(new RegExp(/\d+(\.\d+)?px/, "g"), (data) => {
+						let value = `${parseFloat(data) / 16}rem`
+						return value
+					})
+					fs.writeFileSync(cssFile, content, 'utf-8');
+				});
+			}
 		}
 	}] : []),
 	// Групування Media-запитів
 	...((isProduction) ? [{
 		name: "css-combine-media-query",
 		apply: 'build',
-		writeBundle: {
-			order: 'post',
-			handler: async ({ dir }) => {
-				const cssFiles = globSync(`${dir}/css`)
+		enforce: 'pre',
+		closeBundle: {
+			order: 'pre',
+			handler: async () => {
+				const cssFiles = globSync(pathToOptimize)
 				cssFiles.forEach((cssFile) => {
 					fs.readdirSync(cssFile).filter((filename) => /\.css$/.test(filename)).map((filename) => combineMediaQueries(`${cssFile}/${filename}`))
 				});
@@ -62,10 +74,11 @@ export const stylesPlugins = [
 	...((isProduction && isWp) ? [{
 		name: "wp-css-fonts-path",
 		apply: 'build',
-		writeBundle: {
+		enforce: 'pre',
+		closeBundle: {
 			order: 'pre',
-			handler: ({ dir }) => {
-				const cssFiles = globSync(`${dir}/css/*.css`)
+			handler: () => {
+				const cssFiles = globSync(pathToFiles)
 				if (cssFiles.length) {
 					cssFiles.forEach(async (cssFile) => {
 						const cssFileCode = fs.readFileSync(cssFile, 'utf-8')
@@ -74,22 +87,23 @@ export const stylesPlugins = [
 					})
 				}
 				if (templateConfig.fonts.download) {
-					let cssCode = fs.readFileSync(`${dir}/css/webfonts.min.css`, 'utf8')
-					cssCode = cssCode.replace(/src:\s*url\(\s*fonts/gi, `src:url(/wp-content/themes/fls-theme/assets/fonts/`)
-					fs.writeFileSync(`${dir}/css/webfonts.min.css`, cssCode, 'utf8');
+					let cssCode = fs.readFileSync(`${pathToOptimize}/webfonts.min.css`, 'utf8')
+					cssCode = cssCode.replace(/src:\s*url\(\s*fonts/gi, `src:url(/wp-content/themes/fls-theme/build/assets/fonts/`)
+					fs.writeFileSync(`${pathToOptimize}/webfonts.min.css`, cssCode, 'utf8');
 				}
 			}
 		}
 	}] : []),
-	...((isProduction && templateConfig.fonts.download) ? [{
+	...((isProduction && templateConfig.fonts.download && !isWp) ? [{
 		name: "css-download-path",
 		apply: 'build',
-		writeBundle: {
-			order: 'post',
-			handler: ({ dir }) => {
-				let cssCode = fs.readFileSync(`${dir}/css/webfonts.min.css`, 'utf8')
+		enforce: 'pre',
+		closeBundle: {
+			order: 'pre',
+			handler: () => {
+				let cssCode = fs.readFileSync(`dist/${isAssets}css/webfonts.min.css`, 'utf8')
 				cssCode = cssCode.replace(/src:\s*url\(\s*fonts/gi, `src:url(${templateConfig.server.path === './' ? '../' : '/'}assets/fonts`)
-				fs.writeFileSync(`${dir}/css/webfonts.min.css`, cssCode, 'utf8');
+				fs.writeFileSync(`dist/${isAssets}css/webfonts.min.css`, cssCode, 'utf8');
 			}
 		}
 	}] : []),
@@ -97,12 +111,13 @@ export const stylesPlugins = [
 	...((isProduction && templateConfig.styles.devfiles) ? [{
 		name: "css-devfiles",
 		apply: 'build',
-		writeBundle: {
-			order: 'post',
-			handler: ({ dir }) => {
-				const cssFiles = globSync(`${dir}/css/*.css`)
+		enforce: 'pre',
+		closeBundle: {
+			order: 'pre',
+			handler: () => {
+				const cssFiles = globSync(pathToFiles)
 				if (cssFiles.length) {
-					!fs.existsSync(`${dir}/css/dev`) && templateConfig.styles.codesplit ? fs.mkdirSync(`${dir}/css/dev`) : null
+					!fs.existsSync(pathToDev) && templateConfig.styles.codesplit ? fs.mkdirSync(pathToDev) : null
 					cssFiles.forEach(async (cssFile) => {
 						cssFile = normalizePath(cssFile)
 						let devCssFile = cssFile.replace('.min', '')

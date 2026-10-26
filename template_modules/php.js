@@ -3,6 +3,7 @@ import templateConfig from '../template.config.js'
 import logger from './logger.js'
 import { Glob, globSync } from 'glob'
 import fs from 'fs'
+import path from 'path'
 import { cp } from 'fs/promises'
 import { normalizePath } from 'vite'
 
@@ -83,26 +84,39 @@ export const phpPlugins = [
 			}
 		}
 	}] : []),
+	// Обробка псевдонімів в PHP-файлах
+	// ...((isWp) ? [{
+	// 	name: 'do-php-aliases',
+	// 	order: "pre",
+	// 	transform(html, file) {
+	// 		console.log(file)
+	// 		if (file.endsWith('.php') || file.includes('fls-theme')) {
+	// 			Object.keys(aliases).forEach((alias) => {
+	// 				if (html.includes(alias)) {
+	// 					aliases[alias] = aliases[alias].replace(new RegExp(`src`, "g"), ``)
+	// 					html = html.replace(new RegExp(alias, "g"), aliases[alias])
+	// 				}
+	// 			})
+	// 		}
+	// 		return html
+	// 	},
+	// }] : []),
 ]
-
 async function insertModules() {
 	const modules = new Set()
 	const phpFiles = new globSync(`src/components/wordpress/fls-theme/**/*.php`)
-	const moduleJSFiles = new Glob(`src/components/**/*.js`, { ignore: ['**/_*.*', '**/plugins/**', '**/pages/**', '**/wordpress/**'] })
+	const moduleJSFiles = new Glob(`src/components/**/*.js`, { ignore: ['**/_*.*', '**/plugins/**', '**/wordpress/**'] })
 	const modulePlugins = new Map()
-
 	for (let moduleJSFile of moduleJSFiles) {
 		moduleJSFile = normalizePath(moduleJSFile).replace('src', '')
 		const moduleName = moduleJSFile.split('/').pop().replace('.js', '')
 		const pluginFiles = globSync(`src/components/*/${moduleName}/plugins/**/*.js`)
 		modulePlugins.set(moduleName, pluginFiles.map(plugin => normalizePath(plugin).replace('src', '')))
 	}
-
 	for (let file of phpFiles) {
 		let html = fs.readFileSync(file, 'UTF-8')
 		findModule(html)
 	}
-
 	function findModule(html) {
 		for (let moduleJSFile of moduleJSFiles) {
 			moduleJSFile = normalizePath(moduleJSFile).replace('src', '')
@@ -125,7 +139,6 @@ async function insertModules() {
 
 		}
 	}
-
 	fs.writeFile('src/components/wordpress/fls-wp-modules.js', Array.from(modules).join('\n'), () => { })
 }
 async function insertStyles() {

@@ -10,7 +10,7 @@ export default function addSnippets() {
 		!fs.existsSync('.vscode') ? fs.mkdirSync('.vscode') : null
 		fs.copyFile('template_modules/assets/fls.code-snippets', '.vscode/fls.code-snippets', (err) => {
 			if (err) throw err;
-			logger('Файл конфігурації сніпетів створений')
+			logger('_VS_SNIPPETS')
 		});
 	}
 }

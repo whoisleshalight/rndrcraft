@@ -12,7 +12,6 @@ const isProduction = process.env.NODE_ENV === 'production'
 export function navPanel() {
 	const htmlFiles = globSync('./src/*.html', { ignore: [`./src/${templateConfig.devcomponents.filename}`] })
 	const isIconFont = fs.existsSync('src/assets/svgicons/preview/iconfont.html')
-	//const isDevComponents = fs.existsSync('src/_dev.html')
 	if (htmlFiles.length > 1 || isIconFont || templateConfig.projectpage.enable || (templateConfig.devcomponents.enable && !isProduction)) {
 		let menu = `<ul id="fls-dev-panel">`
 		htmlFiles.forEach(async htmlFile => {
@@ -21,9 +20,11 @@ export function navPanel() {
 			const name = href.replace('.html', '')
 			menu += `<li><a href="${href}">${name}</a></li>`
 		});
-		!isProduction && isIconFont ? menu += `<li><hr></li><li><a target="_blank" href="/assets/svgicons/preview/iconfont.html">Іконковий шрифт</a></li>` : ''
-		!isProduction && templateConfig.projectpage.enable ? menu += `<li><hr></li><li><a target="_blank" href="${templateConfig.projectpage.template.replace('src', '')}">Шаблон сторінки проєкту</a></li>` : ''
-		!isProduction && templateConfig.devcomponents.enable ? menu += `<li><hr></li><li><a target="_blank" href="${templateConfig.devcomponents.filename}">Розробка компонентів</a></li>` : ''
+		if (!isProduction) {
+			templateConfig.projectpage.enable ? menu += `<li><hr></li><li><a target="_blank" href="${templateConfig.projectpage.template.replace('src', '')}">Шаблон сторінки проєкту</a></li>` : ''
+			isIconFont ? menu += `<li><hr></li><li><a target="_blank" href="/assets/svgicons/preview/iconfont.html">Іконковий шрифт</a></li>` : ''
+			templateConfig.devcomponents.enable ? menu += `<li><hr></li><li><a target="_blank" href="${templateConfig.devcomponents.filename}">Розробка компонентів</a></li>` : ''
+		}
 		menu += `</ul>`
 		menu += `<style>
 			#fls-dev-panel{
