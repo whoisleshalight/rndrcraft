@@ -5,7 +5,7 @@ import { bodyLock, bodyUnlock, bodyLockStatus } from '@js/common/functions.js';
 const root = document.documentElement;
 const filter = document.querySelector('[data-fls-mobile-filter]');
 const button = document.querySelector('.mobile-filter__btn');
-const panel = filter?.querySelector('.menu-mobile-filter__object');
+const panel = filter?.querySelector('.menu-mobile-filter__box');
 const handle = filter?.querySelector('.menu-mobile-filter__head');
 const closeButton = filter?.querySelector('.menu-mobile-filter__close-btn');
 
@@ -53,6 +53,8 @@ if (filter && button && panel && handle && closeButton) {
     function finishDrag(event) {
         if (startY === undefined) return;
         startY = undefined;
+        // Commit the dragged position before restoring the CSS transition.
+        panel.getBoundingClientRect();
         panel.style.removeProperty('transition');
         panel.style.removeProperty('transform');
         if (distance > 100 && event.type !== 'pointercancel') closeFilter();
