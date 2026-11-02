@@ -1,30 +1,20 @@
-.catalog {
-	&__body {
-	}
-
-	&__colections-items {
-	}
-}
-
-.colections {
-	&__item {
-	}
-}
-
 .item-colections {
 	background: $mainColor;
 
 	overflow: hidden;
 	color: $whiteColor;
+
 	@media (min-width: toEm(374.98)) {
 		border-radius: toRem(24);
 		padding: toRem(8);
 	}
-	@media (min-width: toEm(575.98)) {
-	}
+
+	@media (min-width: toEm(575.98)) {}
+
 	@media (min-width: toEm(767.98)) {
 		border-radius: $radius32;
 	}
+
 	@media (min-width: toEm(991.98)) {
 		padding: 0;
 	}
@@ -32,24 +22,28 @@
 	@media (min-width: toEm(1279.98)) {
 		display: flex;
 		border-radius: $radius40;
-
 		align-items: center;
 	}
+
 	&:not(:last-child) {
 		margin-bottom: toRem(24);
 	}
 
 	&__pictures {
 		overflow: hidden;
+
 		@media (min-width: toEm(1279.98)) {
 			flex: 0 0 toRem(618);
 		}
+
 		@media (min-width: toEm(1439.98)) {
 			flex: 0 0 toRem(692);
 		}
+
 		@media (min-width: toEm(1599.98)) {
 			flex: 0 0 toRem(768);
 		}
+
 		@media (min-width: toEm(1919.98)) {
 			flex: 0 0 50%;
 		}
@@ -57,12 +51,15 @@
 
 	&__body {
 		overflow: hidden;
+
 		@media (min-width: toEm(320)) {
 			margin-top: toRem(16);
 		}
+
 		@media (min-width: toEm(767.98)) {
 			margin-top: toRem(24);
 		}
+
 		@media (min-width: toEm(991.98)) {
 			margin-top: toRem(0);
 			padding: toRem(32) toRem(40) toRem(40) toRem(40);
@@ -70,6 +67,7 @@
 			align-items: flex-end;
 			gap: toRem(16);
 		}
+
 		@media (min-width: toEm(1279.98)) {
 			gap: toRem(0);
 			align-items: flex-start;
@@ -101,24 +99,28 @@
 			padding-left: toRem(16);
 			padding-right: toRem(16);
 		}
+
 		@media (min-width: toEm(575.98)) {
 			font-size: toRem(48);
 			padding-left: toRem(24);
 			padding-right: toRem(24);
 		}
+
 		@media (min-width: toEm(767.98)) {
 			margin-bottom: toRem(16);
 			font-size: toRem(56);
 			padding-left: toRem(32);
 			padding-right: toRem(32);
 		}
+
 		@media (min-width: toEm(991.98)) {
 			font-size: toRem(64);
 			padding-left: toRem(0);
 			padding-right: toRem(0);
 		}
-		@media (min-width: toEm(1279.98)) {
-		}
+
+		@media (min-width: toEm(1279.98)) {}
+
 		@media (min-width: toEm(1599.98)) {
 			font-size: toRem(80);
 		}
@@ -131,18 +133,22 @@
 		&:not(:last-child) {
 			margin-bottom: toRem(32);
 		}
+
 		@media (min-width: toEm(320)) {
 			font-size: toRem(14);
 			padding-left: toRem(16);
 			padding-right: toRem(16);
+
 			&:not(:last-child) {
 				margin-bottom: toRem(16);
 			}
 		}
+
 		@media (min-width: toEm(575.98)) {
 			padding-left: toRem(24);
 			padding-right: toRem(24);
 		}
+
 		@media (min-width: toEm(767.98)) {
 			font-size: toRem(20);
 			padding-left: toRem(32);
@@ -154,40 +160,39 @@
 			padding-left: toRem(0);
 			padding-right: toRem(0);
 		}
+
 		@media (min-width: toEm(1599.98)) {
 			font-size: toRem(24);
+
 			&:not(:last-child) {
 				margin-bottom: toRem(48);
 			}
 		}
 	}
-
-	&__info {
-	}
-
-	&__bottom {
-	}
 }
+
 .item-colections__bottom {
-	// @media (min-width: toEm(991.98)) {
-	// 	flex-direction: column;
-	// }
+
 	@media (max-width: toEm(991.98)) {
 		display: flex;
 		gap: toRem(8);
+
 		.bottom-item-colections__actions,
 		.bottom-item-colections__price {
 			flex: 0 0 calc(50% - toRem(4));
 			overflow: hidden;
 		}
 	}
+
 	@media (max-width: toEm(767.98)) {
 		flex-direction: column;
 	}
 }
+
 .info-item-colections {
 	border: 2px solid rgba(255, 255, 255, 0.18);
 	overflow: hidden;
+
 	@media (min-width: toEm(320)) {
 		display: flex;
 		margin-bottom: toRem(16);
@@ -197,16 +202,19 @@
 	@media (min-width: toEm(767.98)) {
 		border-radius: $radius24;
 	}
+
 	@media (min-width: toEm(991.98)) {
 		display: inline-flex;
 		margin-bottom: toRem(0);
 	}
+
 	&__item {
 		font-weight: 500;
 
 		&:first-child {
 			border-right: 2px solid rgba(255, 255, 255, 0.18);
 		}
+
 		@media (max-width: toEm(991.98)) {
 			flex: 0 0 50%;
 			display: flex;
@@ -216,15 +224,18 @@
 			padding-top: toRem(18);
 			padding-bottom: toRem(18);
 		}
+
 		@media (max-width: toEm(767.98)) {
 			padding-top: toRem(16);
 			padding-bottom: toRem(16);
 			font-size: toRem(16);
 		}
+
 		@media (min-width: toEm(991.98)) {
 			padding: toRem(16) toRem(22);
 			font-size: toRem(24);
 		}
+
 		@media (min-width: toEm(1279.98)) {
 			padding: toRem(16) toRem(40);
 		}
@@ -262,6 +273,7 @@
 		background-color: rgba(38, 38, 38, 1);
 		overflow: hidden;
 		font-weight: 600;
+
 		@media (min-width: toEm(320)) {
 			font-size: toRem(48);
 			border-radius: toRem(16);
@@ -272,11 +284,13 @@
 		@media (min-width: toEm(767.98)) {
 			border-radius: $radius24;
 		}
+
 		@media (min-width: toEm(991.98)) {
 			font-size: toRem(64);
 			padding-top: toRem(12);
 			padding-bottom: toRem(12);
 		}
+
 		@media (min-width: toEm(1279.98)) {
 			padding-right: toRem(60);
 			padding-left: toRem(60);
@@ -287,6 +301,7 @@
 			padding-left: toRem(62.5);
 			font-size: toRem(88);
 		}
+
 		.collection-main & {
 			background-color: #000;
 			padding-left: toRem(48);
@@ -305,9 +320,11 @@
 			color: rgba(179, 179, 179, 1);
 
 			flex-direction: row-reverse;
+
 			@media (min-width: toEm(320)) {
 				font-size: toRem(32);
 			}
+
 			@media (min-width: toEm(991.98)) {
 				font-size: toRem(40);
 			}
@@ -315,6 +332,7 @@
 			@media (min-width: toEm(1599.98)) {
 				font-size: toRem(48);
 			}
+
 			.collection-main & {
 				font-size: toRem(24);
 			}
@@ -343,9 +361,11 @@
 						display: flex;
 						width: 100%;
 					}
+
 					@media (min-width: toEm(320)) {
 						width: toRem(70);
 					}
+
 					@media (min-width: toEm(991.98)) {
 						width: toRem(114);
 					}
@@ -363,6 +383,7 @@
 		display: flex;
 		align-items: center;
 		gap: toRem(8);
+
 		@media (max-width: toEm(991.98)) {
 			a {
 				font-size: toRem(20);
@@ -371,30 +392,30 @@
 
 		@media (min-width: toEm(320)) {
 			margin-top: toRem(0);
+
 			a {
 				border-radius: toRem(16);
-				// font-size: toRem(20);
 				padding-top: toRem(19);
 				padding-bottom: toRem(19);
 				padding-right: toRem(29);
 				padding-left: toRem(29);
+
 				&:first-child {
 					flex: 1 1 auto;
 				}
+
 				&:last-child {
 					flex: none;
 				}
 			}
 		}
-		@media (min-width: toEm(575.98)) {
-			a {
-			}
-		}
+
 		@media (min-width: toEm(767.98)) {
 			a {
 				border-radius: toRem(24);
 			}
 		}
+
 		@media (min-width: toEm(991.98)) {
 			margin-top: toRem(8);
 
@@ -402,22 +423,25 @@
 				&:first-child {
 					padding: toRem(22) toRem(32);
 				}
+
 				&:last-child {
 					padding: toRem(22) toRem(22);
-					// max-width: toRem(124);
 				}
 			}
 		}
+
 		@media (min-width: toEm(1279.98)) {
 			a {
 				&:first-child {
 					flex: 0 0 calc(50% - toRem(4));
 				}
+
 				&:last-child {
 					flex: 0 0 calc(50% - toRem(4));
 				}
 			}
 		}
+
 		a {
 			display: flex;
 			justify-content: center;
@@ -426,15 +450,7 @@
 			@media (min-width: toEm(1439.98)) {
 				padding: toRem(22);
 			}
-
-			@media (min-width: toEm(1599.98)) {
-			}
 		}
-	}
-}
-
-.item-colections {
-	&__pictures {
 	}
 }
 
@@ -442,9 +458,11 @@
 	@media (min-width: toEm(991.98)) {
 		padding: toRem(8);
 	}
+
 	@media (min-width: toEm(1279.98)) {
 		padding: toRem(16);
 	}
+
 	&__top {
 		position: relative;
 
@@ -462,23 +480,28 @@
 			object-fit: cover;
 			object-position: center;
 		}
+
 		@media (min-width: toEm(374.98)) {
 			padding-bottom: 63.51%;
 			border-top-left-radius: toRem(16);
 			border-top-right-radius: toRem(16);
 		}
+
 		@media (min-width: toEm(575.98)) {
 			height: toRem(311);
 			padding-bottom: toRem(0);
 		}
+
 		@media (min-width: toEm(767.98)) {
 			height: toRem(406);
 			border-top-left-radius: 24px;
 			border-top-right-radius: 24px;
 		}
+
 		@media (min-width: toEm(991.98)) {
 			height: toRem(548);
 		}
+
 		@media (min-width: toEm(1279.98)) {
 			height: toRem(396);
 		}
@@ -498,10 +521,12 @@
 
 		overflow: hidden;
 		justify-content: space-between;
+
 		@media (min-width: toEm(320)) {
 			border-bottom-left-radius: 16px;
 			border-bottom-right-radius: 16px;
 		}
+
 		@media (min-width: toEm(767.98)) {
 			border-bottom-left-radius: 24px;
 			border-bottom-right-radius: 24px;
@@ -526,12 +551,6 @@
 			align-items: center;
 			justify-content: center;
 			z-index: 2;
-			// backdrop-filter: blur(toRem(4));
-			// background-color: hsla(0, 0%, 0%, 0.5);
-			// border-bottom-right-radius: 24px;
-			// border-top-right-radius: 8px;
-			// border-top-left-radius: 8px;
-			// border-bottom-left-radius: 8px;
 			font-size: toRem(40);
 			font-weight: 500;
 		}
@@ -546,34 +565,42 @@
 			object-fit: cover;
 			object-position: center;
 		}
+
 		@media (min-width: toEm(320)) {
 			padding-bottom: 17.83%;
 			flex: 0 0 calc(20% - toRem(1.6));
+
 			&:nth-child(1),
 			&:nth-child(2),
 			&:nth-child(3) {
 				display: none;
 			}
 		}
+
 		@media (min-width: toEm(575.98)) {
 			height: toRem(104);
 			padding-bottom: toRem(0);
 		}
+
 		@media (min-width: toEm(767.98)) {
 			height: toRem(84);
 			flex: 0 0 calc(12.5% - toRem(2));
+
 			&:nth-child(1),
 			&:nth-child(2),
 			&:nth-child(3) {
 				display: block;
 			}
 		}
+
 		@media (min-width: toEm(991.98)) {
 			height: toRem(112);
 		}
+
 		@media (min-width: toEm(1279.98)) {
 			height: toRem(70);
 		}
+
 		@media (min-width: toEm(1439.98)) {
 			height: toRem(80);
 		}
