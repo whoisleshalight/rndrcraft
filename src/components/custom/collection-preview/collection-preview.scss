@@ -93,30 +93,21 @@
 			position: absolute;
 			top: toRem(2);
 			left: toRem(2);
-			// width: calc(100% - toRem(4));
-			width: toRem(0);
+			width: calc(100% - toRem(4));
 			border-radius: toRem(4);
 			height: toRem(4);
 			background-color: $greenColor;
+			transform: scaleX(0);
+			transform-origin: left center;
 		}
 
 		&.swiper-pagination-bullet-active {
 			pointer-events: none;
 
 			&::before {
-				animation: slideTrack 8s infinite linear 0.8s;
+				transform: scaleX(var(--collection-preview-progress, 0));
 			}
 		}
-	}
-}
-
-@keyframes slideTrack {
-	0% {
-		width: toRem(0);
-	}
-
-	100% {
-		width: calc(100% - toRem(4));
 	}
 }
 
