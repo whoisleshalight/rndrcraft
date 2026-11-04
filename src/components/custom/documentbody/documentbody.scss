@@ -10,7 +10,6 @@
 
 .actions-doc {
 	margin-top: 60px;
-
 }
 
 .top-doc__info {
@@ -28,7 +27,7 @@
 }
 
 .item-content-tabs__title::before {
-	content: "0" counter(documentSection) ". ";
+	content: counter(documentSection, decimal-leading-zero) ". ";
 	color: #C9C4BF;
 }
 
