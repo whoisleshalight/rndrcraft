@@ -1,23 +1,166 @@
 .tabs {
+	margin-top: 24px;
+
+
 	// .tabs__navigation
 	&__navigation {
 		display: flex;
+		gap: 54px;
+		position: relative;
+		z-index: 2;
 	}
+
 	// .tabs__title
 	&__title {
-		border: 1px solid #eee;
-		padding: 10px 15px;
-		border-radius: 5px;
+		font-weight: 600;
+		font-size: 16px;
+		line-height: 120%;
+		color: #97928C;
+		text-transform: uppercase;
+		transition: all 0.4s;
+		position: relative;
+
+		&::before {
+			content: '';
+			position: absolute;
+			bottom: -6px;
+			left: 0;
+			width: 100%;
+			height: 4px;
+			background-color: #CAF749;
+			opacity: 0;
+			transition: all 0.4s;
+		}
+
 		&.--tab-active {
-			border: 1px solid #000;
+			color: #000;
+
+			&::before {
+				opacity: 1;
+			}
 		}
 	}
+
 	// .tabs__content
-	&__content {
-		border: 1px solid #eee;
-		padding: 10px 15px;
+	&__block {
+		border-top: 1px solid #E2DAD2;
+		padding-top: 64px;
+		margin-top: 6px;
 	}
+
 	// .tabs__body
-	&__body {
+	&__body {}
+
+}
+
+.content-tabs {
+
+
+	&__items {}
+
+	&__item {
+		&:not(:last-child) {
+			margin-bottom: 120px;
+		}
 	}
+
+	&__nav {}
+}
+
+.item-content-tabs {
+
+	&__title {}
+
+	&__info {
+		p {}
+	}
+}
+
+.actions-doc__title,
+.item-content-tabs__title {
+	font-weight: 600;
+	font-size: 40px;
+
+	&:not(:last-child) {
+		margin-bottom: 16px;
+	}
+}
+
+.actions-doc__info,
+.item-content-tabs__info p {
+	line-height: 120%;
+	font-size: 24px;
+
+	&:not(:last-child) {
+		margin-bottom: 24px;
+	}
+}
+
+
+
+.actions-doc__link {
+	font-weight: 600;
+	font-size: 24px;
+	text-transform: uppercase;
+	text-decoration: underline;
+
+	@media (any-hover: hover) {
+		&:hover {
+			text-decoration: none;
+		}
+	}
+}
+
+.nav-content-tabs {
+
+
+	&__title {
+		color: #CAC7C7;
+		text-transform: uppercase;
+		font-weight: 700;
+		font-size: 34px;
+
+		&:not(:last-child) {
+			margin-bottom: 36px;
+		}
+	}
+}
+
+.nav-content-tabs__inner {
+	position: sticky;
+	top: 120px;
+	border-left: 1px solid #E4E4E3;
+	padding-left: 24px;
+
+	ul {
+		li {
+			a {
+				font-size: 32px;
+				font-weight: 700;
+				line-height: 120%;
+			}
+
+			&:not(:last-child) {
+				margin-bottom: 36px;
+			}
+		}
+	}
+}
+
+
+.actions-doc,
+.content-tabs {
+	display: flex;
+	gap: 160px;
+}
+
+.content-tabs__items,
+.actions-doc__body {
+	flex: 1 1 auto;
+}
+
+.actions-doc__block,
+.nav-content-tabs {
+	// flex: 0 0 724px;
+	flex: 0 0 percent(724, 1920);
 }

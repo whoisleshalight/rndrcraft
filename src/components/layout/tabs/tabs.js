@@ -76,7 +76,26 @@ export function tabs() {
 					tabsTitles[index].classList.add('--tab-active');
 				}
 				tabsContentItem.hidden = !tabsTitles[index].classList.contains('--tab-active');
+				if (!tabsContentItem.hidden) {
+					updateLegalTabsContent(tabsBlock, tabsTitles[index], tabsContentItem);
+				}
 			});
+		}
+	}
+	function updateLegalTabsContent(tabsBlock, activeTitle, activeContent) {
+		const legalTabsContainer = tabsBlock.closest('[data-legal-tabs-container]');
+		if (!legalTabsContainer) {
+			return;
+		}
+
+		const titleCell = legalTabsContainer.querySelector('#titleCell');
+		const infoCell = legalTabsContainer.querySelector('#infoCell');
+
+		if (titleCell) {
+			titleCell.textContent = activeTitle.textContent.trim();
+		}
+		if (infoCell) {
+			infoCell.textContent = activeContent.dataset.tabInfo ?? '';
 		}
 	}
 	function setTabsStatus(tabsBlock) {
@@ -95,6 +114,7 @@ export function tabs() {
 			tabsTitles = Array.from(tabsTitles).filter(item => item.closest('[data-fls-tabs]') === tabsBlock);
 			tabsContent.forEach((tabsContentItem, index) => {
 				if (tabsTitles[index].classList.contains('--tab-active')) {
+					updateLegalTabsContent(tabsBlock, tabsTitles[index], tabsContentItem);
 					if (tabsBlockAnimate) {
 						slideDown(tabsContentItem, tabsBlockAnimate);
 					} else {
