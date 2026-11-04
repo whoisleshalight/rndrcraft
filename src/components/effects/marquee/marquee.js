@@ -28,19 +28,23 @@ const marquee = () => {
 		};
 	};
 
-	const onElementResize = (element, cb) => {
+	const onElementResize = (element, cb, observedItems = []) => {
 		let prevWidth;
 		let prevHeight;
 		let prevViewportWidth;
+		let previousItemSizes = [];
 
 		const handleResize = () => {
 			const currentWidth = element.clientWidth;
 			const currentHeight = element.clientHeight;
+			const currentItemSizes = observedItems.map((item) => `${item.offsetWidth}:${item.offsetHeight}`);
+			const haveItemSizesChanged = currentItemSizes.some((size, index) => size !== previousItemSizes[index]);
 
-			if (prevWidth !== currentWidth || prevHeight !== currentHeight || prevViewportWidth !== window.innerWidth) {
+			if (prevWidth !== currentWidth || prevHeight !== currentHeight || prevViewportWidth !== window.innerWidth || haveItemSizesChanged) {
 				prevWidth = currentWidth;
 				prevHeight = currentHeight;
 				prevViewportWidth = window.innerWidth;
+				previousItemSizes = currentItemSizes;
 				if (currentWidth > 0 && currentHeight > 0) cb();
 			}
 		};
@@ -48,6 +52,7 @@ const marquee = () => {
 		const scheduleResize = debounce(50, handleResize);
 		const resizeObserver = new ResizeObserver(scheduleResize);
 		resizeObserver.observe(element);
+		observedItems.forEach((item) => resizeObserver.observe(item));
 		window.addEventListener("resize", scheduleResize);
 
 		handleResize();
@@ -212,6 +217,12 @@ const marquee = () => {
 				return sizeEl;
 			});
 
+			// Items can have no size until their styles or images have loaded.
+			// Wait for ResizeObserver instead of cloning without making progress.
+			if (!Number.isFinite(initialSizeElements) || initialSizeElements <= 0) {
+				return false;
+			}
+
 			const $multiplyWidth = $parentNodeWidth * 2 + initialSizeElements;
 
 			for (; sumSize < $multiplyWidth; index += 1) {
@@ -231,6 +242,7 @@ const marquee = () => {
 			}
 
 			setBaseStyles(firstScreenVisibleSize);
+			return true;
 		};
 
 		const correctSpaceBetween = () => {
@@ -244,7 +256,10 @@ const marquee = () => {
 
 		const init = () => {
 			correctSpaceBetween();
-			addDublicateElements();
+			if (!addDublicateElements()) {
+				return;
+			}
+
 			animation();
 			initEvents();
 		};
@@ -260,7 +275,7 @@ const marquee = () => {
 			target.style.animationPlayState = type === "mouseenter" ? "paused" : "running";
 		};
 
-		onElementResize($wrapper, onResize);
+		onElementResize($wrapper, onResize, Array.from($items));
 	});
 };
 
