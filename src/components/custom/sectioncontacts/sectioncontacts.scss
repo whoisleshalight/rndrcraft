@@ -108,6 +108,17 @@
 	}
 
 	&__item {
+		position: relative;
+
+		[data-fls-form-error] {
+			position: absolute;
+			bottom: -24px;
+			left: 16px;
+			line-height: 120%;
+			font-size: 14px;
+			font-weight: 500;
+			color: #920000;
+		}
 
 		textarea,
 		input {
@@ -126,6 +137,11 @@
 			height: 58px;
 			padding-left: 24px;
 			padding-right: 24px;
+			transition: all 0.3s;
+
+			&.--form-error {
+				border: 1px solid #920000;
+			}
 		}
 	}
 
