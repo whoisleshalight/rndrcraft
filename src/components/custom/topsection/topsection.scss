@@ -1,0 +1,11 @@
+.top-section__title {
+	&:not(:last-child) {
+		margin-bottom: 8px;
+	}
+}
+
+.top-section__info {
+	font-size: 24px;
+	max-width: 880px;
+	line-height: 120%;
+}

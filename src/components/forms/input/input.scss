@@ -9,21 +9,24 @@ textarea {
 	-moz-appearance: none;
 	appearance: none;
 }
+
 .input {
-	border-radius: 0 !important;
 	width: 100%;
 	display: block;
 	caret-color: inherit;
-	&._form-focus {
-	}
-	&._form-error {
-	}
+
+	&._form-focus {}
+
+	&._form-error {}
 }
+
 .input[placeholder]:not([data-placeholder-nohiden]) {
 	&::placeholder {
 		transition: opacity 0.3s;
-		color: $grayColor;font-weight: 500;
+		color: $grayColor;
+		font-weight: 500;
 	}
+
 	&:focus::placeholder {
 		opacity: 0;
 	}
@@ -31,5 +34,4 @@ textarea {
 
 textarea.input {
 	resize: none;
-	padding: 0px 0px;
 }
