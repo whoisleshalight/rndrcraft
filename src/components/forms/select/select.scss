@@ -196,6 +196,7 @@
 		text-align: left;
 		cursor: pointer;
 		width: 100%;
+		transition: all 0.3s;
 		gap: 10px;
 		padding-left: 24px;
 		padding-right: 24px;
@@ -281,15 +282,12 @@
 	&__options {
 		color: #000;
 		position: absolute;
-		top: calc(100% - toRem(1));
-		border-radius: 0 0 4px 4px;
+		top: calc(100% + toRem(16));
+		border-radius: 14px;
 		min-width: 100%;
 		left: 0;
 		background-color: #fff;
-		border-top: 0;
-		border: 1px solid #d9d9d9;
-		border-top: 0;
-		padding: 10px 0px 5px 0px;
+		border: 1px solid #000;
 	}
 
 	// .select__scroll
@@ -298,6 +296,7 @@
 		overflow-x: hidden;
 		// Максимальна висота
 		max-height: toRem(200);
+		padding: 8px;
 
 		// Стилі скроллбару
 		.simplebar-scrollbar {
@@ -312,8 +311,12 @@
 		width: 100%;
 		text-align: left;
 		cursor: pointer;
-		padding: 5px 10px;
+		font-size: 18px;
+		padding: 12px;
 		color: inherit;
+		border-radius: 8px;
+		font-weight: 500;
+		transition: all 0.3s;
 
 		&.--select-selected {
 			background-color: #eee;
@@ -321,7 +324,7 @@
 
 		@media (any-hover: hover) {
 			&:hover {
-				background: #d9d9d9;
+				background: #E9FCB3;
 			}
 		}
 	}
@@ -348,7 +351,11 @@
 	}
 
 	// Стан селекту
-	&.--select-open {}
+	&.--select-open {
+		.select__title {
+			border: 1px solid #E9FCB3;
+		}
+	}
 
 	&.--select-disabled {}
 
