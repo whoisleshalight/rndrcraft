@@ -1,0 +1,166 @@
+.pfilter {
+	position: relative;
+	z-index: 3;
+
+	&__button {
+		display: flex;
+		align-items: center;
+		gap: 40px;
+		padding-top: 21px;
+		padding-bottom: 21px;
+		padding-left: 29px;
+		padding-right: 21px;
+		background-color: #000;
+		color: #fff;
+		font-size: 24px;
+		font-weight: 500;
+		border-radius: 16px;
+		border: 3px solid transparent;
+		transition: all 0.4s;
+
+		svg {
+			transform: rotate(180deg);
+			transition: all 0.4s;
+
+			path {
+				transition: all 0.4s;
+				stroke: #fff;
+			}
+		}
+
+		._open & {
+			color: #CAF749;
+			border: 3px solid #CAF749;
+
+			svg {
+				transform: rotate(0deg);
+
+				path {
+					stroke: #CAF749;
+				}
+			}
+		}
+
+		@media (any-hover: hover) {
+			&:hover {
+				border: 3px solid #CAF749;
+				color: #CAF749;
+
+				svg {
+					path {
+						stroke: #CAF749;
+					}
+				}
+			}
+		}
+
+	}
+
+	&__menu {
+		overflow: hidden;
+		position: absolute;
+		top: calc(100% + 24px);
+		background-color: #fff;
+		border-radius: 14px;
+		width: 320px;
+		box-shadow: 0 12px 28px 0 hsla(0, 0%, 0%, 0.12);
+		transform: translateY(20px);
+		opacity: 0;
+		transition: all 0.4s;
+
+		._open & {
+			transform: translateY(0px);
+			opacity: 1;
+		}
+
+		.pfilter-chk & {
+			left: 0;
+
+			.checkbox {
+				&:not(:last-child) {
+					margin-bottom: 4px;
+				}
+			}
+		}
+
+		.pfilter-radio & {
+			right: 0;
+		}
+	}
+
+	&__form {}
+
+	&__header {}
+
+	&__content {
+		padding: 16px;
+		max-height: 400px;
+		overflow-y: auto;
+
+		&::-webkit-scrollbar {
+			width: 4px;
+		}
+
+		&::-webkit-scrollbar-thumb {
+			background: #caf749;
+			border-radius: 40px;
+		}
+
+		&::-webkit-scrollbar-track {
+			background: transparent;
+		}
+	}
+
+	.options__input:checked + .options__label {
+		background-color: rgba(201, 247, 73, 0.42);
+	}
+}
+
+.header-pfilter {
+	padding: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	border-bottom: 1px solid #E8E8E8;
+
+	&__body {}
+
+	&__title {
+		font-weight: 500;
+		font-size: 20px;
+		line-height: 120%;
+	}
+
+	&__info {
+		line-height: 120%;
+		font-size: 14px;
+		color: #777777;
+	}
+
+	&__actions {}
+
+	&__button {
+		font-size: 16px;
+		text-decoration: underline;
+		line-height: 120%;
+
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: none;
+			}
+		}
+	}
+}
+
+.options {
+
+	&__item {}
+
+	&__input {}
+
+	&__label {}
+
+	&__text {}
+}
+
+.pfilter-radio {}

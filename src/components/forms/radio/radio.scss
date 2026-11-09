@@ -17,16 +17,16 @@
 		opacity: 0;
 		position: absolute;
 
-		&:checked+.options__label:before {
+		&:checked + .options__label:before {
 			background-color: $mainColor;
 		}
 
-		&:checked+.options__label {
+		&:checked + .options__label {
 			border: 1px solid $mainColor;
 
 		}
 
-		&:checked+.options__label:after {
+		&:checked + .options__label:after {
 			transform: scale(1);
 		}
 	}
@@ -42,6 +42,7 @@
 		border-radius: toRem(12);
 		border: 1px solid rgba(0, 0, 0, 0.10);
 		min-height: toRem(50);
+
 		&:before {
 			content: "";
 			align-self: flex-start;
@@ -65,16 +66,22 @@
 			background-color: $greenColor;
 			position: absolute;
 
-			@media (min-width:toEm(320)){
+			@media (min-width:toEm(320)) {
 				right: toRem(19.5);
 				top: toRem(19.5);
 			}
-			@media (min-width:toEm(575.98)){
+
+			@media (min-width:toEm(575.98)) {
 				right: toRem(23);
 				top: toRem(23);
 				width: toRem(12);
 				flex: 0 0 toRem(12);
 				height: toRem(12);
+			}
+
+			@media (min-width:toEm(991.98)) {
+				top: 22.5px;
+				right: 22.5px;
 			}
 		}
 
