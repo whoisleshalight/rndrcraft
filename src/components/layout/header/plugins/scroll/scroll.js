@@ -1,40 +1,49 @@
-// Підключення функціоналу "Чертоги Фрілансера"
-import { FLS } from "@js/common/functions.js";
-
-import './scroll.scss'
+import './scroll.scss';
 
 export function headerScroll() {
 	const header = document.querySelector('[data-fls-header-scroll]');
-	const headerShow = header.hasAttribute('data-fls-header-scroll-show');
-	const headerShowTimer = header.dataset.flsHeaderScrollShow ? header.dataset.flsHeaderScrollShow : 500;
-	const startPoint = header.dataset.flsHeaderScroll ? header.dataset.flsHeaderScroll : 1;
-	let scrollDirection = 0;
-	let timer;
-	document.addEventListener("scroll", function (e) {
+
+	if (!header) {
+		return;
+	}
+
+	const shouldShowHeader = header.hasAttribute('data-fls-header-scroll-show');
+	const headerShowDelay = Number(header.dataset.flsHeaderScrollShow || 500);
+	const scrollStartPoint = Number(header.dataset.flsHeaderScroll || 1);
+	let previousScrollTop = window.scrollY;
+	let headerShowTimeout;
+
+	function updateHeaderState() {
 		const scrollTop = window.scrollY;
-		clearTimeout(timer);
-		if (scrollTop >= startPoint) {
-			!header.classList.contains('--header-scroll') ? header.classList.add('--header-scroll') : null;
-			if (headerShow) {
-				if (scrollTop > scrollDirection) {
-					// downscroll code
-					header.classList.contains('--header-show') ? header.classList.remove('--header-show') : null;
-				} else {
-					// upscroll code
-					!header.classList.contains('--header-show') ? header.classList.add('--header-show') : null;
-				}
-				timer = setTimeout(() => {
-					!header.classList.contains('--header-show') ? header.classList.add('--header-show') : null;
-				}, headerShowTimer);
-			}
-		} else {
-			header.classList.contains('--header-scroll') ? header.classList.remove('--header-scroll') : null;
-			if (headerShow) {
-				header.classList.contains('--header-show') ? header.classList.remove('--header-show') : null;
+		const isScrolled = scrollTop >= scrollStartPoint;
+
+		clearTimeout(headerShowTimeout);
+		header.classList.toggle('--header-scroll', isScrolled);
+
+		if (shouldShowHeader) {
+			if (isScrolled) {
+				header.classList.toggle('--header-show', scrollTop <= previousScrollTop);
+				headerShowTimeout = setTimeout(() => {
+					header.classList.add('--header-show');
+				}, headerShowDelay);
+			} else {
+				header.classList.remove('--header-show');
 			}
 		}
-		scrollDirection = scrollTop <= 0 ? 0 : scrollTop;
-	});
+
+		previousScrollTop = Math.max(scrollTop, 0);
+	}
+
+	document.addEventListener('scroll', updateHeaderState, { passive: true });
+	// Browsers can restore the scroll position without another scroll event.
+	window.addEventListener('pageshow', updateHeaderState);
+	updateHeaderState();
 }
-document.querySelector('[data-fls-header-scroll]') ?
-	window.addEventListener('load', headerScroll) : null
+
+if (document.querySelector('[data-fls-header-scroll]')) {
+	if (document.readyState === 'complete') {
+		headerScroll();
+	} else {
+		window.addEventListener('load', headerScroll, { once: true });
+	}
+}
