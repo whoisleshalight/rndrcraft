@@ -5,7 +5,20 @@
 }
 
 .top-section__info {
-	font-size: 24px;
 	max-width: 880px;
 	line-height: 120%;
+
+	@media (min-width: toEm(320)) {
+		font-size: 12px;
+	}
+
+
+	@media (min-width: toEm(991.98)) {
+		font-size: 16px;
+	}
+
+
+	@media (min-width: toEm(1919.98)) {
+		font-size: 24px;
+	}
 }

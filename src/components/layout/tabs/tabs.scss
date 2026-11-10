@@ -5,20 +5,67 @@
 	// .tabs__navigation
 	&__navigation {
 		display: flex;
-		gap: 54px;
 		position: relative;
 		z-index: 2;
+
+		@media (min-width: toEm(320)) {
+			gap: 24px;
+		}
+
+		@media (min-width: toEm(575.98)) {}
+
+		@media (min-width: toEm(767.98)) {
+			justify-content: space-between;
+		}
+
+		@media (min-width: toEm(991.98)) {}
+
+		@media (min-width: toEm(1279.98)) {}
+
+		@media (min-width: toEm(1439.98)) {
+			gap: 36px;
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			gap: 48px;
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			gap: 54px;
+		}
 	}
 
 	// .tabs__title
 	&__title {
 		font-weight: 600;
-		font-size: 16px;
 		line-height: 120%;
 		color: #97928C;
 		text-transform: uppercase;
 		transition: all 0.4s;
 		position: relative;
+		white-space: nowrap;
+
+		@media (min-width: toEm(320)) {
+			font-size: 14px;
+		}
+
+		@media (min-width: toEm(575.98)) {}
+
+		@media (min-width: toEm(767.98)) {}
+
+
+
+		@media (min-width: toEm(1279.98)) {}
+
+		@media (min-width: toEm(1439.98)) {}
+
+		@media (min-width: toEm(1599.98)) {
+			font-size: 15px;
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			font-size: 16px;
+		}
 
 		&::before {
 			content: '';
@@ -159,8 +206,16 @@
 	flex: 1 1 auto;
 }
 
-.actions-doc__block,
-.nav-content-tabs {
+.actions-doc__block {
 	// flex: 0 0 724px;
 	flex: 0 0 percent(724, 1920);
+}
+
+.nav-content-tabs {
+	display: none;
+
+	@media (min-width: toEm(991.98)) {
+		display: block;
+		flex: 0 0 percent(724, 1920);
+	}
 }

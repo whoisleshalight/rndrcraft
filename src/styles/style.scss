@@ -22,5 +22,20 @@ body::-webkit-scrollbar-track {
 }
 
 ._inner-padding-top {
-	padding-top: 184px;
+
+	@media (min-width: toEm(320)) {
+		padding-top: 80px;
+	}
+
+	@media (min-width: toEm(991.98)) {
+		padding-top: 112px;
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-top: 144px;
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		padding-top: 184px;
+	}
 }
