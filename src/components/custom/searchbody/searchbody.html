@@ -17,7 +17,7 @@
 			<div class="search-page__action action-search-page">
 				<form action="#" class="action-search-page__form form-search-page">
 					<div class="form-search-page__item item-form-search-page">
-						<div class="item-form-search-page__decor">
+						<div class="item-form-search-page__decor" aria-hidden="true">
 							<svg width="27" height="28" viewBox="0 0 27 28" fill="none" xmlns="http://www.w3.org/2000/svg">
 								<path
 									d="M11.6667 2C6.32791 2 2 6.32791 2 11.6667C2 17.0054 6.32791 21.3333 11.6667 21.3333C17.0054 21.3333 21.3333 17.0054 21.3333 11.6667C21.3333 6.32791 17.0054 2 11.6667 2ZM0 11.6667C0 5.22334 5.22334 0 11.6667 0C18.11 0 23.3333 5.22334 23.3333 11.6667C23.3333 18.11 18.11 23.3333 11.6667 23.3333C5.22334 23.3333 0 18.11 0 11.6667Z"
@@ -26,8 +26,8 @@
 									d="M18.2929 18.9035C18.6834 18.513 19.3166 18.513 19.7071 18.9035L26.3738 25.5702C26.7643 25.9608 26.7643 26.5939 26.3738 26.9844C25.9832 27.375 25.3501 27.375 24.9596 26.9844L18.2929 20.3177C17.9024 19.9272 17.9024 19.294 18.2929 18.9035Z"
 									fill-rule="evenodd" clip-rule="evenodd" fill="#9A9A9A" />
 							</svg></div>
-						<input data-fls-input autocomplete="off" type="text" name="form[]" placeholder="Search" class="input">
-						<button type="reset" class="item-form-search-page__reset">
+						<input data-fls-input autocomplete="off" type="text" name="form[]" placeholder="Search" aria-label="Search mockups and collections" class="input">
+						<button type="reset" aria-label="Clear search" class="item-form-search-page__reset">
 							<span>
 								<svg width="6" height="6" viewBox="0 0 6 6" fill="none" xmlns="http://www.w3.org/2000/svg">
 									<path
@@ -37,7 +37,7 @@
 							</span>
 						</button>
 					</div>
-					<button type="button" class="action-search-page__button btn-01 ">Search</button>
+					<button type="button" class="action-search-page__button btn-01">Search</button>
 				</form>
 				<p class="action-search-page__info">35 results for “iPhone 15”</p>
 			</div>
@@ -50,6 +50,33 @@
 				</div>
 				<div data-fls-tabs-body class="tabs__content">
 					<div class="tabs__body">
+						<div class="search-page__filter-mobile mobile-filter">
+							<button data-fls-buttons type="button" class="mobile-filter__btn _dark-btn">
+								<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+									<path d="M3 7H21M3 17H21" stroke="currentColor" stroke-width="1.5" />
+									<circle cx="7" cy="7" r="2.5" fill="black" stroke="currentColor" stroke-width="1.5" />
+									<circle cx="17" cy="17" r="2.5" fill="black" stroke="currentColor" stroke-width="1.5" />
+								</svg>
+								<span>Filters</span>
+							</button>
+							<div data-fls-mobile-filter class="mobile-filter__menu menu-mobile-filter">
+								<div class="menu-mobile-filter__object">
+									<div class="menu-mobile-filter__box">
+										<div class="menu-mobile-filter__head">
+											<div class="menu-mobile-filter__title">Filters</div>
+											<button type="button" aria-label="Close filters" class="menu-mobile-filter__close-btn">
+												<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+													<path d="M6 6L18 18M18 6L6 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+												</svg>
+											</button>
+										</div>
+										<div class="menu-mobile-filter__body">
+											<div class="menu-mobile-filter__wrapper search-page__mobile-panel"></div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
 						<div data-fls-pagefilter class="catalog__filter filter" data-one-select data-fls-checkbox
 							data-fls-radio>
 							<div class="filter__box">

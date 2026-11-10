@@ -30,7 +30,7 @@
 .item-collection-info {
 	&__gallery {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: toRem(8);
 
 		img {
@@ -38,44 +38,170 @@
 			height: 100%;
 			object-fit: cover;
 			object-position: center;
-			border-radius: $radius40;
+			border-radius: $radius24;
 			overflow: hidden;
+		}
+
+		@media (min-width: toEm(575.98)) {
+			grid-template-columns: repeat(4, minmax(0, 1fr));
+		}
+
+		@media (min-width: toEm(767.98)) {
+			img {
+				border-radius: $radius32;
+			}
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			img {
+				border-radius: $radius40;
+			}
 		}
 	}
 
 	&__carts {
-		display: flex;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
 		gap: toRem(8);
-		flex-wrap: wrap;
+
+		@media (min-width: toEm(575.98)) {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
 	}
 
 	&__cart {
-		$spacing: calc(16 / 3);
-		flex: 0 0 calc(33.333% - #{$spacing}px);
+		min-width: 0;
 		overflow: hidden;
-		overflow: hidden;
-		border-radius: $radius40;
+		border-radius: $radius24;
 		background: linear-gradient(90deg, rgba(248, 248, 248, 1) 0%, rgba(241, 241, 241, 1) 100%);
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: toRem(24);
-		padding-top: toRem(59);
-		padding-bottom: toRem(59);
-		padding-left: toRem(36.5);
-		padding-right: toRem(36.5);
+		gap: toRem(16);
+		padding: toRem(24) toRem(16);
+
+		.cart-item-collection-info__picture {
+			width: 100%;
+		}
 
 		img {
-			height: toRem(214);
+			display: block;
+			width: 100%;
+			height: toRem(120);
 			object-fit: contain;
 			object-position: center;
 		}
 
 		.cart-item-collection-info__title {
-			font-size: toRem(40);
+			font-size: toRem(24);
 			text-align: center;
 			font-weight: 600;
+			overflow-wrap: anywhere;
+		}
+
+		@media (min-width: toEm(767.98)) {
+			border-radius: $radius32;
+
+			img {
+				height: toRem(160);
+			}
+
+			.cart-item-collection-info__title {
+				font-size: toRem(28);
+			}
+		}
+
+		@media (min-width: toEm(1279.98)) {
+			border-radius: $radius40;
+		}
+
+		@media (min-width: toEm(1599.98)) {
+			img {
+				height: toRem(180);
+			}
+
+			.cart-item-collection-info__title {
+				font-size: toRem(32);
+			}
+		}
+
+		@media (min-width: toEm(1919.98)) {
+			gap: toRem(24);
+			padding: toRem(59) toRem(36.5);
+
+			img {
+				height: toRem(214);
+			}
+
+			.cart-item-collection-info__title {
+				font-size: toRem(40);
+			}
+		}
+	}
+}
+
+.collection-info--collection {
+	.asside {
+		padding-top: 0;
+	}
+
+	.info-asside {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		width: 100%;
+		max-width: 100%;
+	}
+
+	.info-asside__item {
+		min-width: 0;
+		padding: toRem(12);
+		font-size: toRem(16);
+		line-height: 1.2;
+	}
+
+	@media (min-width: toEm(575.98)) {
+		.info-asside__item {
+			padding: toRem(16);
+			font-size: toRem(20);
+		}
+	}
+
+	@media (min-width: toEm(767.98)) {
+		.info-asside__item {
+			padding-inline: toRem(24);
+			font-size: toRem(24);
+		}
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		.asside {
+			padding-top: toRem(96);
+		}
+
+		.info-asside__item {
+			padding-inline: toRem(12);
+			font-size: toRem(20);
+		}
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		.info-asside__item {
+			padding-inline: toRem(16);
+			font-size: toRem(24);
+		}
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		.info-asside {
+			display: inline-flex;
+			width: auto;
+		}
+
+		.info-asside__item {
+			padding: toRem(16) toRem(38);
+			font-size: toRem(32);
+			line-height: 1;
 		}
 	}
 }
