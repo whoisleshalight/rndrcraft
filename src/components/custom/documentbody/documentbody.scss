@@ -1,14 +1,82 @@
 .doс {
-	padding-bottom: 80px;
+	padding-bottom: 0;
+
+	@media (min-width: toEm(320)) {}
+
+	@media (min-width: toEm(575.98)) {}
+
+	@media (min-width: toEm(767.98)) {
+		padding-bottom: 48px;
+	}
+
+	@media (min-width: toEm(991.98)) {
+		padding-bottom: 38px;
+	}
+
+	@media (min-width: toEm(1279.98)) {}
+
+	@media (min-width: toEm(1439.98)) {
+		padding-bottom: 48px;
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		padding-bottom: 80px;
+	}
+
+	@media (min-width: toEm(1919.98)) {}
+}
+
+.doc__container {
+	@media (max-width: toEm(767.98)) {
+		max-width: 100%;
+	}
 }
 
 .actions-doc__body {
-	padding-top: 60px;
+
 	border-top: 2px solid #E6E6E6;
+	padding-top: 20px;
+
+	@media (min-width: toEm(320)) {}
+
+	@media (min-width: toEm(575.98)) {}
+
+	@media (min-width: toEm(767.98)) {
+		padding-top: 60px;
+	}
+
+	@media (min-width: toEm(991.98)) {}
+
+	@media (min-width: toEm(1279.98)) {}
+
+	@media (min-width: toEm(1439.98)) {}
+
+	@media (min-width: toEm(1599.98)) {}
+
+	@media (min-width: toEm(1919.98)) {}
 }
 
 .actions-doc {
-	margin-top: 60px;
+
+	padding-top: 20px;
+
+	@media (min-width: toEm(320)) {}
+
+	@media (min-width: toEm(575.98)) {}
+
+	@media (min-width: toEm(767.98)) {
+		margin-top: 60px;
+	}
+
+	@media (min-width: toEm(991.98)) {}
+
+	@media (min-width: toEm(1279.98)) {}
+
+	@media (min-width: toEm(1439.98)) {}
+
+	@media (min-width: toEm(1599.98)) {}
+
+	@media (min-width: toEm(1919.98)) {}
 }
 
 .top-doc__info {

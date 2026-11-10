@@ -1,41 +1,41 @@
-// Base styles only. Component styles are imported by their own modules.
-@use "@styles/libs/reset.scss";
-@use "@styles/site.scss";
-@use "@styles/base.scss";
+ // Base styles only. Component styles are imported by their own modules.
+ @use "@styles/libs/reset.scss";
+ @use "@styles/site.scss";
+ @use "@styles/base.scss";
 
-body::-webkit-scrollbar {
-	width: 4px;
-}
+ body::-webkit-scrollbar {
+ 	width: 4px;
+ }
 
-body::-webkit-scrollbar-thumb {
-	background: #caf749;
-	border-radius: 40px;
-}
+ body::-webkit-scrollbar-thumb {
+ 	background: #caf749;
+ 	border-radius: 40px;
+ }
 
-body::-webkit-scrollbar-track {
-	background: #000;
-}
+ body::-webkit-scrollbar-track {
+ 	background: #000;
+ }
 
-::selection {
-	background: #000;
-	color: #fff;
-}
+ ::selection {
+ 	background: #000;
+ 	color: #fff;
+ }
 
-._inner-padding-top {
+ ._inner-padding-top {
 
-	@media (min-width: toEm(320)) {
-		padding-top: 80px;
-	}
+ 	@media (min-width: toEm(320)) {
+ 		padding-top: 80px;
+ 	}
 
-	@media (min-width: toEm(991.98)) {
-		padding-top: 112px;
-	}
+ 	@media (min-width: toEm(991.98)) {
+ 		padding-top: 112px;
+ 	}
 
-	@media (min-width: toEm(1279.98)) {
-		padding-top: 144px;
-	}
+ 	@media (min-width: toEm(1279.98)) {
+ 		padding-top: 144px;
+ 	}
 
-	@media (min-width: toEm(1919.98)) {
-		padding-top: 184px;
-	}
-}
+ 	@media (min-width: toEm(1919.98)) {
+ 		padding-top: 184px;
+ 	}
+ }
