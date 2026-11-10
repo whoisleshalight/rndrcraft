@@ -1,0 +1,37 @@
+.filter {
+	padding-top: toRem(32);
+	padding-bottom: toRem(32);
+	padding-right: toRem(40);
+	padding-left: toRem(40);
+	background: url("@img/all_mockups/bg.png");
+	background-position: right center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	border-radius: $radius40;
+	align-items: center;
+	column-gap: toRem(16);
+	justify-content: space-between;
+
+	&:not(:last-child) {
+		margin-bottom: toRem(64);
+	}
+
+	&__box {
+		display: flex;
+		align-items: center;
+		gap: toRem(32);
+	}
+
+	&__title {
+		font-size: toRem(32);
+		font-weight: 600;
+	}
+
+	@media (min-width: toEm(320)) {
+		display: none;
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		display: flex;
+	}
+}
