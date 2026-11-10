@@ -1,166 +1,341 @@
 .contacts {
-
-	padding-bottom: 80px;
-
-	&__container {}
+	padding-bottom: toRem(56);
 
 	&__body {
-		display: flex;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
 		align-items: center;
-		margin-top: 60px;
+		gap: toRem(32);
+		margin-top: toRem(32);
 	}
 
-	&__content {
-		flex: 0 0 50%;
+	&__content,
+	&__form {
+		min-width: 0;
 	}
 
-	&__form {}
+	@media (min-width: toEm(767.98)) {
+		&__body {
+			gap: toRem(40);
+			margin-top: toRem(40);
+		}
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		padding-bottom: toRem(80);
+
+		&__body {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+			gap: 0;
+			margin-top: toRem(56);
+		}
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		&__body {
+			margin-top: toRem(60);
+		}
+	}
 }
 
-
-
 .content-contacts {
-
 	&__box {
-		max-width: 575px;
 		display: flex;
 		flex-direction: column;
-		gap: 84px;
-
-		ul {
-			justify-content: center;
-		}
+		gap: toRem(32);
+		max-width: toRem(575);
 	}
 
-	&__top {}
-
 	&__title {
+		margin-bottom: toRem(16);
+		font-size: toRem(40);
 		font-weight: 500;
-		font-size: 88px;
-
-		&:not(:last-child) {
-			margin-bottom: 24px;
-		}
 	}
 
 	&__info {
-		font-size: 24px;
-		line-height: 120%;
+		font-size: toRem(14);
+		line-height: 1.2;
 	}
 
-	&__list {
-		span {
-			display: block;
-			font-size: 24px;
-			font-weight: 600;
-
-			&:not(:last-child) {
-				margin-bottom: 24px;
-			}
-		}
-
-		a {
-			font-weight: 500;
-			font-size: 40px;
-		}
-	}
-
+	&__list,
 	&__social {
 		span {
 			display: block;
-			font-size: 24px;
+			margin-bottom: toRem(16);
+			font-size: toRem(16);
 			font-weight: 600;
+		}
+	}
 
-			&:not(:last-child) {
-				margin-bottom: 24px;
-			}
+	&__list a {
+		max-width: 100%;
+		font-size: toRem(24);
+		font-weight: 500;
+		line-height: 1.2;
+		overflow-wrap: anywhere;
+	}
+
+	._social-list {
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: toRem(8);
+		width: 100%;
+		padding: toRem(8) toRem(16);
+
+		a {
+			min-width: toRem(44);
+			min-height: toRem(44);
+		}
+	}
+
+	@media (min-width: toEm(575.98)) {
+		&__title {
+			font-size: toRem(48);
+		}
+
+		&__info {
+			font-size: toRem(16);
+		}
+	}
+
+	@media (min-width: toEm(767.98)) {
+		&__box {
+			gap: toRem(40);
+		}
+
+		&__title {
+			font-size: toRem(56);
+		}
+
+		&__info,
+		&__list span,
+		&__social span {
+			font-size: toRem(20);
+		}
+
+		&__list a {
+			font-size: toRem(32);
+		}
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		&__box {
+			gap: toRem(56);
+			padding-right: toRem(24);
+		}
+
+		&__title {
+			font-size: toRem(64);
+		}
+
+		._social-list {
+			padding: toRem(16) toRem(32);
+		}
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		&__title {
+			font-size: toRem(72);
+		}
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		&__box {
+			gap: toRem(84);
+			padding-right: 0;
+		}
+
+		&__title {
+			margin-bottom: toRem(24);
+			font-size: toRem(88);
+		}
+
+		&__info,
+		&__list span,
+		&__social span {
+			font-size: toRem(24);
+		}
+
+		&__list span,
+		&__social span {
+			margin-bottom: toRem(24);
+		}
+
+		&__list a {
+			font-size: toRem(40);
+			line-height: 1;
+		}
+
+		._social-list {
+			justify-content: center;
+			gap: toRem(32);
+			padding-inline: toRem(69);
 		}
 	}
 }
 
 .form-contacts {
-	flex: 0 0 50%;
-	padding: 56px;
-	background-color: #EFECE8;
-	border-radius: 30px;
 	display: flex;
 	flex-direction: column;
-	gap: 36px;
-
-	label {
-		font-size: 16px;
-		font-weight: 500;
-		margin-bottom: 16px;
-	}
+	gap: toRem(24);
+	width: 100%;
+	padding: toRem(24) toRem(16);
+	border-radius: $radius24;
+	background-color: #efece8;
 
 	&__title {
-		font-size: 64px;
+		font-size: toRem(24);
 		font-weight: 600;
 	}
 
 	&__inner {
-		display: flex;
-		gap: 24px;
-
-		.item-form-contacts {
-			flex: 0 0 calc(50% - 12px);
-		}
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		gap: toRem(24);
 	}
 
 	&__item {
-		position: relative;
+		min-width: 0;
 
 		[data-fls-form-error] {
-			position: absolute;
-			bottom: -24px;
-			left: 16px;
-			line-height: 120%;
-			font-size: 14px;
+			margin-top: toRem(8);
+			font-size: toRem(14);
 			font-weight: 500;
+			line-height: 1.2;
 			color: #920000;
+			overflow-wrap: anywhere;
 		}
 
-		textarea,
-		input {
-			border: 1px solid #8A8A89;
-			border-radius: 24px;
-			background-color: #FBFBFA;
-			font-weight: 500;
-		}
-
+		input,
 		textarea {
-			height: 190px;
-			padding: 24px;
-		}
-
-		input {
-			height: 58px;
-			padding-left: 24px;
-			padding-right: 24px;
-			transition: all 0.3s;
+			min-width: 0;
+			border: 1px solid #8a8a89;
+			border-radius: $radius24;
+			background-color: #fbfbfa;
+			font-size: toRem(16);
+			font-weight: 500;
+			line-height: 1.4;
 
 			&.--form-error {
-				border: 1px solid #920000;
+				border-color: #920000;
 			}
+		}
+
+		input {
+			height: toRem(58);
+			padding-inline: toRem(16);
+			transition: all 0.3s;
+		}
+
+		textarea.input {
+			min-height: toRem(160);
+			padding: toRem(16);
+			resize: vertical;
 		}
 	}
 
 	&__text {
-		font-size: 16px;
+		font-size: toRem(14);
 		font-weight: 500;
+		line-height: 1.4;
 
 		a {
 			font-weight: 600;
 		}
 	}
 
-	button {
+	.btn-2l {
 		align-self: flex-start;
+		max-width: 100%;
+		padding-inline: toRem(16);
+		font-size: toRem(18);
+	}
+
+	@media (min-width: toEm(575.98)) {
+		padding: toRem(24);
+
+		&__title {
+			font-size: toRem(32);
+		}
+
+		&__inner {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
+	}
+
+	@media (min-width: toEm(767.98)) {
+		padding: toRem(32);
+		border-radius: $radius32;
+
+		&__title {
+			font-size: toRem(40);
+		}
+
+		&__item input {
+			padding-inline: toRem(24);
+		}
+
+		&__text {
+			font-size: toRem(16);
+		}
+
+		.btn-2l {
+			padding-inline: toRem(32);
+			font-size: toRem(20);
+		}
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		gap: toRem(32);
+		border-radius: toRem(30);
+
+		&__item textarea.input {
+			min-height: toRem(190);
+			padding: toRem(24);
+		}
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		&__title {
+			font-size: toRem(48);
+		}
+
+		.btn-2l {
+			font-size: toRem(24);
+		}
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		padding: toRem(40);
+
+		&__title {
+			font-size: toRem(56);
+		}
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		gap: toRem(36);
+		padding: toRem(56);
+
+		&__title {
+			font-size: toRem(64);
+		}
+
+		&__item input,
+		&__item textarea,
+		&__text {
+			line-height: 1;
+		}
+
+		.btn-2l {
+			padding-inline: toRem(69);
+		}
 	}
 }
 
-.item-form-contacts {
-
-	&__label {}
-
+.item-form-contacts__label {
+	display: block;
+	margin-bottom: toRem(16);
+	font-size: toRem(16);
+	font-weight: 500;
 }

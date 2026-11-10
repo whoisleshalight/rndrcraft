@@ -19,7 +19,7 @@ export let formValidate = {
 	validateInput(formRequiredItem) {
 		let error = 0;
 		if (formRequiredItem.type === "email") {
-			formRequiredItem.value = formRequiredItem.value.replace(" ", "");
+			formRequiredItem.value = formRequiredItem.value.trim();
 			if (this.emailTest(formRequiredItem)) {
 				this.addError(formRequiredItem);
 				this.removeSuccess(formRequiredItem);
@@ -68,21 +68,20 @@ export let formValidate = {
 		formRequiredItem.classList.remove('--form-success');
 		formRequiredItem.parentElement.classList.remove('--form-success');
 	},
-	formClean(form) {
-		form.reset();
-		setTimeout(() => {
-			let inputs = form.querySelectorAll('input,textarea');
+	formClean(form, shouldReset = true) {
+		if (shouldReset) {
+			form.reset();
+			return;
+		}
+
+		queueMicrotask(() => {
+			let inputs = form.querySelectorAll('input,textarea,select');
 			for (let index = 0; index < inputs.length; index++) {
 				const el = inputs[index];
 				el.parentElement.classList.remove('--form-focus');
 				el.classList.remove('--form-focus');
 				formValidate.removeError(el);
-			}
-			let checkboxes = form.querySelectorAll('input[type="checkbox"]');
-			if (checkboxes.length) {
-				checkboxes.forEach(checkbox => {
-					checkbox.checked = false;
-				})
+				formValidate.removeSuccess(el);
 			}
 			if (window['flsSelect']) {
 				let selects = form.querySelectorAll('select[data-fls-select]')
@@ -92,9 +91,9 @@ export let formValidate = {
 					})
 				}
 			}
-		}, 0)
+		})
 	},
 	emailTest(formRequiredItem) {
-		return !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,8})+$/.test(formRequiredItem.value);
+		return !formRequiredItem.validity.valid;
 	}
 }

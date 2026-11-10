@@ -139,11 +139,20 @@
 			left: 0;
 			width: 100%;
 			height: 100%;
-			padding-left: toRem(32);
-			padding-top: toRem(20);
-			padding-bottom: toRem(20);
-			padding-right: toRem(168);
+			padding-left: toRem(16);
+			padding-block: 0;
+			padding-right: toRem(120);
 			transition: all 0.4s;
+
+			@media (min-width: toEm(767.98)) {
+				padding-left: toRem(24);
+				padding-right: toRem(144);
+			}
+
+			@media (min-width: toEm(1439.98)) {
+				padding-left: toRem(32);
+				padding-right: toRem(184);
+			}
 
 			&._data {
 				border: 2px solid $greenColor;

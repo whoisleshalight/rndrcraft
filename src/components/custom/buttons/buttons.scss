@@ -294,8 +294,8 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding-left: toRem(69);
-	padding-right: toRem(69);
+	padding-left: toRem(24);
+	padding-right: toRem(24);
 	padding-top: toRem(19);
 	padding-bottom: toRem(19);
 	transition: all 0.4s;
@@ -327,10 +327,17 @@
 
 	@media (min-width: toEm(1279.98)) {
 		min-height: toRem(72);
+		padding-left: toRem(48);
+		padding-right: toRem(48);
 	}
 
 	@media (min-width: toEm(1439.98)) {
 		font-size: toRem(24);
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		padding-left: toRem(69);
+		padding-right: toRem(69);
 	}
 }
 
@@ -547,3 +554,13 @@
 // 	}
 // }
 //========================================================================================================================================================
+.btn-2s,
+.btn-s,
+.btn-m,
+.btn-l,
+// .btn-3l,
+.btn-01 {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}

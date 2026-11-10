@@ -80,6 +80,10 @@
 			object-position: center;
 
 			@media (min-width: toEm(320)) {
+				width: toRem(96);
+			}
+
+			@media (min-width: toEm(374.98)) {
 				width: toRem(126);
 			}
 
@@ -95,6 +99,7 @@
 
 	&__box {
 		flex: 1 1 auto;
+		min-width: 0;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
@@ -103,6 +108,11 @@
 		gap: toRem(20);
 
 		@media (min-width: toEm(320)) {
+			margin-left: toRem(8);
+			padding-right: 0;
+		}
+
+		@media (min-width: toEm(374.98)) {
 			margin-left: toRem(16);
 			padding-right: toRem(8);
 		}
@@ -141,7 +151,12 @@
 		// flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		gap: toRem(16);
+		gap: toRem(8);
+		flex-shrink: 0;
+
+		@media (min-width: toEm(374.98)) {
+			gap: toRem(16);
+		}
 
 		@media (min-width: toEm(320)) {
 			padding-left: toRem(8);

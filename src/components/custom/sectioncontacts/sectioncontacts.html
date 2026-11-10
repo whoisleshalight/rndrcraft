@@ -7,7 +7,7 @@
 						<a href="#">home </a>
 					</li>
 					<li>
-						<a href="#">Legal page</a>
+						<a href="#">Contacts</a>
 					</li>
 				</ul>
 			</div>
@@ -35,41 +35,28 @@
 					</ul>
 					<div class="content-contacts__social">
 						<span>FOLLOW US</span>
-						<ul data-fls-social-links="" class="social-footer__list _social-list">
-							<li class="social-footer__item">
-								<a data-fls-icon="" href="#" class="social-footer__link svg-icon--behance"></a>
-							</li>
-							<li class="social-footer__item">
-								<a data-fls-icon="" href="#" class="social-footer__link svg-icon--instagram"></a>
-							</li>
-							<li class="social-footer__item">
-								<a data-fls-icon="" href="#" class="social-footer__link svg-icon--twitter"></a>
-							</li>
-							<li class="social-footer__item">
-								<a data-fls-icon="" href="#" class="social-footer__link svg-icon--facebook"></a>
-							</li>
-						</ul>
+						<include src="@components/custom/social-links/social-links.html" locals='{"listClass":"social-footer__list","itemClass":"social-footer__item","linkClass":"social-footer__link"}'></include>
 					</div>
 				</div>
 			</div>
-			<form data-fls-form="ajax" data-fls-form-popup="popup" method="POST" action="php/sendmail" method="POST"
+			<form data-fls-form="ajax" data-fls-form-popup="popup" method="POST" action="php/sendmail"
 				class="contacts__form form-contacts">
 				<div class="form-contacts__title">Send us a message</div>
 				<div class="form-contacts__inner">
 					<div class="form-contacts__item item-form-contacts">
-						<label for="" class="item-form-contacts__label">Name *</label>
-						<input required id="" data-fls-input autocomplete="off" type="text" name="form[]" placeholder=""
+						<label for="contact-name" class="item-form-contacts__label">Name *</label>
+						<input required id="contact-name" data-fls-input autocomplete="name" type="text" name="form[]" placeholder=""
 							data-fls-form-errtext="This field is required." class="input">
 					</div>
 					<div class="form-contacts__item item-form-contacts">
-						<label for="" class="item-form-contacts__label">Email *</label>
-						<input id="" required type="email" name="form[email]" data-fls-form-errtext="This field is required."
-							data-fls-input autocomplete="off" type="text" name="form[]" placeholder="" class="input">
+						<label for="contact-email" class="item-form-contacts__label">Email *</label>
+						<input id="contact-email" required type="email" name="form[email]" data-fls-form-errtext="This field is required."
+							data-fls-input autocomplete="email" placeholder="" class="input">
 					</div>
 				</div>
 				<div class="form-contacts__item item-form-contacts">
-					<label for="" class="item-form-contacts__label">Subject *</label>
-					<select required name="form[]" data-fls-select data-fls-select-modif="form"
+					<label for="contact-subject" class="item-form-contacts__label">Subject *</label>
+					<select id="contact-subject" required name="form[]" data-fls-select data-fls-select-modif="form"
 						data-fls-form-errtext="This field is required.">
 						<option value="" selected>Select a topic</option>
 						<option value="2">Select</option>
@@ -78,12 +65,12 @@
 					</select>
 				</div>
 				<div class="form-contacts__item item-form-contacts">
-					<label for="" class="item-form-contacts__label">Message *</label>
-					<textarea required data-fls-input autocomplete="off" name="form[]" placeholder=""
+					<label for="contact-message" class="item-form-contacts__label">Message *</label>
+					<textarea id="contact-message" required data-fls-input autocomplete="off" name="form[]" placeholder=""
 						data-fls-form-errtext="This field is required." class="input"></textarea>
 				</div>
 				<div class="form-contacts__text">
-					By sending this message, you acknowledge our <a href="#">Privacy Policy</a>.
+					By sending this message, you acknowledge our <a href="documents-template.html#tab-0-2">Privacy Policy</a>.
 				</div>
 				<button type="submit" class="btn-2l">SEND MESSAGE →</button>
 			</form>

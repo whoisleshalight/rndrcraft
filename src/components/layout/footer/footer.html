@@ -2,7 +2,7 @@
 
 	<div class="footer__top top-footer">
 		<div class="top-footer__container">
-			<a href="" class="top-footer__logo"><img src="@img/logo-white.svg" alt="#"></a>
+			<a href="index.html" class="top-footer__logo"><img src="@img/logo-white.svg" alt="rndrcraft"></a>
 			<p class="top-footer__info">Explore trending categories on RNDRCRAFT <br>
 				Check what’s popular on RNDRCRAFT and make your project look trendy and professional.</p>
 		</div>
@@ -13,10 +13,10 @@
 				<nav>
 					<ul>
 						<li>
-							<a href="#">All Mockups</a>
+							<a href="all_mockups.html">All Mockups</a>
 						</li>
 						<li>
-							<a href="#">Collections</a>
+							<a href="collections.html">Collections</a>
 						</li>
 						<li>
 							<a href="#">Free</a>
@@ -26,7 +26,7 @@
 				<nav>
 					<ul>
 						<li>
-							<a href="#">Devices</a>
+							<a href="devices.html">Devices</a>
 						</li>
 						<li>
 							<a href="#">Branding</a>
@@ -51,10 +51,10 @@
 							<a href="#">Company</a>
 						</li>
 						<li>
-							<a href="#">Contacts</a>
+							<a href="contacts.html">Contacts</a>
 						</li>
 						<li>
-							<a href="#">Search</a>
+							<a href="search.html">Search</a>
 						</li>
 						<li>
 							<a href="#">My account</a>
@@ -64,16 +64,16 @@
 				<nav>
 					<ul>
 						<li>
-							<a href="#">Terms of use</a>
+							<a href="documents-template.html#tab-0-0">Terms of use</a>
 						</li>
 						<li>
-							<a href="#">License agreement</a>
+							<a href="documents-template.html#tab-0-1">License agreement</a>
 						</li>
 						<li>
-							<a href="#">Privacy policy</a>
+							<a href="documents-template.html#tab-0-2">Privacy policy</a>
 						</li>
 						<li>
-							<a href="#">Copyright information</a>
+							<a href="documents-template.html#tab-0-3">Copyright information</a>
 						</li>
 					</ul>
 				</nav>
@@ -81,26 +81,13 @@
 			<div class="footer__social social-footer">
 				<div class="social-footer__box">
 					<div class="social-footer__title">Social media</div>
-					<ul data-fls-social-links class="social-footer__list _social-list">
-						<li class="social-footer__item">
-							<a data-fls-icon href="#" class="social-footer__link svg-icon--behance"></a>
-						</li>
-						<li class="social-footer__item">
-							<a data-fls-icon href="#" class="social-footer__link svg-icon--instagram"></a>
-						</li>
-						<li class="social-footer__item">
-							<a data-fls-icon href="#" class="social-footer__link svg-icon--twitter"></a>
-						</li>
-						<li class="social-footer__item">
-							<a data-fls-icon href="#" class="social-footer__link svg-icon--facebook"></a>
-						</li>
-					</ul>
+					<include src="@components/custom/social-links/social-links.html" locals='{"listClass":"social-footer__list","itemClass":"social-footer__item","linkClass":"social-footer__link"}'></include>
 					<div class="social-footer__actions">
 						<a href="#" class="_footer-social-create-btn">
 							<span>Create account</span>
 							<span>-15%</span>
 						</a>
-						<a href="#" data-popup="#" class="social-footer__action">GET IN TOUCH</a>
+						<a href="contacts.html" class="social-footer__action">GET IN TOUCH</a>
 					</div>
 				</div>
 			</div>

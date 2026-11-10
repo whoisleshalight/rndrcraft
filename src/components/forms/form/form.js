@@ -1,112 +1,140 @@
-// Підключення функціоналу "Чертоги Фрілансера"
-import { gotoBlock, FLS } from "@js/common/functions.js";
-// Підключення функціоналу модуля форм
-import { formValidate } from "../_functions.js";
+import { gotoBlock, FLS } from '@js/common/functions.js';
+import { formValidate } from '../_functions.js';
 
-import './form.scss'
+import './form.scss';
 
-function formInit() {
-	// Відправлення форм
-	function formSubmit() {
-		const forms = document.forms;
-		if (forms.length) {
-			for (const form of forms) {
-				// Прибираємо вбудовану валідацію
-				!form.hasAttribute('data-fls-form-novalidate') ? form.setAttribute('novalidate', true) : null
-				// Подія відправки
-				form.addEventListener('submit', function (e) {
-					const form = e.target;
-					formSubmitAction(form, e);
-				});
-				// Подія очистки
-				form.addEventListener('reset', function (e) {
-					const form = e.target;
-					formValidate.formClean(form);
-				});
-			}
-		}
-		async function formSubmitAction(form, e) {
-			const error = formValidate.getErrors(form)
-			if (error === 0) {
-				if (form.dataset.flsForm === 'ajax') { // Якщо режим ajax
-					e.preventDefault();
-					const formAction = form.getAttribute('action') ? form.getAttribute('action').trim() : '#';
-					const formMethod = form.getAttribute('method') ? form.getAttribute('method').trim() : 'GET';
-					const formData = new FormData(form);
-					form.classList.add('--sending');
-					const response = await fetch(formAction, {
-						method: formMethod,
-						body: formData
-					});
-					if (response.ok) {
-						let responseResult = await response.json()
-						form.classList.remove('--sending')
-						formSent(form, responseResult)
-					} else {
-						FLS("_FLS_FORM_AJAX_ERR")
-						form.classList.remove('--sending')
-					}
-				} else if (form.dataset.flsForm === 'dev') {	// Якщо режим розробки
-					e.preventDefault()
-					formSent(form)
-				}
-			} else {
-				e.preventDefault();
-				if (form.querySelector('.--form-error') && form.hasAttribute('data-fls-form-gotoerr')) {
-					const formGoToErrorClass = form.dataset.flsFormGotoerr ? form.dataset.flsFormGotoerr : '.--form-error';
-					gotoBlock(formGoToErrorClass);
-				}
-			}
-		}
-		// Дії після надсилання форми
-		function formSent(form, responseResult = ``) {
-			// Створюємо подію відправлення форми
-			document.dispatchEvent(new CustomEvent("formSent", {
-				detail: {
-					form: form
-				}
-			}));
-			// Показуємо попап, якщо підключено модуль попапів 
-			// та для форми вказано налаштування
-			setTimeout(() => {
-				if (window.flsPopup) {
-					const popup = form.dataset.flsFormPopup;
-					popup ? window.flsPopup.open(popup) : null;
-				}
-			}, 0);
-			// Очищуємо форму
-			formValidate.formClean(form);
-			// Повідомляємо до консолі
-			FLS(`_FLS_FORM_SEND`);
-		}
-	}
-	// Робота із полями форми.
-	function formFieldsInit() {
-		document.body.addEventListener("focusin", function (e) {
-			const targetElement = e.target;
-			if ((targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA')) {
-				if (!targetElement.hasAttribute('data-fls-form-nofocus')) {
-					targetElement.classList.add('--form-focus');
-					targetElement.parentElement.classList.add('--form-focus');
-				}
-				formValidate.removeError(targetElement);
-				targetElement.hasAttribute('data-fls-form-validatenow') ? formValidate.removeError(targetElement) : null;
-			}
-		});
-		document.body.addEventListener("focusout", function (e) {
-			const targetElement = e.target;
-			if ((targetElement.tagName === 'INPUT' || targetElement.tagName === 'TEXTAREA')) {
-				if (!targetElement.hasAttribute('data-fls-form-nofocus')) {
-					targetElement.classList.remove('--form-focus');
-					targetElement.parentElement.classList.remove('--form-focus');
-				}
-				// Миттєва валідація
-				targetElement.hasAttribute('data-fls-form-validatenow') ? formValidate.validateInput(targetElement) : null;
-			}
-		});
-	}
-	formSubmit()
-	formFieldsInit()
+function setFormStatus(status, message, isError = false) {
+    status.textContent = message;
+    status.hidden = message === '';
+    status.classList.toggle('form__status--error', isError);
 }
-document.querySelector('[data-fls-form]') ?
-	window.addEventListener('load', formInit) : null
+
+function handleFormSent(form, status) {
+    document.dispatchEvent(new CustomEvent('formSent', { detail: { form } }));
+    formValidate.formClean(form);
+    setFormStatus(status, 'Your message has been sent.');
+
+    if (window.flsPopup && form.dataset.flsFormPopup) {
+        window.flsPopup.open(form.dataset.flsFormPopup);
+    }
+
+    FLS('_FLS_FORM_SEND');
+}
+
+async function handleFormSubmit(event, form, status) {
+    if (form.classList.contains('--sending')) {
+        event.preventDefault();
+        return;
+    }
+
+    setFormStatus(status, '');
+    const errorCount = formValidate.getErrors(form);
+
+    if (errorCount > 0) {
+        event.preventDefault();
+
+        if (form.hasAttribute('data-fls-form-gotoerr')) {
+            gotoBlock(form.dataset.flsFormGotoerr || '.--form-error');
+        }
+
+        return;
+    }
+
+    if (form.dataset.flsForm !== 'ajax' && form.dataset.flsForm !== 'dev') {
+        return;
+    }
+
+    event.preventDefault();
+
+    if (form.dataset.flsForm === 'dev') {
+        handleFormSent(form, status);
+        return;
+    }
+
+    const submitControls = Array.from(form.querySelectorAll(
+        'button:not([type]), button[type="submit"], input[type="submit"]',
+    )).map((control) => ({ control, wasDisabled: control.disabled }));
+
+    form.classList.add('--sending');
+    form.setAttribute('aria-busy', 'true');
+    const formData = new FormData(form);
+    submitControls.forEach(({ control }) => {
+        control.disabled = true;
+    });
+
+    try {
+        const response = await fetch(form.action, {
+            method: form.method.toUpperCase(),
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error(`Form request failed with status ${response.status}.`);
+        }
+
+        const result = await response.json();
+
+        if (result && typeof result === 'object' && result.success === false) {
+            throw new Error('The server did not accept the form.');
+        }
+
+        handleFormSent(form, status);
+    } catch (error) {
+        setFormStatus(status, 'Your message could not be sent. Please try again.', true);
+        console.error('Form submission failed.', error);
+    } finally {
+        form.classList.remove('--sending');
+        form.removeAttribute('aria-busy');
+        submitControls.forEach(({ control, wasDisabled }) => {
+            control.disabled = wasDisabled;
+        });
+    }
+}
+
+function initializeForms() {
+    document.querySelectorAll('form[data-fls-form]').forEach((form) => {
+        if (!form.hasAttribute('data-fls-form-novalidate')) {
+            form.noValidate = true;
+        }
+
+        const status = document.createElement('p');
+        status.className = 'form__status';
+        status.setAttribute('role', 'status');
+        status.hidden = true;
+        form.append(status);
+
+        form.addEventListener('submit', (event) => {
+            handleFormSubmit(event, form, status);
+        });
+
+        form.addEventListener('reset', () => {
+            // The native reset event owns cleanup; it must not trigger another reset.
+            formValidate.formClean(form, false);
+            setFormStatus(status, '');
+        });
+
+        form.addEventListener('focusin', ({ target }) => {
+            if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement)) {
+                return;
+            }
+            if (!target.hasAttribute('data-fls-form-nofocus')) {
+                target.classList.add('--form-focus');
+                target.parentElement.classList.add('--form-focus');
+            }
+            formValidate.removeError(target);
+        });
+
+        form.addEventListener('focusout', ({ target }) => {
+            if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement)) {
+                return;
+            }
+            target.classList.remove('--form-focus');
+            target.parentElement.classList.remove('--form-focus');
+            if (target.hasAttribute('data-fls-form-validatenow')) {
+                formValidate.validateInput(target);
+            }
+        });
+    });
+}
+
+window.addEventListener('load', initializeForms);

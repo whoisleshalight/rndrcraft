@@ -11,12 +11,16 @@ let previousFocus;
 function closeSearch() {
     if (!root.classList.contains('search-open')) return;
     root.classList.remove('search-open');
+    search.inert = true;
+    search.setAttribute('aria-hidden', 'true');
     bodyUnlock(0);
     openButton?.setAttribute('aria-expanded', 'false');
     previousFocus?.focus();
 }
 
 if (search && openButton && closeButton) {
+    search.inert = true;
+    search.setAttribute('aria-hidden', 'true');
     openButton.setAttribute('aria-expanded', 'false');
     openButton.addEventListener('click', () => {
         if (!bodyLockStatus || root.classList.contains('search-open')) return;
@@ -24,28 +28,18 @@ if (search && openButton && closeButton) {
         root.removeAttribute('data-fls-menu-open');
         if (!root.hasAttribute('data-fls-scrolllock')) bodyLock(0);
         root.classList.add('search-open');
+        search.inert = false;
+        search.setAttribute('aria-hidden', 'false');
         openButton.setAttribute('aria-expanded', 'true');
-        setTimeout(() => {
+        requestAnimationFrame(() => {
             if (root.classList.contains('search-open')) {
                 search.querySelector('input')?.focus({ preventScroll: true });
             }
-        }, 50);
+        });
     });
     closeButton.addEventListener('click', closeSearch);
     document.addEventListener('keydown', (event) => {
         if (!root.classList.contains('search-open')) return;
         if (event.key === 'Escape') closeSearch();
-        if (event.key === 'Tab') {
-            const controls = [...search.querySelectorAll('a[href], button, input, [tabindex="0"]')];
-            const first = controls[0];
-            const last = controls.at(-1);
-            if (event.shiftKey && document.activeElement === first) {
-                event.preventDefault();
-                last?.focus();
-            } else if (!event.shiftKey && document.activeElement === last) {
-                event.preventDefault();
-                first?.focus();
-            }
-        }
     });
 }

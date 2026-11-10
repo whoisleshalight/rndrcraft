@@ -22,6 +22,7 @@
 	left: 0;
 	width: 100vw;
 	height: 100vh;
+	height: 100dvh;
 	padding-top: toRem(120);
 	z-index: 10;
 	backdrop-filter: blur(0px);
@@ -32,7 +33,9 @@
 	flex-direction: column;
 	transition: all 0.4s;
 	pointer-events: none;
+	visibility: hidden;
 	._filter-menu-open &{
+		visibility: visible;
 		backdrop-filter: blur(160px);
 		-webkit-backdrop-filter: blur(160px);
 

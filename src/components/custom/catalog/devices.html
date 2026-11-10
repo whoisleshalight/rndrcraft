@@ -32,12 +32,12 @@
 									</svg>
 									<span>Filters</span>
 								</button>
-								<include src="@components/custom/mobile-filter/devices-filter.html"></include>
+								<include src="@components/custom/mobile-filter/mobile-filter.html"></include>
 							</div>
 						</div>
 					</div>
 					<div class="catalog__body">
-						<div class="catalog__filter filter" data-one-select>
+						<div data-fls-pagefilter class="catalog__filter filter" data-one-select>
 							<div class="filter__box">
 								<div class="filter__title">Filters:</div>
 								<select data-fls-select name="form[]" data-fls-select-modif="form">
@@ -57,7 +57,7 @@
 								</select>
 							</div>
 						</div>
-						<div class="catalog__items">
+						<div data-fls-catalogitems class="catalog__items">
 							<include src="@components/custom/product-card/product-card.html" locals='{"classes": "catalog__item item-catalog item-link trending__item", "href": "#", "image": "@img/all_mockups/01.jpg", "alt": "Image", "name": "Business Card Mockup", "buyHref": "2#", "price": "$4"}'></include>
 							<include src="@components/custom/product-card/product-card.html" locals='{"classes": "catalog__item item-catalog item-link trending__item", "href": "#", "image": "@img/all_mockups/01.jpg", "alt": "Image", "name": "Business Card Mockup", "buyHref": "2#", "price": "$4"}'></include>
 							<include src="@components/custom/product-card/product-card.html" locals='{"classes": "catalog__item item-catalog item-link trending__item", "href": "#", "image": "@img/all_mockups/01.jpg", "alt": "Image", "name": "Business Card Mockup", "buyHref": "2#", "price": "$4"}'></include>

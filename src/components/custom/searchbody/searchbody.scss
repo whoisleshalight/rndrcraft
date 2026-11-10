@@ -109,11 +109,6 @@
 		}
 	}
 
-	:focus-visible {
-		outline: 2px solid $mainColor;
-		outline-offset: 3px;
-	}
-
 	@media (min-width: toEm(767.98)) {
 		--search-control-height: #{toRem(58)};
 

@@ -123,6 +123,14 @@ class SelectConstructor {
 			// Запускаємо конструктор псевдоселекту
 			this.selectBuild(originalSelect);
 
+			if (selectItem.id) {
+				const label = document.querySelector(`label[for="${CSS.escape(selectItem.id)}"]`);
+				label?.addEventListener('click', (event) => {
+					event.preventDefault();
+					this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement?.focus();
+				});
+			}
+
 			// Запам'ятовуємо швидкість
 			originalSelect.dataset.flsSelectSpeed = originalSelect.dataset.flsSelectSpeed ? originalSelect.dataset.flsSelectSpeed : this.config.speed;
 			this.config.speed = +originalSelect.dataset.flsSelectSpeed
@@ -205,6 +213,7 @@ class SelectConstructor {
 		const selectOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
 		if (!selectOptions.classList.contains('_slide')) {
 			selectItem.classList.remove(this.selectClasses.classSelectOpen);
+			this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement?.setAttribute('aria-expanded', 'false');
 			slideUp(selectOptions, originalSelect.dataset.flsSelectSpeed);
 			setTimeout(() => {
 				selectItem.style.zIndex = '';
@@ -232,6 +241,7 @@ class SelectConstructor {
 		setTimeout(() => {
 			if (!selectOptions.classList.contains('--slide')) {
 				selectItem.classList.toggle(this.selectClasses.classSelectOpen);
+				this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement?.setAttribute('aria-expanded', String(selectItem.classList.contains(this.selectClasses.classSelectOpen)));
 				slideToggle(selectOptions, originalSelect.dataset.flsSelectSpeed);
 
 				if (selectItem.classList.contains(this.selectClasses.classSelectOpen)) {
@@ -250,6 +260,18 @@ class SelectConstructor {
 		const selectItemTitle = this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement;
 		if (selectItemTitle) selectItemTitle.remove();
 		selectItemBody.insertAdjacentHTML("afterbegin", this.getSelectTitleValue(selectItem, originalSelect));
+		const updatedTitle = this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement;
+
+		if (updatedTitle instanceof HTMLButtonElement) {
+			updatedTitle.setAttribute('aria-expanded', String(selectItem.classList.contains(this.selectClasses.classSelectOpen)));
+
+			if (selectItem.id) {
+				const label = document.querySelector(`label[for="${CSS.escape(selectItem.id)}"]`);
+				if (label) {
+					updatedTitle.setAttribute('aria-label', `${label.textContent.trim()}: ${updatedTitle.textContent.trim()}`);
+				}
+			}
+		}
 		// Якщо увімкнено опцію пошуку data-search, запускаємо обробник
 		originalSelect.hasAttribute('data-fls-select-search') ? this.searchActions(selectItem) : null;
 	}

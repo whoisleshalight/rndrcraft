@@ -1,0 +1,13 @@
+.form__status {
+	font-size: toRem(16);
+	line-height: 1.4;
+	color: #1b4f00;
+
+	&--error {
+		color: #920000;
+	}
+}
+
+[data-fls-form][aria-busy="true"] button[type="submit"] {
+	cursor: progress;
+}

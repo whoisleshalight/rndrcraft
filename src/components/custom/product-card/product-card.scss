@@ -70,6 +70,7 @@
 
 	border-radius: $radius24;
 	display: flex;
+	align-items: center;
 	pointer-events: all;
 
 	span {
@@ -381,7 +382,7 @@
 			}
 		}
 
-		a {
+		> a {
 			@media (max-width: toEm(1279.98)) {
 				position: relative;
 				width: 100%;
@@ -406,12 +407,6 @@
 				padding-bottom: 100%;
 			}
 
-			&.cart-action__buy {
-				@media (max-width: toEm(1279.98)) {
-					height: auto !important;
-					padding-bottom: toRem(0);
-				}
-			}
 		}
 	}
 .cart {

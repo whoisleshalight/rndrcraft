@@ -744,3 +744,16 @@
 .asside__wrapper {
 	flex: 1 1 auto;
 }
+.actions-asside-bottom .btn-2l {
+	font-size: toRem(18);
+	padding-inline: toRem(16);
+
+	@media (min-width: toEm(575.98)) {
+		font-size: toRem(20);
+		padding-inline: toRem(30);
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		font-size: toRem(24);
+	}
+}

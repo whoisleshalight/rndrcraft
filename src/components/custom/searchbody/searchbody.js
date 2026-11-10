@@ -10,12 +10,6 @@ if (searchPage && mobilePanel) {
 	});
 
 	const updateFilterLayout = () => {
-		const filterButton = searchPage.querySelector('.mobile-filter__btn');
-
-		if (!mobileMediaQuery.matches && filterButton?.getAttribute('aria-expanded') === 'true') {
-			searchPage.querySelector('.menu-mobile-filter__close-btn')?.click();
-		}
-
 		// Move the same controls so selections and label associations survive resizing.
 		filters.forEach(({ element, desktopParent }) => {
 			const target = mobileMediaQuery.matches ? mobilePanel : desktopParent;

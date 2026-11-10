@@ -6,7 +6,7 @@ import { addTouchAttr, bodyLockStatus, bodyLockToggle, FLS } from "@js/common/fu
 export function menuInit() {
 	document.addEventListener("click", function (e) {
 		if (bodyLockStatus && e.target.closest('[data-fls-menu]')) {
-			bodyLockToggle()
+			bodyLockToggle(0)
 			document.documentElement.toggleAttribute("data-fls-menu-open")
 		}
 	})

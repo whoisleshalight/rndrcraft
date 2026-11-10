@@ -54,7 +54,8 @@
 		display: block;
 		position: relative;
 		width: toRem(40);
-		height: toRem(18);
+		height: toRem(40);
+		flex: 0 0 toRem(40);
 		z-index: 5;
 
 		@media (any-hover: none) {
@@ -74,11 +75,11 @@
 		}
 
 		&::before {
-			top: 0;
+			top: toRem(11);
 		}
 
 		&::after {
-			bottom: 0;
+			bottom: toRem(11);
 		}
 
 		span {
