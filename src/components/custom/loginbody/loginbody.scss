@@ -84,6 +84,27 @@
 		gap: var(--field-gap);
 	}
 
+	&__control {
+		position: relative;
+		display: grid;
+		min-width: 0;
+
+		[data-fls-form-error] {
+			position: absolute;
+			top: calc(100% + 6px);
+			left: 24px;
+			max-width: calc(100% - 48px);
+			color: #920000;
+			font-size: 14px;
+			font-weight: 500;
+			line-height: 1.2;
+
+			@media (max-width: $tablet) {
+				font-size: 12px;
+			}
+		}
+	}
+
 	&__label {
 		font-size: var(--label-size);
 		font-weight: 600;
@@ -111,6 +132,10 @@
 		&:focus {
 			border-color: $mainColor;
 		}
+
+		&.--form-error {
+			border-color: #920000;
+		}
 	}
 
 	&__inputPassword {
@@ -123,10 +148,11 @@
 
 	&__passwordToggle {
 		position: absolute;
-		top: 50%;
+		top: calc(var(--input-height) / 2);
 		right: 6px;
 		display: grid;
 		place-items: center;
+		transition: all 0.4s;
 		width: 44px;
 		height: 44px;
 		border-radius: $radius14;
@@ -142,6 +168,12 @@
 		font-size: var(--secondary-size);
 		font-weight: 600;
 		line-height: 1.2;
+
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: underline;
+			}
+		}
 	}
 
 	&__actions {
@@ -217,24 +249,11 @@
 		font-weight: 700;
 		text-decoration: underline;
 		text-underline-offset: 2px;
-	}
 
-	&__input:focus-visible,
-	&__passwordToggle:focus-visible,
-	&__forgot:focus-visible,
-	&__switch:focus-visible,
-	&__submit:focus-visible,
-	&__registerLink:focus-visible {
-		outline: 2px solid #caf749;
-		outline-offset: 4px;
-	}
-
-	@media (any-hover: hover) {
-
-		&__forgot:hover,
-		&__registerLink:hover {
-			text-decoration: underline;
-			text-underline-offset: 3px;
+		@media (any-hover: hover) {
+			&:hover {
+				text-decoration: none;
+			}
 		}
 	}
 
@@ -262,6 +281,7 @@
 			min-height: 52px;
 			padding-block: 16px;
 			font-size: 16px;
+			line-height: 120%;
 		}
 
 		&__switch {

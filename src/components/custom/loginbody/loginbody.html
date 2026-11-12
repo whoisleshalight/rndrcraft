@@ -8,17 +8,22 @@
 					<h1 id="login-title" class="login__title">WELCOME BACK</h1>
 					<p class="login__description">Sign in to access your mockups, downloads, and account.</p>
 				</div>
-				<form class="login__form" action="#" method="post" data-login-form>
+				<form class="login__form" action="#" method="post" data-login-form data-fls-form>
 					<div class="login__field">
 						<label class="login__label" for="login-email">Email address</label>
-						<input class="login__input" id="login-email" name="email" type="email" autocomplete="username"
-							placeholder="you@example.com" required>
+						<div class="login__control">
+							<input class="login__input" id="login-email" name="email" type="email" autocomplete="username"
+								pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
+								placeholder="you@example.com" data-fls-form-validatenow
+								data-fls-form-errtext="Enter a valid email address." required>
+						</div>
 					</div>
 					<div class="login__field">
 						<label class="login__label" for="login-password">Password</label>
-						<div class="login__password">
+						<div class="login__password login__control">
 							<input class="login__input login__inputPassword" id="login-password" name="password"
-								type="password" autocomplete="current-password" placeholder="Enter your password" required>
+								type="password" autocomplete="current-password" placeholder="Enter your password"
+								data-fls-form-validatenow data-fls-form-errtext="This field is required." required>
 							<button class="login__passwordToggle" type="button" aria-label="Show password"
 								aria-controls="login-password" aria-pressed="false" data-login-password-toggle>
 								<img src="@img/login/show-password.svg" width="22" height="22" alt="">

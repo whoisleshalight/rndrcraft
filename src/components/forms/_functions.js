@@ -59,6 +59,12 @@ export let formValidate = {
 				formRequiredItem.parentElement.append(inputError);
 			}
 			inputError.textContent = formRequiredItem.dataset.flsFormErrtext;
+			if (formRequiredItem.id) {
+				inputError.id = `${formRequiredItem.id}-error`;
+				const describedBy = new Set((formRequiredItem.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean));
+				describedBy.add(inputError.id);
+				formRequiredItem.setAttribute('aria-describedby', Array.from(describedBy).join(' '));
+			}
 		}
 	},
 	removeError(formRequiredItem) {
@@ -68,8 +74,17 @@ export let formValidate = {
 		if (formRequiredItem.tagName === 'SELECT') {
 			formRequiredItem.parentElement.querySelector('.select__title')?.removeAttribute('aria-invalid');
 		}
-		if (formRequiredItem.parentElement.querySelector('[data-fls-form-error]')) {
-			formRequiredItem.parentElement.removeChild(formRequiredItem.parentElement.querySelector('[data-fls-form-error]'));
+		const inputError = formRequiredItem.parentElement.querySelector('[data-fls-form-error]');
+		if (inputError) {
+			const describedBy = (formRequiredItem.getAttribute('aria-describedby') || '')
+				.split(/\s+/)
+				.filter((descriptionId) => descriptionId && descriptionId !== inputError.id);
+			if (describedBy.length) {
+				formRequiredItem.setAttribute('aria-describedby', describedBy.join(' '));
+			} else {
+				formRequiredItem.removeAttribute('aria-describedby');
+			}
+			inputError.remove();
 		}
 	},
 	addSuccess(formRequiredItem) {
