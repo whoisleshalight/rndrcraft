@@ -47,15 +47,27 @@ export let formValidate = {
 	addError(formRequiredItem) {
 		formRequiredItem.classList.add('--form-error');
 		formRequiredItem.parentElement.classList.add('--form-error');
+		formRequiredItem.setAttribute('aria-invalid', 'true');
+		if (formRequiredItem.tagName === 'SELECT') {
+			formRequiredItem.parentElement.querySelector('.select__title')?.setAttribute('aria-invalid', 'true');
+		}
 		let inputError = formRequiredItem.parentElement.querySelector('[data-fls-form-error]');
-		if (inputError) formRequiredItem.parentElement.removeChild(inputError);
 		if (formRequiredItem.dataset.flsFormErrtext) {
-			formRequiredItem.parentElement.insertAdjacentHTML('beforeend', `<div data-fls-form-error>${formRequiredItem.dataset.flsFormErrtext}</div>`);
+			if (!inputError) {
+				inputError = document.createElement('div');
+				inputError.setAttribute('data-fls-form-error', '');
+				formRequiredItem.parentElement.append(inputError);
+			}
+			inputError.textContent = formRequiredItem.dataset.flsFormErrtext;
 		}
 	},
 	removeError(formRequiredItem) {
 		formRequiredItem.classList.remove('--form-error');
 		formRequiredItem.parentElement.classList.remove('--form-error');
+		formRequiredItem.removeAttribute('aria-invalid');
+		if (formRequiredItem.tagName === 'SELECT') {
+			formRequiredItem.parentElement.querySelector('.select__title')?.removeAttribute('aria-invalid');
+		}
 		if (formRequiredItem.parentElement.querySelector('[data-fls-form-error]')) {
 			formRequiredItem.parentElement.removeChild(formRequiredItem.parentElement.querySelector('[data-fls-form-error]'));
 		}

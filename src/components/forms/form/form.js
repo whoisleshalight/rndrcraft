@@ -3,16 +3,9 @@ import { formValidate } from '../_functions.js';
 
 import './form.scss';
 
-function setFormStatus(status, message, isError = false) {
-    status.textContent = message;
-    status.hidden = message === '';
-    status.classList.toggle('form__status--error', isError);
-}
-
-function handleFormSent(form, status) {
+function handleFormSent(form) {
     document.dispatchEvent(new CustomEvent('formSent', { detail: { form } }));
     formValidate.formClean(form);
-    setFormStatus(status, 'Your message has been sent.');
 
     if (window.flsPopup && form.dataset.flsFormPopup) {
         window.flsPopup.open(form.dataset.flsFormPopup);
@@ -21,13 +14,12 @@ function handleFormSent(form, status) {
     FLS('_FLS_FORM_SEND');
 }
 
-async function handleFormSubmit(event, form, status) {
+async function handleFormSubmit(event, form) {
     if (form.classList.contains('--sending')) {
         event.preventDefault();
         return;
     }
 
-    setFormStatus(status, '');
     const errorCount = formValidate.getErrors(form);
 
     if (errorCount > 0) {
@@ -47,7 +39,7 @@ async function handleFormSubmit(event, form, status) {
     event.preventDefault();
 
     if (form.dataset.flsForm === 'dev') {
-        handleFormSent(form, status);
+        handleFormSent(form);
         return;
     }
 
@@ -78,9 +70,8 @@ async function handleFormSubmit(event, form, status) {
             throw new Error('The server did not accept the form.');
         }
 
-        handleFormSent(form, status);
+        handleFormSent(form);
     } catch (error) {
-        setFormStatus(status, 'Your message could not be sent. Please try again.', true);
         console.error('Form submission failed.', error);
     } finally {
         form.classList.remove('--sending');
@@ -91,49 +82,105 @@ async function handleFormSubmit(event, form, status) {
     }
 }
 
+function getValidationField(target) {
+    if (
+        target instanceof HTMLInputElement
+        || target instanceof HTMLTextAreaElement
+        || target instanceof HTMLSelectElement
+    ) {
+        return target;
+    }
+
+    if (target instanceof HTMLElement) {
+        return target.closest('.select')?.querySelector('select[data-fls-select]') ?? null;
+    }
+
+    return null;
+}
+
+function shouldValidateField(field) {
+    if (!field || field.disabled) {
+        return false;
+    }
+
+    return field.hasAttribute('data-fls-form-validatenow')
+        || (field.required && field.form?.matches('.form-contacts'))
+        || (field.required && (
+            field.classList.contains('--form-error')
+            || field.classList.contains('--form-success')
+        ));
+}
+
 function initializeForms() {
     document.querySelectorAll('form[data-fls-form]').forEach((form) => {
         if (!form.hasAttribute('data-fls-form-novalidate')) {
             form.noValidate = true;
         }
 
-        const status = document.createElement('p');
-        status.className = 'form__status';
-        status.setAttribute('role', 'status');
-        status.hidden = true;
-        form.append(status);
-
         form.addEventListener('submit', (event) => {
-            handleFormSubmit(event, form, status);
+            handleFormSubmit(event, form);
         });
 
         form.addEventListener('reset', () => {
             // The native reset event owns cleanup; it must not trigger another reset.
             formValidate.formClean(form, false);
-            setFormStatus(status, '');
         });
 
         form.addEventListener('focusin', ({ target }) => {
-            if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement)) {
+            const field = getValidationField(target);
+
+            if (!field) {
                 return;
             }
-            if (!target.hasAttribute('data-fls-form-nofocus')) {
-                target.classList.add('--form-focus');
-                target.parentElement.classList.add('--form-focus');
+            if (!field.hasAttribute('data-fls-form-nofocus')) {
+                field.classList.add('--form-focus');
+                field.parentElement.classList.add('--form-focus');
             }
-            formValidate.removeError(target);
+
+            if (shouldValidateField(field)) {
+                formValidate.validateInput(field);
+            } else {
+                formValidate.removeError(field);
+            }
         });
 
-        form.addEventListener('focusout', ({ target }) => {
-            if (!(target instanceof HTMLInputElement || target instanceof HTMLTextAreaElement)) {
+        form.addEventListener('focusout', ({ target, relatedTarget }) => {
+            const field = getValidationField(target);
+
+            if (!field) {
                 return;
             }
-            target.classList.remove('--form-focus');
-            target.parentElement.classList.remove('--form-focus');
-            if (target.hasAttribute('data-fls-form-validatenow')) {
-                formValidate.validateInput(target);
+
+            if (field instanceof HTMLSelectElement && field.parentElement.contains(relatedTarget)) {
+                return;
+            }
+
+            field.classList.remove('--form-focus');
+            field.parentElement.classList.remove('--form-focus');
+
+            if (shouldValidateField(field)) {
+                formValidate.validateInput(field);
             }
         });
+
+        const handleFieldChange = ({ target }) => {
+            const field = getValidationField(target);
+
+            if (shouldValidateField(field)) {
+                formValidate.validateInput(field);
+            }
+        };
+
+        form.addEventListener('input', handleFieldChange);
+        form.addEventListener('change', handleFieldChange);
+    });
+
+    document.addEventListener('selectCallback', ({ detail }) => {
+        const field = detail.select;
+
+        if (shouldValidateField(field)) {
+            formValidate.validateInput(field);
+        }
     });
 }
 
