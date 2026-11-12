@@ -1,0 +1,484 @@
+.login {
+	--card-gap: 24px;
+	--title-size: clamp(30px, 9.6vw, 36px);
+	--description-size: 18px;
+	--label-size: 16px;
+	--field-gap: 12px;
+	--input-height: 56px;
+	--input-padding: 16px;
+	--action-gap: 16px;
+	--secondary-size: 16px;
+	--remember-size: 14px;
+	--submit-height: 56px;
+	--submit-size: 20px;
+
+	padding-block: 72px 32px;
+	background: linear-gradient(to bottom, transparent, #fff), url("@img/login/form-background.webp") center top / cover no-repeat;
+
+	&__body {
+		position: relative;
+		padding-block: 20px;
+	}
+
+	&__scene {
+		display: none;
+	}
+
+	&__card {
+		position: relative;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: var(--card-gap);
+		width: 100%;
+		min-width: 0;
+	}
+
+	&__badge {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 42px;
+		padding: 12px 24px;
+		border: 2px solid $greenColor;
+		border-radius: $radius16;
+		background-color: $greenColor;
+		font-size: 14px;
+		font-weight: 500;
+		text-align: center;
+	}
+
+	&__heading {
+		display: grid;
+		gap: 12px;
+		width: 100%;
+		text-align: center;
+	}
+
+	&__title {
+		font-size: var(--title-size);
+		font-weight: 700;
+		line-height: 1;
+	}
+
+	&__description {
+		font-size: var(--description-size);
+		line-height: 1.2;
+	}
+
+	&__form,
+	&__field,
+	&__actions,
+	&__submitGroup {
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		min-width: 0;
+	}
+
+	&__form {
+		gap: 24px;
+	}
+
+	&__field {
+		gap: var(--field-gap);
+	}
+
+	&__label {
+		font-size: var(--label-size);
+		font-weight: 600;
+		line-height: 1.2;
+		text-transform: uppercase;
+	}
+
+	&__input {
+		width: 100%;
+		min-width: 0;
+		height: var(--input-height);
+		padding-inline: var(--input-padding);
+		border: 1.5px solid rgba(0, 0, 0, 0.45);
+		border-radius: $radius24;
+		background-color: rgba(255, 255, 255, 0.74);
+		font-size: 16px;
+		line-height: 1.2;
+		transition: border-color 0.2s;
+
+		&::placeholder {
+			color: rgba(0, 0, 0, 0.35);
+			opacity: 1;
+		}
+
+		&:focus {
+			border-color: $mainColor;
+		}
+	}
+
+	&__inputPassword {
+		padding-right: 60px;
+	}
+
+	&__password {
+		position: relative;
+	}
+
+	&__passwordToggle {
+		position: absolute;
+		top: 50%;
+		right: 6px;
+		display: grid;
+		place-items: center;
+		width: 44px;
+		height: 44px;
+		border-radius: $radius14;
+		transform: translateY(-50%);
+
+		&[aria-pressed="true"] {
+			background-color: $greenColor;
+		}
+	}
+
+	&__forgot {
+		align-self: flex-end;
+		font-size: var(--secondary-size);
+		font-weight: 600;
+		line-height: 1.2;
+	}
+
+	&__actions {
+		gap: var(--action-gap);
+	}
+
+	&__submitGroup {
+		gap: 16px;
+	}
+
+	&__remember {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		min-height: 25px;
+		font-size: var(--remember-size);
+		font-weight: 500;
+		line-height: 1.2;
+		cursor: pointer;
+	}
+
+	&__switch {
+		position: relative;
+		flex: 0 0 46px;
+		width: 46px;
+		height: 25px;
+		border: 1.5px solid rgba(0, 0, 0, 0.45);
+		border-radius: 28px;
+		appearance: none;
+		background-color: $whiteColor;
+		cursor: pointer;
+
+		&::before {
+			content: "";
+			position: absolute;
+			top: 1px;
+			left: 1px;
+			width: 20px;
+			height: 20px;
+			border-radius: 50%;
+			background-color: $mainColor;
+			transition: transform 0.2s;
+		}
+
+		&:checked::before {
+			transform: translateX(21px);
+		}
+	}
+
+	&__submit {
+		width: 100%;
+		min-height: var(--submit-height);
+		padding-block: 12px;
+		font-size: var(--submit-size);
+		line-height: 1;
+	}
+
+	&__register {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 4px;
+		color: #64625d;
+		font-size: 14px;
+		line-height: 21px;
+		text-align: center;
+	}
+
+	&__registerLink {
+		color: #050505;
+		font-weight: 700;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	&__input:focus-visible,
+	&__passwordToggle:focus-visible,
+	&__forgot:focus-visible,
+	&__switch:focus-visible,
+	&__submit:focus-visible,
+	&__registerLink:focus-visible {
+		outline: 2px solid #caf749;
+		outline-offset: 4px;
+	}
+
+	@media (any-hover: hover) {
+
+		&__forgot:hover,
+		&__registerLink:hover {
+			text-decoration: underline;
+			text-underline-offset: 3px;
+		}
+	}
+
+	@media (min-width: toEm(575.98)) {
+		--card-gap: 28px;
+		--title-size: 40px;
+		--description-size: 22px;
+		--label-size: 18px;
+		--remember-size: 18px;
+		--action-gap: 24px;
+		--submit-size: 22px;
+
+		padding-bottom: 40px;
+
+		&__body {
+			padding-block: 28px;
+		}
+
+		&__card {
+			max-width: 464px;
+			margin-inline: auto;
+		}
+
+		&__badge {
+			min-height: 52px;
+			padding-block: 16px;
+			font-size: 16px;
+		}
+
+		&__switch {
+			flex-basis: 52px;
+			width: 52px;
+			height: 28px;
+
+			&::before {
+				width: 23px;
+				height: 23px;
+			}
+
+			&:checked::before {
+				transform: translateX(24px);
+			}
+		}
+
+		&__register {
+			flex-direction: row;
+			flex-wrap: wrap;
+		}
+	}
+
+	@media (min-width: toEm(767.98)) {
+		--title-size: 44px;
+		--label-size: 20px;
+		--submit-size: 24px;
+
+		padding-block: 80px 56px;
+
+		&__body {
+			padding: 0 32px 56px;
+		}
+
+		&__card {
+			align-items: flex-start;
+			max-width: none;
+		}
+
+		&__badge {
+			min-height: 48px;
+			padding-block: 12px;
+			border-radius: $radius24;
+		}
+
+		&__heading {
+			text-align: left;
+		}
+	}
+
+	@media (min-width: toEm(991.98)) {
+		--title-size: 42px;
+		--description-size: 20px;
+		--input-height: 58px;
+		--input-padding: 24px;
+		--secondary-size: 18px;
+		--remember-size: 16px;
+		--submit-height: 64px;
+
+		padding-top: 120px;
+
+		&__body {
+			display: flex;
+			align-items: center;
+			min-height: 780px;
+			padding: 40px;
+		}
+
+		&__scene {
+			position: absolute;
+			inset: 0;
+			display: block;
+			overflow: hidden;
+			border-radius: $radius40;
+			background-color: #808080;
+
+			&::before {
+				content: "";
+				position: absolute;
+				top: var(--scene-top, -5.5%);
+				left: var(--scene-left, -18.93%);
+				width: var(--scene-width, 184.62%);
+				height: var(--scene-height, 111.11%);
+				background: url("@img/login/brand-scene.webp") center / 100% 100% no-repeat;
+			}
+
+			&::after {
+				content: "";
+				position: absolute;
+				inset: 0;
+				background: linear-gradient(to right, transparent, rgba(0, 0, 0, 0.57));
+			}
+		}
+
+		&__card {
+			width: 500px;
+			max-width: 100%;
+			margin: 0;
+			padding: 28px;
+			border-radius: 30px;
+			background: linear-gradient(127deg, #fae8d4 1.01%, #fefefe 39.35%);
+		}
+
+		&__badge {
+			min-height: 56px;
+		}
+
+		&__heading {
+			gap: 16px;
+		}
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		--card-gap: 32px;
+		--title-size: 48px;
+		--remember-size: 18px;
+		--scene-top: -0.02%;
+		--scene-left: -6.66%;
+		--scene-width: 138.86%;
+		--scene-height: 105.45%;
+
+		padding-block: 128px 64px;
+
+		&__body {
+			min-height: 810px;
+			padding: 40px 48px;
+		}
+
+		&__card {
+			width: 560px;
+			padding: 32px;
+		}
+	}
+
+	@media (min-width: toEm(1439.98)) {
+		--description-size: 22px;
+		--label-size: 22px;
+		--scene-top: -5.56%;
+		--scene-left: -5.49%;
+		--scene-width: 137.28%;
+		--scene-height: 111.11%;
+
+		padding-block: 134px 72px;
+
+		&__body {
+			min-height: 850px;
+			padding: 54px 64px;
+		}
+
+		&__card {
+			width: 620px;
+		}
+	}
+
+	@media (min-width: toEm(1599.98)) {
+		--card-gap: 36px;
+		--title-size: 56px;
+		--description-size: 24px;
+		--label-size: 24px;
+		--field-gap: 16px;
+		--secondary-size: 20px;
+		--remember-size: 20px;
+		--submit-height: 72px;
+		--scene-top: -3.35%;
+		--scene-left: -0.98%;
+		--scene-width: 132.5%;
+		--scene-height: 112.2%;
+
+		padding-bottom: 76px;
+
+		&__body {
+			min-height: 905px;
+			align-items: flex-start;
+			padding: 86px 86px 34px;
+		}
+
+		&__card {
+			width: 665px;
+			padding: 36px;
+		}
+
+		&__description {
+			max-width: 509px;
+		}
+
+		&__passwordToggle {
+			// display: none;
+		}
+
+		&__register {
+			font-family: Arial, sans-serif;
+		}
+	}
+
+	@media (min-width: toEm(1919.98)) {
+		--scene-top: -12.34%;
+		--scene-left: -0.88%;
+		--scene-width: 122.8%;
+		--scene-height: 121.91%;
+
+		padding-block: 174px 72px;
+
+		&__body {
+			padding-inline: 120px;
+		}
+
+		&__card {
+			width: 716px;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+
+		&__input,
+		&__switch::before,
+		&__submit {
+			transition: none;
+		}
+	}
+}

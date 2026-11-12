@@ -1,0 +1,46 @@
+<section data-fls-loginbody class="login" aria-labelledby="login-title">
+	<div class="login__container">
+		<div class="login__body">
+			<div class="login__scene" aria-hidden="true"></div>
+			<div class="login__card">
+				<p class="login__badge">YOUR CREATIVE SPACE</p>
+				<div class="login__heading">
+					<h1 id="login-title" class="login__title">WELCOME BACK</h1>
+					<p class="login__description">Sign in to access your mockups, downloads, and account.</p>
+				</div>
+				<form class="login__form" action="#" method="post" data-login-form>
+					<div class="login__field">
+						<label class="login__label" for="login-email">Email address</label>
+						<input class="login__input" id="login-email" name="email" type="email" autocomplete="username"
+							placeholder="you@example.com" required>
+					</div>
+					<div class="login__field">
+						<label class="login__label" for="login-password">Password</label>
+						<div class="login__password">
+							<input class="login__input login__inputPassword" id="login-password" name="password"
+								type="password" autocomplete="current-password" placeholder="Enter your password" required>
+							<button class="login__passwordToggle" type="button" aria-label="Show password"
+								aria-controls="login-password" aria-pressed="false" data-login-password-toggle>
+								<img src="@img/login/show-password.svg" width="22" height="22" alt="">
+							</button>
+						</div>
+						<a class="login__forgot" href="#">Forgot password?</a>
+					</div>
+					<div class="login__actions">
+						<label class="login__remember">
+							<span>Remember the days off</span>
+							<input class="login__switch" name="remember" type="checkbox" role="switch" checked>
+						</label>
+						<div class="login__submitGroup">
+							<button data-fls-buttons class="login__submit btn-2l" type="submit">Log in</button>
+							<p class="login__register">
+								<span>Don’t have an account?</span>
+								<a class="login__registerLink" href="#">Create account →</a>
+							</p>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</section>
