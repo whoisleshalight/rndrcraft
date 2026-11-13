@@ -1,18 +1,178 @@
  <head>
-	<if condition="'[[preloader.enable]]' === 'true'">
-		<include src="@components/effects/preloader/preloader.html" locals='{"once":"[[preloader.once]]"}'></include>
-	</if>
-	<meta charset="UTF-8" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<include src="@components/layout/head/fonts-preload.html"></include>
-	<link rel="stylesheet" href="@styles/fonts/fonts.css">
-	<link rel="stylesheet" href="@styles/style.scss">
-	<link rel="shortcut icon" href="@img/favicon.ico">
-	<if condition="'[[keywords]]' !== ''">
-		<meta name="keywords" content="[[keywords]]">
-	</if>
-	<if condition="'[[description]]' !== ''">
-		<meta name="description" content="[[description]]">
-	</if>
-	<title>[[title]]</title>
-</head>
+ 	<if condition="'[[preloader.enable]]' === 'true'">
+ 		<include src="@components/effects/preloader/preloader.html" locals='{"once":"[[preloader.once]]"}'></include>
+ 	</if>
+ 	<meta charset="UTF-8" />
+ 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+ 	<include src="@components/layout/head/fonts-preload.html"></include>
+ 	<link rel="stylesheet" href="@styles/fonts/fonts.css">
+ 	<link rel="stylesheet" href="@styles/style.scss">
+ 	<link rel="shortcut icon" href="@img/favicon.ico">
+ 	<if condition="'[[keywords]]' !== ''">
+ 		<meta name="keywords" content="[[keywords]]">
+ 	</if>
+ 	<if condition="'[[description]]' !== ''">
+ 		<meta name="description" content="[[description]]">
+ 	</if>
+ 	<title>[[title]]</title>
+ 	<style>
+ 		html[data-fls-webpreloader-loading] {
+ 			overflow: hidden;
+ 		}
+
+ 		html[data-fls-webpreloader-loading] body {
+ 			overflow: hidden;
+ 		}
+
+ 		.webpreloader {
+ 			position: fixed;
+ 			inset: 0;
+ 			z-index: 9999;
+ 			display: flex;
+ 			flex-direction: column;
+ 		}
+
+ 		.webpreloader::before {
+ 			content: "";
+ 			position: fixed;
+ 			top: 0;
+ 			left: 0;
+ 			width: 100%;
+ 			height: 100%;
+ 			background-color: #000000;
+ 			opacity: 1;
+ 		}
+
+ 		.webpreloader[data-fls-webpreloader-closing]::before {
+ 			animation: webpreloaderBackdropFade 850ms ease-in-out forwards;
+ 		}
+
+ 		.webpreloader .webpreloader__wrapper {
+ 			position: relative;
+ 			z-index: 2;
+ 			flex: 1 1 auto;
+ 			display: flex;
+ 			flex-direction: column;
+ 			background-color: #fff;
+ 			will-change: transform;
+ 		}
+
+ 		.webpreloader__main {
+ 			display: flex;
+ 			flex: 1 1 auto;
+ 			flex-direction: column;
+ 			align-items: center;
+ 			justify-content: center;
+ 		}
+
+ 		.webpreloader__main svg {
+ 			display: block;
+ 			width: 16vw;
+ 			max-width: calc(100% - 48px);
+ 			height: auto;
+ 		}
+
+ 		@media (max-width: toEm(991.98)) {
+ 			.webpreloader__main svg {
+ 				width: 26vw;
+ 			}
+ 		}
+
+ 		@media (max-width: toEm(575.98)) {
+ 			.webpreloader__main svg {
+ 				width: 50vw;
+ 			}
+ 		}
+
+ 		.webpreloader__cubePart {
+ 			animation: webpreloaderCubeShimmer 3.4s ease-in-out infinite;
+ 		}
+
+ 		.webpreloader__cubePart:nth-child(1) {
+ 			animation-delay: 0s;
+ 		}
+
+ 		.webpreloader__cubePart:nth-child(2) {
+ 			animation-delay: -0.18s;
+ 		}
+
+ 		.webpreloader__cubePart:nth-child(3) {
+ 			animation-delay: -0.36s;
+ 		}
+
+ 		.webpreloader__cubePart:nth-child(4) {
+ 			animation-delay: -0.54s;
+ 		}
+
+ 		.webpreloader__cubePart:nth-child(5) {
+ 			animation-delay: -0.72s;
+ 		}
+
+ 		.webpreloader__cubePart:nth-child(6) {
+ 			animation-delay: -0.9s;
+ 		}
+
+ 		.webpreloader__cubePart:nth-child(7) {
+ 			animation-delay: -1.08s;
+ 		}
+
+ 		.webpreloader__progress {
+ 			position: relative;
+ 			flex: 0 0 8px;
+ 			width: 100%;
+ 			height: 8px;
+ 			overflow: hidden;
+ 			background-color: #000;
+ 		}
+
+ 		.webpreloader__progress span {
+ 			position: absolute;
+ 			inset: 0;
+ 			display: block;
+ 			background-color: #caf749;
+ 			transform: scaleX(0);
+ 			transform-origin: left center;
+ 		}
+
+ 		@keyframes webpreloaderCubeShimmer {
+
+ 			0%,
+ 			65%,
+ 			100% {
+ 				fill: #000;
+ 			}
+
+ 			30% {
+ 				fill: #caf749;
+ 			}
+ 		}
+
+ 		@keyframes webpreloaderBackdropFade {
+ 			from {
+ 				opacity: 1;
+ 			}
+
+ 			to {
+ 				opacity: 0;
+ 			}
+ 		}
+
+ 		@media (prefers-reduced-motion: reduce) {
+ 			.webpreloader__wrapper {
+ 				will-change: auto;
+ 			}
+
+ 			.webpreloader__cubePart {
+ 				animation: none;
+ 			}
+ 		}
+
+ 		html:not([data-fls-loaded]) body {
+ 			overflow-y: hidden;
+ 		}
+
+ 		html:not([data-fls-loaded]) * {
+ 			transition: none !important;
+ 		}
+ 	</style>
+ </head>
