@@ -8,13 +8,15 @@
 					<h1 id="login-title" class="login__title">WELCOME BACK</h1>
 					<p class="login__description">Sign in to access your mockups, downloads, and account.</p>
 				</div>
-				<form class="login__form" action="#" method="post" data-login-form data-fls-form>
+				<!--!! --sending -> _loader-box  -->
+				<form class="login__form _loader-box def-form " data-fls-formloader action="#" method="post" data-login-form
+					data-fls-form>
+					<div class="loader"></div>
 					<div class="login__field">
 						<label class="login__label" for="login-email">Email address</label>
 						<div class="login__control">
 							<input class="login__input" id="login-email" name="email" type="email" autocomplete="username"
-								pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
-								placeholder="you@example.com" data-fls-form-validatenow
+								pattern="[^\s@]+@[^\s@]+\.[^\s@]+" placeholder="you@example.com" data-fls-form-validatenow
 								data-fls-form-errtext="Enter a valid email address." required>
 						</div>
 					</div>
