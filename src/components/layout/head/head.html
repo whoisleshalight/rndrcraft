@@ -72,17 +72,7 @@
  			height: auto;
  		}
 
- 		@media (max-width: toEm(991.98)) {
- 			.webpreloader__main svg {
- 				width: 26vw;
- 			}
- 		}
 
- 		@media (max-width: toEm(575.98)) {
- 			.webpreloader__main svg {
- 				width: 50vw;
- 			}
- 		}
 
  		.webpreloader__cubePart {
  			animation: webpreloaderCubeShimmer 3.4s ease-in-out infinite;
@@ -173,6 +163,18 @@
 
  		html:not([data-fls-loaded]) * {
  			transition: none !important;
+ 		}
+
+ 		@media (max-width: 991.98px) {
+ 			.webpreloader__main svg {
+ 				width: 26vw;
+ 			}
+ 		}
+
+ 		@media (max-width: 575.98px) {
+ 			.webpreloader__main svg {
+ 				width: 50vw;
+ 			}
  		}
  	</style>
  </head>

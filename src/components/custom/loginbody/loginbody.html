@@ -1,52 +1,153 @@
-<section data-fls-loginbody class="login" aria-labelledby="login-title">
+<!-- Static preview: remove data-login-demo and set data-login-endpoint on recovery forms when connecting the API. -->
+<section data-fls-loginbody data-login-demo class="login" aria-labelledby="login-title">
 	<div class="login__container">
 		<div class="login__body">
 			<div class="login__scene" aria-hidden="true"></div>
-			<div class="login__card">
-				<p class="login__badge">YOUR CREATIVE SPACE</p>
-				<div class="login__heading">
-					<h1 id="login-title" class="login__title">WELCOME BACK</h1>
-					<p class="login__description">Sign in to access your mockups, downloads, and account.</p>
+			<div class="login__panel" data-login-panel>
+				<div class="login__card" data-login-view="login">
+					<p class="login__badge">YOUR CREATIVE SPACE</p>
+					<div class="login__heading">
+						<h1 id="login-title" class="login__title" tabindex="-1">WELCOME BACK</h1>
+						<p class="login__description">Sign in to access your mockups, downloads, and account.</p>
+					</div>
+					<!--!! --sending -> _loader-box  -->
+					<form class="login__form _loader-box def-form " data-fls-formloader action="#" method="post"
+						data-login-form data-fls-form>
+						<div class="loader"></div>
+						<div class="login__field">
+							<label class="login__label" for="login-email">Email address</label>
+							<div class="login__control">
+								<input class="login__input" id="login-email" name="email" type="email" autocomplete="username"
+									pattern="[^\s@]+@[^\s@]+\.[^\s@]+" placeholder="you@example.com" data-fls-form-validatenow
+									data-fls-form-errtext="Enter a valid email address." required>
+							</div>
+						</div>
+						<div class="login__field">
+							<label class="login__label" for="login-password">Password</label>
+							<div class="login__password login__control">
+								<input class="login__input login__inputPassword" id="login-password" name="password"
+									type="password" autocomplete="current-password" placeholder="Enter your password"
+									data-fls-form-validatenow data-fls-form-errtext="This field is required." required>
+								<button class="login__passwordToggle" type="button" aria-label="Show password"
+									aria-controls="login-password" aria-pressed="false" data-login-password-toggle>
+									<img src="@img/login/show-password.svg" width="22" height="22" alt="">
+								</button>
+							</div>
+							<a class="login__forgot" href="#forgot-password">Forgot password?</a>
+						</div>
+						<div class="login__actions">
+							<label class="login__remember">
+								<span>Remember the days off</span>
+								<input class="login__switch" name="remember" type="checkbox" role="switch" checked>
+							</label>
+							<div class="login__submitGroup">
+								<button data-fls-buttons class="login__submit btn-2l" type="submit">Log in</button>
+								<p class="login__register">
+									<span>Don’t have an account?</span>
+									<a class="login__registerLink" href="#">Create account →</a>
+								</p>
+							</div>
+						</div>
+					</form>
 				</div>
-				<!--!! --sending -> _loader-box  -->
-				<form class="login__form _loader-box def-form " data-fls-formloader action="#" method="post" data-login-form
-					data-fls-form>
-					<div class="loader"></div>
-					<div class="login__field">
-						<label class="login__label" for="login-email">Email address</label>
-						<div class="login__control">
-							<input class="login__input" id="login-email" name="email" type="email" autocomplete="username"
-								pattern="[^\s@]+@[^\s@]+\.[^\s@]+" placeholder="you@example.com" data-fls-form-validatenow
-								data-fls-form-errtext="Enter a valid email address." required>
-						</div>
+				<div class="login__card login__cardRecovery" data-login-view="forgot-password" hidden>
+					<p class="login__badge">ACCOUNT RECOVERY</p>
+					<div class="login__heading">
+						<h1 id="forgot-password-title" class="login__title" tabindex="-1">Forgot your<br>password?</h1>
+						<p class="login__description">Enter the email address associated with your account.</p>
 					</div>
-					<div class="login__field">
-						<label class="login__label" for="login-password">Password</label>
-						<div class="login__password login__control">
-							<input class="login__input login__inputPassword" id="login-password" name="password"
-								type="password" autocomplete="current-password" placeholder="Enter your password"
-								data-fls-form-validatenow data-fls-form-errtext="This field is required." required>
-							<button class="login__passwordToggle" type="button" aria-label="Show password"
-								aria-controls="login-password" aria-pressed="false" data-login-password-toggle>
-								<img src="@img/login/show-password.svg" width="22" height="22" alt="">
-							</button>
+					<form class="login__form _loader-box def-form" data-fls-form data-fls-formloader
+						data-login-recovery-form="request" action="#" method="post">
+						<div class="login__field">
+							<label class="login__label" for="recovery-email">Email address</label>
+							<div class="login__control">
+								<input class="login__input" id="recovery-email" name="email" type="email" autocomplete="email"
+									pattern="[^\s@]+@[^\s@]+\.[^\s@]+" placeholder="you@example.com" data-fls-form-validatenow
+									data-fls-form-errtext="Enter a valid email address." required>
+							</div>
 						</div>
-						<a class="login__forgot" href="#">Forgot password?</a>
-					</div>
-					<div class="login__actions">
-						<label class="login__remember">
-							<span>Remember the days off</span>
-							<input class="login__switch" name="remember" type="checkbox" role="switch" checked>
-						</label>
+						<p class="login__feedback" data-login-feedback role="alert" hidden></p>
 						<div class="login__submitGroup">
-							<button data-fls-buttons class="login__submit btn-2l" type="submit">Log in</button>
-							<p class="login__register">
-								<span>Don’t have an account?</span>
-								<a class="login__registerLink" href="#">Create account →</a>
-							</p>
+							<button data-fls-buttons class="login__submit btn-2l" type="submit">Send reset link →</button>
+							<a class="login__backLink" href="#login">← Back to log in</a>
 						</div>
+					</form>
+				</div>
+				<div class="login__card login__cardRecovery" data-login-view="check-email" hidden>
+					<p class="login__badge">ACCOUNT RECOVERY</p>
+					<div class="login__heading">
+						<h1 id="check-email-title" class="login__title" tabindex="-1">Check your email</h1>
+						<p class="login__description">If an account exists for this email address, we'll send you a link to
+							reset your password.</p>
 					</div>
-				</form>
+					<p class="login__guidance">Check your spam folder if you don't see the email.</p>
+					<p class="login__feedback" data-login-feedback role="alert" hidden></p>
+					<p class="login__guidance login__guidance-result" data-login-resend-status role="status" hidden></p>
+					<div class="login__submitGroup">
+						<a data-fls-buttons class="login__submit btn-2l" href="#login">Back to log in →</a>
+						<p class="login__resend">Didn't receive an email? <button class="login__textButton" type="button"
+								data-login-resend>Resend link</button></p>
+					</div>
+				</div>
+				<div class="login__card login__cardRecovery" data-login-view="reset-password" hidden>
+					<p class="login__badge">ACCOUNT RECOVERY</p>
+					<div class="login__heading">
+						<h1 id="reset-password-title" class="login__title" tabindex="-1">Create a new<br>password</h1>
+						<p class="login__description">Choose a new password for your account.</p>
+					</div>
+					<form class="login__form _loader-box def-form" data-fls-form data-fls-formloader
+						data-login-recovery-form="reset" action="#" method="post">
+						<div class="login__field">
+							<label class="login__label" for="new-password">New password</label>
+							<div class="login__password login__control">
+								<input class="login__input login__inputPassword" id="new-password" name="password"
+									type="password" autocomplete="new-password" placeholder="Enter a new password"
+									data-fls-form-validatenow data-fls-form-errtext="This field is required." required>
+								<button class="login__passwordToggle" type="button" aria-label="Show password"
+									aria-controls="new-password" aria-pressed="false" data-login-password-toggle>
+									<img src="@img/login/show-password.svg" width="22" height="22" alt="">
+								</button>
+							</div>
+						</div>
+						<div class="login__field">
+							<label class="login__label" for="confirm-password">Confirm password</label>
+							<div class="login__password login__control">
+								<input class="login__input login__inputPassword" id="confirm-password"
+									name="password_confirmation" type="password" autocomplete="new-password"
+									placeholder="Confirm your new password" data-fls-form-validatenow
+									data-fls-form-errtext="This field is required." data-fls-form-match="password"
+									data-fls-form-match-errtext="Passwords do not match." required>
+								<button class="login__passwordToggle" type="button" aria-label="Show password"
+									aria-controls="confirm-password" aria-pressed="false" data-login-password-toggle>
+									<img src="@img/login/show-password.svg" width="22" height="22" alt="">
+								</button>
+							</div>
+						</div>
+						<p class="login__feedback" data-login-feedback role="alert" hidden></p>
+						<button data-fls-buttons class="login__submit btn-2l" type="submit">Reset password →</button>
+					</form>
+				</div>
+				<div class="login__card login__cardRecovery" data-login-view="password-updated" hidden>
+					<p class="login__badge">ACCOUNT RECOVERY</p>
+					<div class="login__heading">
+						<h1 id="password-updated-title" class="login__title" tabindex="-1">Password updated</h1>
+						<p class="login__description">Your password has been changed. You can now log in with your new
+							password.</p>
+					</div>
+					<a data-fls-buttons class="login__submit btn-2l" href="#login">Back to log in →</a>
+				</div>
+				<div class="login__card login__cardRecovery" data-login-view="reset-link-expired" hidden>
+					<p class="login__badge">ACCOUNT RECOVERY</p>
+					<div class="login__heading">
+						<h1 id="reset-link-expired-title" class="login__title" tabindex="-1">This reset link is<br>no longer
+							valid</h1>
+						<p class="login__description">Request a new link to reset your password.</p>
+					</div>
+					<div class="login__submitGroup">
+						<a data-fls-buttons class="login__submit btn-2l" href="#forgot-password">Request a new link →</a>
+						<a class="login__backLink" href="#login">← Back to log in</a>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

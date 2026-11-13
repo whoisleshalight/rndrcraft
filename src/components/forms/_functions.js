@@ -18,6 +18,18 @@ export let formValidate = {
 	},
 	validateInput(formRequiredItem) {
 		let error = 0;
+		const matchingFieldName = formRequiredItem.dataset.flsFormMatch;
+
+		if (matchingFieldName && formRequiredItem.value.trim()) {
+			const matchingField = formRequiredItem.form?.elements.namedItem(matchingFieldName);
+
+			if (!matchingField || formRequiredItem.value !== matchingField.value) {
+				this.addError(formRequiredItem, formRequiredItem.dataset.flsFormMatchErrtext);
+				this.removeSuccess(formRequiredItem);
+				return 1;
+			}
+		}
+
 		if (formRequiredItem.type === "email") {
 			formRequiredItem.value = formRequiredItem.value.trim();
 			if (this.emailTest(formRequiredItem)) {
@@ -44,7 +56,7 @@ export let formValidate = {
 		}
 		return error;
 	},
-	addError(formRequiredItem) {
+	addError(formRequiredItem, errorMessage = formRequiredItem.dataset.flsFormErrtext) {
 		formRequiredItem.classList.add('--form-error');
 		formRequiredItem.parentElement.classList.add('--form-error');
 		formRequiredItem.setAttribute('aria-invalid', 'true');
@@ -52,13 +64,13 @@ export let formValidate = {
 			formRequiredItem.parentElement.querySelector('.select__title')?.setAttribute('aria-invalid', 'true');
 		}
 		let inputError = formRequiredItem.parentElement.querySelector('[data-fls-form-error]');
-		if (formRequiredItem.dataset.flsFormErrtext) {
+		if (errorMessage) {
 			if (!inputError) {
 				inputError = document.createElement('div');
 				inputError.setAttribute('data-fls-form-error', '');
 				formRequiredItem.parentElement.append(inputError);
 			}
-			inputError.textContent = formRequiredItem.dataset.flsFormErrtext;
+			inputError.textContent = errorMessage;
 			if (formRequiredItem.id) {
 				inputError.id = `${formRequiredItem.id}-error`;
 				const describedBy = new Set((formRequiredItem.getAttribute('aria-describedby') || '').split(/\s+/).filter(Boolean));

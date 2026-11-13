@@ -169,6 +169,18 @@ function initializeForms() {
             if (shouldValidateField(field)) {
                 formValidate.validateInput(field);
             }
+
+            if (field?.name && field.form) {
+                field.form.querySelectorAll('[data-fls-form-match]').forEach((matchingField) => {
+                    if (
+                        matchingField.dataset.flsFormMatch === field.name
+                        && shouldValidateField(matchingField)
+                        && (matchingField.value || matchingField.hasAttribute('aria-invalid'))
+                    ) {
+                        formValidate.validateInput(matchingField);
+                    }
+                });
+            }
         };
 
         form.addEventListener('input', handleFieldChange);

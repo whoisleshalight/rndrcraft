@@ -24,14 +24,57 @@
 		display: none;
 	}
 
+	&__panel {
+		position: relative;
+		display: grid;
+		grid-template-columns: minmax(0, 1fr);
+		align-items: start;
+		width: 100%;
+		min-width: 0;
+		// overflow-x: clip;
+	}
+
 	&__card {
 		position: relative;
+		grid-area: 1 / 1;
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		gap: var(--card-gap);
 		width: 100%;
 		min-width: 0;
+		opacity: 1;
+		visibility: visible;
+		transform: translateX(0);
+		transition: opacity 0.28s ease, transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+		transition-delay: 0.08s, 0.08s, 0s;
+
+		&[hidden] {
+			// Keep every card in the grid so changing steps cannot resize the background scene.
+			display: flex;
+			opacity: 0;
+			visibility: hidden;
+			pointer-events: none;
+			transform: translateX(28px);
+			transition: none;
+		}
+
+		&[data-login-leaving] {
+			transform: translateX(-28px);
+			transition: opacity 0.28s ease, transform 0.36s cubic-bezier(0.22, 1, 0.36, 1), visibility 0s;
+			transition-delay: 0s, 0s, 0.36s;
+		}
+	}
+
+	&__cardRecovery {
+		.login__description {
+			max-width: none;
+		}
+	}
+
+	.login__guidance-result {
+		font-weight: 600;
+		text-align: center;
 	}
 
 	&__badge {
@@ -99,6 +142,7 @@
 			font-size: 14px;
 			font-weight: 500;
 			line-height: 1.2;
+			animation: loginFeedbackReveal 0.24s ease-out;
 
 			@media (max-width: $tablet) {
 				font-size: 12px;
@@ -123,7 +167,7 @@
 		background-color: rgba(255, 255, 255, 0.74);
 		font-size: 16px;
 		line-height: 1.2;
-		transition: border-color 0.2s;
+		transition: border-color 0.2s, background-color 0.2s;
 
 		&::placeholder {
 			color: rgba(0, 0, 0, 0.35);
@@ -153,7 +197,7 @@
 		right: 6px;
 		display: grid;
 		place-items: center;
-		transition: all 0.4s;
+		transition: background-color 0.2s, box-shadow 0.2s;
 		width: 44px;
 		height: 44px;
 		border-radius: $radius14;
@@ -161,6 +205,12 @@
 
 		&[aria-pressed="true"] {
 			background-color: $greenColor;
+		}
+
+		@media (any-hover: hover) {
+			&:hover {
+				background-color: $greenColor;
+			}
 		}
 	}
 
@@ -226,11 +276,64 @@
 	}
 
 	&__submit {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 		width: 100%;
 		min-height: var(--submit-height);
 		padding-block: 12px;
 		font-size: var(--submit-size);
 		line-height: 1;
+		text-align: center;
+
+		&:disabled {
+			cursor: progress;
+		}
+	}
+
+	&__backLink {
+		align-self: center;
+		font-size: var(--secondary-size);
+		font-weight: 500;
+		line-height: 1.3;
+		text-align: center;
+	}
+
+	&__guidance,
+	&__feedback,
+	&__resend {
+		font-size: 14px;
+		line-height: 1.4;
+	}
+
+	&__feedback {
+		color: #920000;
+		animation: loginFeedbackReveal 0.24s ease-out;
+	}
+
+	[data-login-resend-status]:not([hidden]) {
+		animation: loginFeedbackReveal 0.24s ease-out;
+	}
+
+	&__resend {
+		text-align: center;
+	}
+
+	&__textButton {
+		font-weight: 600;
+		text-decoration: underline;
+		text-underline-offset: 3px;
+		transition: color 0.2s, opacity 0.2s;
+
+		@media (any-hover: hover) {
+			&:hover:not(:disabled) {
+				color: #64625d;
+			}
+		}
+
+		&:disabled {
+			cursor: progress;
+		}
 	}
 
 	&__register {
@@ -393,6 +496,12 @@
 		&__heading {
 			gap: 16px;
 		}
+
+		&__guidance,
+		&__feedback,
+		&__resend {
+			font-size: 16px;
+		}
 	}
 
 	@media (min-width: toEm(1279.98)) {
@@ -468,6 +577,18 @@
 			max-width: 509px;
 		}
 
+		&__cardRecovery {
+			.login__form {
+				gap: 36px;
+			}
+		}
+
+		&__guidance,
+		&__feedback,
+		&__resend {
+			font-size: 18px;
+		}
+
 		&__passwordToggle {
 			// display: none;
 		}
@@ -496,10 +617,37 @@
 
 	@media (prefers-reduced-motion: reduce) {
 
+		&__card,
 		&__input,
 		&__switch::before,
-		&__submit {
+		&__submit,
+		&__passwordToggle,
+		&__textButton {
 			transition: none;
 		}
+
+		&__card,
+		&__card[hidden],
+		&__card[data-login-leaving] {
+			transform: none;
+			transition: none;
+		}
+
+		&__feedback,
+		[data-login-resend-status],
+		[data-fls-form-error],
+		&__form._loader-box::before {
+			animation: none;
+		}
+	}
+}
+
+@keyframes loginFeedbackReveal {
+	from {
+		opacity: 0;
+	}
+
+	to {
+		opacity: 1;
 	}
 }
