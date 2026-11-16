@@ -94,7 +94,7 @@
 		font-size: 16px;
 		font-weight: 600;
 		line-height: 1.2;
-		transition: color 0.2s, background-color 0.2s;
+		transition: color 0.6s, background-color 0.6s;
 
 		@media (any-hover: hover) {
 			&:hover {
@@ -134,7 +134,7 @@
 }
 
 .dashboard-nav {
-	--navigation-duration: 0.36s;
+	--navigation-duration: 0.6s;
 	--navigation-easing: cubic-bezier(0.22, 1, 0.36, 1);
 
 	overflow: hidden;
@@ -163,7 +163,7 @@
 		border: 2px solid transparent;
 		font-size: 20px;
 		line-height: 1.2;
-		transition: all 0.4s;
+		transition: all 0.6s;
 		font-weight: 500;
 
 		&:disabled {
@@ -450,8 +450,20 @@
 		font-weight: 700;
 		line-height: 1;
 
-		&:disabled {
-			cursor: not-allowed;
+
+		transition: all 0.6s;
+
+
+		@media (any-hover: hover) {
+			&:hover {
+				border: 1px solid #000;
+				background-color: #caf749;
+				color: #000;
+
+				img {
+					filter: brightness(0);
+				}
+			}
 		}
 	}
 
@@ -462,6 +474,11 @@
 		width: 18px;
 		height: 18px;
 		transform: rotate(90deg);
+
+		img {
+			filter: brightness(1);
+			transition: filter 0.6s;
+		}
 	}
 }
 
@@ -535,16 +552,25 @@
 		font-weight: 600;
 		line-height: 1.2;
 		white-space: nowrap;
-		transition: background-color 0.2s, color 0.2s;
+		transition: all 0.6s;
+		border: 1px solid transparent;
 
 		img {
 			flex-shrink: 0;
 			transform: rotate(180deg);
+			filter: brightness(1);
+			transition: filter 0.6s;
 		}
 
 		@media (any-hover: hover) {
 			&:hover {
-				background-color: #394517;
+				border: 1px solid #000;
+				background-color: #caf749;
+				color: #000;
+
+				img {
+					filter: brightness(0);
+				}
 			}
 		}
 	}
@@ -691,7 +717,7 @@
 		transition:
 			grid-template-rows var(--navigation-duration) var(--navigation-easing),
 			opacity var(--navigation-duration) var(--navigation-easing),
-			visibility 0s;
+			visibility var(--navigation-duration);
 	}
 
 	.dashboard-nav--collapsed .dashboard-nav__panel {
@@ -701,7 +727,7 @@
 		transition:
 			grid-template-rows var(--navigation-duration) var(--navigation-easing),
 			opacity var(--navigation-duration) var(--navigation-easing),
-			visibility 0s var(--navigation-duration);
+			visibility var(--navigation-duration);
 	}
 
 	.dashboard-nav--expanded {
@@ -1026,7 +1052,10 @@
 
 	.dashboardsection__view-all,
 	.dashboard-purchase__image-link,
-	.dashboard-orders__details {
+	.dashboard-purchase__download,
+	.dashboard-purchase__download-icon img,
+	.dashboard-orders__details,
+	.dashboard-orders__details img {
 		transition: none;
 	}
 }
