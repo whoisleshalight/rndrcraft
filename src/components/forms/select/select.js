@@ -15,7 +15,7 @@ class SelectConstructor {
 	constructor(props, data = null) {
 		let defaultConfig = {
 			init: true,
-			speed: 150
+			speed: 300
 		}
 		this.config = Object.assign(defaultConfig, props);
 		// CSS класи модуля

@@ -1,0 +1,65 @@
+<aside data-fls-accountsidebar class="accountsidebar">
+	<nav class="dashboard-nav" aria-label="Account navigation">
+		<div class="dashboard-nav__current">
+			<a class="dashboard-nav__link dashboard-nav__link--active" href="[[currentHref]]" aria-current="page">
+
+				<span>[[mobileLabel]]</span>
+				<span class="dashboard-nav__arrow" aria-hidden="true"><img src="@img/dashboard/arrow.svg"
+						alt=""></span>
+			</a>
+			<button class="dashboard-nav__toggle" type="button" data-dashboard-menu-toggle
+				aria-controls="[[navigationId]]" aria-expanded="false"
+				aria-label="[[currentLabel]]: expand account navigation" hidden></button>
+		</div>
+		<div class="dashboard-nav__panel" id="[[navigationId]]">
+			<ul class="dashboard-nav__list">
+				<li>
+					<a class="dashboard-nav__link [[currentPage === 'dashboard' ? 'dashboard-nav__link--active' : '']]" href="dashboard.html"
+						aria-current="[[currentPage === 'dashboard' ? 'page' : 'false']]">
+						<span class="dashboard-nav__icon dashboard-nav__icon--overview"
+							aria-hidden="true"><span></span><span></span><span></span><span></span></span>
+						<span>Dashboard</span>
+
+					</a>
+				</li>
+				<li>
+					<a class="dashboard-nav__link [[currentPage === 'downloads' ? 'dashboard-nav__link--active' : '']]" href="downloads.html"
+						aria-current="[[currentPage === 'downloads' ? 'page' : 'false']]">
+						<span class="dashboard-nav__icon dashboard-nav__icon--download" aria-hidden="true"><img
+								src="@img/dashboard/download.svg" alt=""></span>
+						<span>My Downloads</span>
+
+					</a>
+				</li>
+				<li>
+					<a class="dashboard-nav__link" href="orders.html">
+						<span class="dashboard-nav__icon" aria-hidden="true"><img src="@img/dashboard/orders.svg"
+								alt=""></span>
+						<span>Orders</span>
+					</a>
+				</li>
+				<li>
+					<a class="dashboard-nav__link" href="account-settings.html">
+						<span class="dashboard-nav__icon" aria-hidden="true"><img src="@img/dashboard/user.svg"
+								alt=""></span>
+						<span>Account Settings</span>
+					</a>
+				</li>
+				<li>
+					<a class="dashboard-nav__link" href="billing-details.html">
+						<span class="dashboard-nav__icon" aria-hidden="true"><img src="@img/dashboard/billing.svg"
+								alt=""></span>
+						<span>Billing Details</span>
+					</a>
+				</li>
+				<li class="dashboard-nav__logout">
+					<button class="dashboard-nav__link" type="button" title="You are viewing a preview account">
+						<span class="dashboard-nav__icon" aria-hidden="true"><img src="@img/dashboard/logout.svg"
+								alt=""></span>
+						<span>Log out</span>
+					</button>
+				</li>
+			</ul>
+		</div>
+	</nav>
+</aside>

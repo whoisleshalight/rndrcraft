@@ -1,0 +1,18 @@
+<article data-fls-purchaseproduct class="purchaseProduct purchaseProduct--[[variant]]">
+	<a class="purchaseProduct__imageLink" href="[[productHref]]" aria-label="View [[productTitle]]">
+		<img class="purchaseProduct__image" src="[[imageSrc]]" alt="[[imageAlt]]" width="120" height="94" loading="lazy">
+	</a>
+	<div class="purchaseProduct__details">
+		<h3 class="purchaseProduct__title"><a href="[[productHref]]">[[productTitle]]</a></h3>
+		<p class="purchaseProduct__meta">
+			<span>[[category]]</span>
+			<span class="purchaseProduct__separator" aria-hidden="true">·</span>
+			<span>Purchased <time datetime="[[purchaseDate]]">[[purchaseDateLabel]]</time></span>
+		</p>
+	</div>
+	<button class="purchaseProduct__download" type="button" title="Download currently unavailable"
+		aria-label="Download [[productTitle]] — currently unavailable">
+		<span>Download</span>
+		<img class="purchaseProduct__downloadIcon" src="@img/dashboard/download-light.svg" alt="" width="18" height="18">
+	</button>
+</article>

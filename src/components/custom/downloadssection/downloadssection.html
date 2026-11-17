@@ -1,0 +1,75 @@
+<section data-fls-downloadssection class="downloadssection" aria-labelledby="downloads-title">
+	<div class="downloadssection__container">
+		<div class="downloadssection__layout">
+			<include src="@components/custom/accountsidebar/accountsidebar.html"
+				locals='{"currentPage":"downloads","currentHref":"downloads.html","currentLabel":"My Downloads","mobileLabel":"My Downloads","navigationId":"downloads-navigation"}'>
+			</include>
+			<div class="downloadssection__main">
+				<div class="downloadssection__heading">
+					<h1 class="downloadssection__title" id="downloads-title">My Downloads</h1>
+					<p class="downloadssection__description">All your purchased mockups, ready to download.</p>
+				</div>
+				<form class="downloadssection__filters" role="search" data-downloads-filters>
+					<include src="@components/custom/searchfield/searchfield.html" locals='{
+							"size": "compact",
+							"inputId": "downloads-search",
+							"inputName": "search",
+							"label": "Search by product name",
+							"placeholder": "Search by product name",
+							"clearLabel": "Clear product search"
+						}'>
+					</include>
+					<div class="downloadssection__category">
+						<label class="downloadssection__visuallyHidden" for="downloads-category">Product category</label>
+
+						<select id="downloads-category" name="category" data-fls-select data-fls-select-modif="form"
+							data-downloads-category>
+							<option value="all" selected>All categories</option>
+							<option value="devices">Devices</option>
+							<option value="branding">Branding</option>
+							<option value="packaging">Packaging</option>
+							<option value="posters">Posters</option>
+						</select>
+
+
+					</div>
+				</form>
+				<div class="downloadssection__products" role="group" aria-labelledby="downloads-products-title">
+					<div class="downloadssection__productsHeading">
+						<div class="downloadssection__productsLabel">
+							<h2 class="downloadssection__productsTitle" id="downloads-products-title">Purchased products</h2>
+							<span class="downloadssection__count" data-downloads-count>48</span>
+						</div>
+						<p class="downloadssection__summary" data-downloads-summary>Showing 6 of 48 products</p>
+					</div>
+					<ul class="downloadssection__list" id="downloads-products" data-downloads-list>
+						<each loop="purchase in [1, 2, 3, 4, 5, 6]">
+							<li class="downloadssection__item" data-downloads-item data-product-name="Floating Phone Mockup"
+								data-product-category="devices">
+								<include src="@components/custom/purchaseproduct/purchaseproduct.html" locals='{
+										"variant": "downloads",
+										"productTitle": "Floating Phone Mockup",
+										"productHref": "product-single.html",
+										"imageSrc": "@img/dashboard/floating-phone.webp",
+										"imageAlt": "Floating phone mockup on a dark background",
+										"category": "Devices",
+										"purchaseDate": "2025-05-18",
+										"purchaseDateLabel": "May 18, 2025"
+									}'>
+								</include>
+							</li>
+						</each>
+					</ul>
+					<p class="downloadssection__empty" data-downloads-empty hidden>No products found. Try another name or
+						category.</p>
+				</div>
+				<div class="downloadssection__pagination">
+					<button class="downloadssection__loadMore" type="button" aria-controls="downloads-products"
+						data-downloads-more>Load more</button>
+					<p class="downloadssection__progress" role="status" aria-live="polite" aria-atomic="true"
+						data-downloads-progress>Showing 6 of 48 products</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>

@@ -94,126 +94,21 @@
 	align-items: stretch;
 	gap: toRem(8);
 
-	&__item {
-		display: flex;
-		min-width: 0;
-		height: var(--search-control-height);
-		border: 1px solid $mainColor;
-		border-radius: $radius16;
-
-		input {
-			min-width: 0;
-			height: 100%;
-			font-size: toRem(16);
-			font-weight: 500;
-		}
-	}
-
 	@media (min-width: toEm(767.98)) {
 		--search-control-height: #{toRem(58)};
 
 		grid-template-columns: minmax(0, 1fr) auto;
 		gap: toRem(16);
-
-		&__item input {
-			font-size: toRem(20);
-		}
 	}
 
 	@media (min-width: toEm(1279.98)) {
 		--search-control-height: #{toRem(66)};
 
 		gap: toRem(24);
-
-		&__item {
-			border-radius: $radius24;
-
-			input {
-				font-size: toRem(24);
-			}
-		}
 	}
 
 	@media (min-width: toEm(1919.98)) {
 		--search-control-height: #{toRem(72)};
-
-		&__item input {
-			font-size: toRem(28);
-		}
-	}
-}
-
-.item-form-search-page {
-	&__decor {
-		display: flex;
-		flex: 0 0 toRem(40);
-		align-items: center;
-		padding-left: toRem(12);
-
-		svg {
-			width: toRem(20);
-			height: toRem(20);
-		}
-	}
-
-	&__reset {
-		display: flex;
-		flex: 0 0 toRem(44);
-		align-items: center;
-		justify-content: center;
-		border-left: 1px solid rgba(0, 0, 0, 0.08);
-
-		span {
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			width: toRem(20);
-			height: toRem(20);
-			border-radius: $radius8;
-			background-color: $grayColor;
-		}
-	}
-
-	@media (min-width: toEm(767.98)) {
-		&__decor {
-			flex-basis: toRem(48);
-			padding-left: toRem(16);
-
-			svg {
-				width: toRem(24);
-				height: toRem(24);
-			}
-		}
-
-		&__reset {
-			flex-basis: toRem(48);
-		}
-	}
-
-	@media (min-width: toEm(1279.98)) {
-		&__decor {
-			flex-basis: toRem(56);
-			padding-left: toRem(24);
-		}
-
-		&__reset {
-			flex-basis: toRem(56);
-		}
-	}
-
-	@media (min-width: toEm(1919.98)) {
-		&__decor {
-			flex-basis: toRem(72);
-		}
-
-		&__reset {
-			flex-basis: toRem(64);
-
-			span {
-				width: toRem(24);
-				height: toRem(24);
-			}
-		}
 	}
 }
 

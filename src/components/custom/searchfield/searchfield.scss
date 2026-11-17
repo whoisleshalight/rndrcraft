@@ -1,0 +1,162 @@
+.searchField {
+	display: flex;
+	align-items: center;
+	gap: 16px;
+	min-width: 0;
+	height: 60px;
+	padding-inline: 24px 0;
+	border: 1px solid $mainColor;
+	border-radius: 24px;
+
+	&__label {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	&__icon {
+		flex-shrink: 0;
+		width: 28px;
+		height: 29px;
+	}
+
+	&__input {
+		min-width: 0;
+		width: 100%;
+		height: 100%;
+		background-color: transparent;
+		font-size: 16px;
+		font-weight: 500;
+		appearance: none;
+
+		&::placeholder {
+			color: $grayColor;
+			opacity: 1;
+		}
+
+		&::-webkit-search-cancel-button {
+			appearance: none;
+		}
+	}
+
+	&__clear {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		align-self: stretch;
+		flex-shrink: 0;
+		padding-inline: 20px;
+		border-left: 1px solid rgba(0, 0, 0, 0.08);
+		border-start-end-radius: inherit;
+		border-end-end-radius: inherit;
+	}
+
+	&__clearIcon {
+		width: 24px;
+		height: 24px;
+	}
+
+	&--large {
+		gap: 0;
+		height: var(--search-control-height, 50px);
+		padding-inline: 0;
+		border-radius: 16px;
+
+		.searchField__icon {
+			width: 20px;
+			height: 20px;
+			margin-inline: 12px 8px;
+		}
+
+		.searchField__clear {
+			flex-basis: 44px;
+			padding-inline: 0;
+		}
+
+		.searchField__clearIcon {
+			width: 20px;
+			height: 20px;
+		}
+	}
+}
+
+@media (min-width: toEm(767.98)) {
+	.searchField--large {
+		.searchField__icon {
+			width: 24px;
+			height: 24px;
+			margin-left: 16px;
+		}
+
+		.searchField__input {
+			font-size: 20px;
+		}
+
+		.searchField__clear {
+			flex-basis: 48px;
+		}
+	}
+}
+
+@media (min-width: toEm(1279.98)) {
+	.searchField--large {
+		border-radius: 24px;
+
+		.searchField__icon {
+			margin-left: 24px;
+		}
+
+		.searchField__input {
+			font-size: 24px;
+		}
+
+		.searchField__clear {
+			flex-basis: 56px;
+		}
+	}
+}
+
+@media (min-width: toEm(1919.98)) {
+	.searchField--large {
+		.searchField__icon {
+			margin-right: 24px;
+		}
+
+		.searchField__input {
+			font-size: 28px;
+		}
+
+		.searchField__clear {
+			flex-basis: 64px;
+		}
+
+		.searchField__clearIcon {
+			width: 24px;
+			height: 24px;
+		}
+	}
+}
+
+@media (max-width: $mobileX) {
+	.searchField--compact {
+		gap: 12px;
+	}
+}
+
+@media (max-width: 374.98px) {
+	.searchField--compact {
+		gap: 8px;
+		padding-inline: 16px 0;
+
+		.searchField__clear {
+			padding-inline: 16px;
+		}
+
+		.searchField__input {
+			font-size: 14px;
+		}
+	}
+}
