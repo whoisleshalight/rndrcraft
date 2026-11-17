@@ -1,0 +1,21 @@
+.orderssection {
+	&__main {
+		padding-top: 24px;
+	}
+
+	&__orders {
+		margin-top: 24px;
+	}
+}
+
+@media (max-width: $tablet) {
+	.orderssection__main {
+		padding-top: 0;
+	}
+}
+
+@media (max-width: $mobile) {
+	.orderssection__orders {
+		margin-top: 36px;
+	}
+}

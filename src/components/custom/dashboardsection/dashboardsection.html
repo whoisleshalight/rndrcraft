@@ -1,14 +1,18 @@
-<section data-fls-dashboardsection class="dashboardsection" aria-labelledby="dashboard-title">
-	<div class="dashboardsection__container">
-		<div class="dashboardsection__layout">
+<section data-fls-dashboardsection data-fls-accountlayout class="dashboardsection accountLayout accountLayout--dashboard" aria-labelledby="dashboard-title">
+	<div class="accountLayout__container">
+		<div class="accountLayout__grid">
 			<include src="@components/custom/accountsidebar/accountsidebar.html"
 				locals='{"currentPage":"dashboard","currentHref":"dashboard.html","currentLabel":"Dashboard","mobileLabel":"Menu","navigationId":"dashboard-navigation"}'></include>
 
-			<div class="dashboardsection__main">
-				<div class="dashboardsection__heading">
-					<h1 class="dashboardsection__title" id="dashboard-title">Dashboard</h1>
-					<p class="dashboardsection__description">Here’s an overview of your account and recent activity.</p>
-				</div>
+			<div class="accountLayout__main dashboardsection__main">
+				<include src="@components/custom/accountheading/accountheading.html"
+					locals='{
+						"variant": "dashboard",
+						"titleId": "dashboard-title",
+						"title": "Dashboard",
+						"description": "Here’s an overview of your account and recent activity."
+					}'>
+				</include>
 
 				<div class="dashboard-welcome">
 					<div class="dashboard-welcome__content">
@@ -64,36 +68,39 @@
 						<h2 class="dashboardsection__section-title" id="dashboard-orders-title">Recent orders</h2>
 						<a class="dashboardsection__view-all" href="orders.html">View all orders</a>
 					</div>
-					<div class="dashboard-orders__table-wrap">
-						<table class="dashboard-orders__table">
-							<caption class="dashboardsection__visually-hidden">Recent orders, dates, totals and payment status
-							</caption>
-							<thead class="dashboard-orders__head">
-								<tr>
-									<th scope="col">Order</th>
-									<th scope="col">Date</th>
-									<th scope="col">Total</th>
-									<th scope="col">Status</th>
-									<th scope="col"><span class="dashboardsection__visually-hidden">Details</span></th>
-								</tr>
-							</thead>
-							<tbody>
-								<each loop="order in [1, 2, 3]">
-									<tr class="dashboard-orders__row">
-										<th class="dashboard-orders__number" scope="row">#RC-10241</th>
-										<td class="dashboard-orders__date"><time datetime="2025-02-03">February 03, 2025</time>
-										</td>
-										<td class="dashboard-orders__total">$24.00</td>
-										<td class="dashboard-orders__status"><span class="dashboard-orders__paid">Paid</span></td>
-										<td class="dashboard-orders__action"><a class="dashboard-orders__details"
-												href="order-details.html" aria-label="View details for order RC-10241"><span
-													class="dashboard-orders__details-text">View details</span><img
-													src="@img/dashboard/right.svg" alt="" aria-hidden="true"></a></td>
-									</tr>
-								</each>
-							</tbody>
-						</table>
-					</div>
+					<include src="@components/custom/ordertable/ordertable.html"
+						locals='{
+							"variant": "dashboard",
+							"tableId": "dashboard-orders",
+							"caption": "Recent orders, dates, totals and payment status",
+							"orders": [
+								{
+									"number": "RC-10241",
+									"date": "2025-02-03",
+									"formattedDate": "February 03, 2025",
+									"total": "$24.00",
+									"status": "Paid",
+									"href": "order-details.html"
+								},
+								{
+									"number": "RC-10241",
+									"date": "2025-02-03",
+									"formattedDate": "February 03, 2025",
+									"total": "$24.00",
+									"status": "Paid",
+									"href": "order-details.html"
+								},
+								{
+									"number": "RC-10241",
+									"date": "2025-02-03",
+									"formattedDate": "February 03, 2025",
+									"total": "$24.00",
+									"status": "Paid",
+									"href": "order-details.html"
+								}
+							]
+						}'>
+					</include>
 				</div>
 			</div>
 		</div>

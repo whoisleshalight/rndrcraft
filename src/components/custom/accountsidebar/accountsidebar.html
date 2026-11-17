@@ -32,10 +32,13 @@
 					</a>
 				</li>
 				<li>
-					<a class="dashboard-nav__link" href="orders.html">
-						<span class="dashboard-nav__icon" aria-hidden="true"><img src="@img/dashboard/orders.svg"
-								alt=""></span>
+					<a class="dashboard-nav__link [[currentPage === 'orders' ? 'dashboard-nav__link--active' : '']]" href="orders.html"
+						aria-current="[[currentPage === 'orders' ? 'page' : 'false']]">
+						<span class="dashboard-nav__icon dashboard-nav__icon--orders" aria-hidden="true"><img src="[[currentPage === 'orders' ? '@img/dashboard/orders-active.svg' : '@img/dashboard/orders.svg']]" alt=""></span>
 						<span>Orders</span>
+						<if condition="currentPage === 'orders'">
+							<span class="dashboard-nav__arrow" aria-hidden="true"><img src="@img/dashboard/arrow.svg" alt=""></span>
+						</if>
 					</a>
 				</li>
 				<li>

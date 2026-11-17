@@ -1,0 +1,31 @@
+<table data-fls-ordertable class="orderTable orderTable--[[variant]]" id="[[tableId]]">
+	<caption class="orderTable__caption">[[caption]]</caption>
+	<thead class="orderTable__head">
+		<tr>
+			<th scope="col">Order</th>
+			<th scope="col">Date</th>
+			<th scope="col">Total</th>
+			<th scope="col">Status</th>
+			<th scope="col"><span class="orderTable__caption">Details</span></th>
+		</tr>
+	</thead>
+	<tbody>
+		<each loop="order in orders">
+			<tr class="orderTable__row">
+				<th class="orderTable__number" scope="row">#[[order.number]]</th>
+				<td class="orderTable__date"><time datetime="[[order.date]]">[[order.formattedDate]]</time></td>
+				<td class="orderTable__total">[[order.total]]</td>
+				<td class="orderTable__status"><span class="orderTable__statusLabel">[[order.status]]</span></td>
+				<td class="orderTable__action">
+					<a class="orderTable__details" href="[[order.href]]" aria-label="View details for order [[order.number]]">
+						<span class="orderTable__detailsText">View details</span>
+						<picture class="orderTable__detailsIconBox">
+							<source media="(max-width: 767.98px)" srcset="@img/dashboard/right.svg">
+							<img class="orderTable__detailsIcon" src="@img/dashboard/details-arrow.svg" alt="">
+						</picture>
+					</a>
+				</td>
+			</tr>
+		</each>
+	</tbody>
+</table>

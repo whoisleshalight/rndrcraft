@@ -1,0 +1,234 @@
+.orderTable {
+	width: 100%;
+	border-collapse: collapse;
+	text-align: left;
+	font-size: 14px;
+	line-height: 1.4;
+
+	&__caption {
+		position: absolute;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+
+	&__head {
+		border-top: 1px solid #111;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+		color: #666;
+		text-transform: uppercase;
+
+		th {
+			padding: 14px 8px;
+			font-weight: 500;
+		}
+	}
+
+	&__row {
+		border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+		th,
+		td {
+			padding: 16px 8px;
+			vertical-align: middle;
+		}
+	}
+
+	&__number {
+		font-weight: 700;
+		white-space: nowrap;
+	}
+
+	&__statusLabel {
+		display: inline-flex;
+		align-items: center;
+		gap: 7px;
+		font-weight: 600;
+
+		&::before {
+			content: "";
+			flex-shrink: 0;
+			padding: 0.285714em;
+			border-radius: 50%;
+			background-color: #84b900;
+		}
+	}
+
+	&__action {
+		text-align: right;
+	}
+
+	&__details {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		gap: 10px;
+		padding: 9px 20px;
+		border-radius: 16px;
+		background-color: $mainColor;
+		color: $whiteColor;
+		font-size: 14px;
+		font-weight: 600;
+		line-height: 1.4;
+		white-space: nowrap;
+		transition: background-color 0.3s, color 0.3s, box-shadow 0.3s;
+
+		@media (any-hover: hover) {
+			&:hover {
+				box-shadow: inset 0 0 0 1px $mainColor;
+				background-color: $greenColor;
+				color: $mainColor;
+
+				.orderTable__detailsIcon {
+					filter: brightness(0);
+				}
+			}
+		}
+	}
+
+	&__detailsIconBox {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+		min-inline-size: 1.5em;
+		min-block-size: 1.5em;
+		font-size: 16px;
+	}
+
+	&__detailsIcon {
+		flex-shrink: 0;
+		transform: rotate(180deg);
+		filter: brightness(1);
+		transition: filter 0.3s;
+	}
+
+	&--dashboard &__row {
+		th,
+		td {
+			padding-block: 24px;
+		}
+	}
+
+	&--orders &__details {
+		font-size: 16px;
+		line-height: 1.2;
+	}
+}
+
+@media (max-width: $pc) {
+	.orderTable--dashboard .orderTable__row {
+		th,
+		td {
+			padding-block: 14px;
+		}
+	}
+
+	.orderTable--orders .orderTable__details {
+		font-size: 14px;
+		line-height: 1.4;
+	}
+}
+
+@media (max-width: $mobile) {
+	.orderTable,
+	.orderTable tbody {
+		display: block;
+	}
+
+	.orderTable {
+		border-top: 1px solid #111;
+	}
+
+	.orderTable__head {
+		position: absolute;
+		overflow: hidden;
+		clip-path: inset(50%);
+	}
+
+	.orderTable__row {
+		display: grid;
+		grid-template-columns: minmax(0, 1fr) max-content max-content;
+		grid-template-areas: "number total action" "date status action";
+		align-items: center;
+		column-gap: 16px;
+		row-gap: 4px;
+		padding: 20px 8px;
+	}
+
+	.orderTable .orderTable__row {
+		th,
+		td {
+			padding: 0;
+		}
+	}
+
+	.orderTable__number {
+		grid-area: number;
+		font-size: 16px;
+	}
+
+	.orderTable__date {
+		grid-area: date;
+		color: #666;
+	}
+
+	.orderTable__total {
+		grid-area: total;
+		text-align: center;
+		font-size: 16px;
+		font-weight: 700;
+	}
+
+	.orderTable__status {
+		grid-area: status;
+		text-align: center;
+	}
+
+	.orderTable__statusLabel {
+		font-weight: 400;
+	}
+
+	.orderTable__action {
+		grid-area: action;
+	}
+
+	.orderTable__details {
+		padding: 5px 20px;
+	}
+
+	.orderTable__detailsIconBox {
+		min-inline-size: 2em;
+		min-block-size: 2em;
+	}
+}
+
+@media (min-width: 480px) and (max-width: $mobile) {
+	.orderTable__row {
+		column-gap: 24px;
+		padding-inline: 16px;
+	}
+}
+
+@media (max-width: $mobileSmall) {
+	.orderTable__detailsText {
+		display: none;
+	}
+
+	.orderTable__details {
+		padding-inline: 16px;
+	}
+}
+
+@media (max-width: 374.98px) {
+	.orderTable__row {
+		column-gap: 8px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.orderTable__details,
+	.orderTable__detailsIcon {
+		transition: none;
+	}
+}

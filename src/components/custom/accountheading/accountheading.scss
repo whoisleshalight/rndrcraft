@@ -1,0 +1,98 @@
+.accountHeading {
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+	padding-bottom: 48px;
+	border-bottom: 1px solid #111;
+
+	&__title {
+		font-size: 76px;
+		font-weight: 700;
+		line-height: 0.94;
+		letter-spacing: -0.035em;
+	}
+
+	&__description {
+		color: #50504d;
+		font-size: 24px;
+		line-height: 1.2;
+	}
+
+	&--dashboard &__title {
+		font-size: 72px;
+		line-height: 1;
+		letter-spacing: -0.055em;
+	}
+
+	&--orders {
+		padding-bottom: 38px;
+	}
+}
+
+@media (max-width: $pc) {
+	.accountHeading {
+		padding-bottom: 32px;
+	}
+
+	.accountHeading__title,
+	.accountHeading--dashboard .accountHeading__title {
+		font-size: 64px;
+	}
+
+	.accountHeading--dashboard {
+		gap: 12px;
+		padding-bottom: 24px;
+	}
+}
+
+@media (max-width: $laptopXl) {
+	.accountHeading__title,
+	.accountHeading--dashboard .accountHeading__title {
+		font-size: 56px;
+	}
+
+	.accountHeading__description {
+		font-size: 20px;
+	}
+}
+
+@media (max-width: $laptopL) {
+	.accountHeading__title,
+	.accountHeading--dashboard .accountHeading__title {
+		font-size: 48px;
+	}
+}
+
+@media (max-width: $tablet) {
+	.accountHeading--orders {
+		gap: 12px;
+		padding-bottom: 24px;
+	}
+
+	.accountHeading--orders .accountHeading__description {
+		font-size: 18px;
+		line-height: 1.25;
+	}
+}
+
+@media (max-width: $mobile) {
+	.accountHeading {
+		gap: 12px;
+		padding-bottom: 16px;
+	}
+
+	.accountHeading__title,
+	.accountHeading--dashboard .accountHeading__title {
+		font-size: 40px;
+		line-height: 1;
+	}
+
+	.accountHeading__description {
+		font-size: 18px;
+		line-height: 20px;
+	}
+
+	.accountHeading--orders .accountHeading__description {
+		font-size: 16px;
+	}
+}

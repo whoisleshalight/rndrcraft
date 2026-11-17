@@ -1,53 +1,9 @@
 .dashboardsection {
-	position: relative;
-	isolation: isolate;
-	padding-top: 184px;
-	padding-bottom: 100px;
-	color: #0a0a0a;
-
-	&::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		pointer-events: none;
-		background: linear-gradient(to bottom, transparent, #fff), url("@img/dashboard/background.webp") top center / cover no-repeat;
-	}
-
-	&__layout {
-		display: grid;
-		grid-template-columns: 301px minmax(0, 875px);
-		align-items: start;
-		gap: 150px;
-		max-width: 1326px;
-	}
-
 	&__main {
 		min-width: 0;
 		display: flex;
 		flex-direction: column;
 		gap: 36px;
-	}
-
-	&__heading {
-		display: flex;
-		flex-direction: column;
-		gap: 16px;
-		padding-bottom: 48px;
-		border-bottom: 1px solid #111;
-	}
-
-	&__title {
-		font-size: 72px;
-		font-weight: 700;
-		line-height: 1;
-		letter-spacing: -0.055em;
-	}
-
-	&__description {
-		color: #50504d;
-		font-size: 24px;
-		line-height: 1.2;
 	}
 
 	&__section-heading {
@@ -86,16 +42,6 @@
 				color: $greenColor;
 			}
 		}
-	}
-
-	&__visually-hidden {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		overflow: hidden;
-		clip-path: inset(50%);
-		white-space: nowrap;
 	}
 }
 
@@ -209,171 +155,18 @@
 	}
 }
 
-.dashboard-orders {
-	&__table {
-		width: 100%;
-		border-collapse: collapse;
-		text-align: left;
-		font-size: 14px;
-		line-height: 1.4;
-	}
-
-	&__head {
-		border-top: 1px solid #111;
-		border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-		color: #666;
-		text-transform: uppercase;
-
-		th {
-			padding: 14px 8px;
-			font-weight: 500;
-		}
-	}
-
-	&__row {
-		border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-
-		th,
-		td {
-			padding: 24px 8px;
-			vertical-align: middle;
-		}
-	}
-
-	&__number {
-		font-weight: 700;
-		white-space: nowrap;
-	}
-
-	&__paid {
-		display: inline-flex;
-		align-items: center;
-		gap: 7px;
-		font-weight: 600;
-
-		&::before {
-			content: "";
-			flex: 0 0 8px;
-			width: 8px;
-			height: 8px;
-			border-radius: 4px;
-			background-color: #84b900;
-		}
-	}
-
-	&__action {
-		text-align: right;
-	}
-
-	&__details {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		gap: 12px;
-		min-height: 42px;
-		padding: 10px 20px;
-		border-radius: 16px;
-		background-color: $mainColor;
-		color: $whiteColor;
-		font-size: 14px;
-		font-weight: 600;
-		line-height: 1.2;
-		white-space: nowrap;
-		transition: all 0.3s;
-		border: 1px solid transparent;
-
-		img {
-			flex-shrink: 0;
-			transform: rotate(180deg);
-			filter: brightness(1);
-			transition: filter 0.3s;
-		}
-
-		@media (any-hover: hover) {
-			&:hover {
-				border: 1px solid #000;
-				background-color: #caf749;
-				color: #000;
-
-				img {
-					filter: brightness(0);
-				}
-			}
-		}
-	}
-}
-
 @media (max-width: $pc) {
-	.dashboardsection {
-		padding-top: 136px;
-		padding-bottom: 80px;
-	}
-
-	.dashboardsection__layout {
-		column-gap: 97px;
-	}
-
 	.dashboardsection__main {
 		gap: 32px;
-	}
-
-	.dashboardsection__heading {
-		gap: 12px;
-		padding-bottom: 24px;
-	}
-
-	.dashboardsection__title {
-		font-size: 64px;
 	}
 
 	.dashboard-purchases,
 	.dashboard-orders {
 		margin-top: 16px;
 	}
-
-	.dashboard-orders__row {
-
-		th,
-		td {
-			padding-block: 14px;
-		}
-	}
-}
-
-@media (max-width: $laptopXl) {
-	.dashboardsection__layout {
-		column-gap: 64px;
-	}
-
-	.dashboardsection__title {
-		font-size: 56px;
-	}
-
-	.dashboardsection__description {
-		font-size: 20px;
-	}
-
-	.dashboardsection__container {
-		padding-inline: 32px;
-	}
-}
-
-@media (max-width: $laptopX) {
-	.dashboardsection__layout {
-		column-gap: 40px;
-	}
 }
 
 @media (max-width: $laptopL) {
-	.dashboardsection__layout {
-		grid-template-columns: 288px minmax(0, 1fr);
-		column-gap: 20px;
-	}
-
-	.dashboardsection__title {
-		font-size: 48px;
-	}
-
 	.dashboardsection__view-all {
 		font-size: 14px;
 	}
@@ -400,16 +193,6 @@
 }
 
 @media (max-width: $tablet) {
-	.dashboardsection {
-		padding-top: 80px;
-		padding-bottom: 64px;
-	}
-
-	.dashboardsection__layout {
-		grid-template-columns: minmax(0, 1fr);
-		gap: 32px;
-	}
-
 	.dashboardsection__main {
 		gap: 24px;
 	}
@@ -421,32 +204,6 @@
 }
 
 @media (max-width: $mobile) {
-	.dashboardsection {
-		padding-bottom: 48px;
-	}
-
-	.dashboardsection__layout {
-		gap: 24px;
-	}
-
-	.dashboardsection__container {
-		padding-inline: 16px;
-	}
-
-	.dashboardsection__heading {
-		gap: 12px;
-		padding-bottom: 16px;
-	}
-
-	.dashboardsection__title {
-		font-size: 40px;
-	}
-
-	.dashboardsection__description {
-		font-size: 18px;
-		line-height: 20px;
-	}
-
 	.dashboardsection__section-title {
 		font-size: 18px;
 	}
@@ -487,83 +244,9 @@
 	.dashboard-purchases {
 		margin-top: 0;
 	}
-
-	.dashboard-orders__table {
-		display: block;
-		border-top: 1px solid #111;
-	}
-
-	.dashboard-orders__head {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		overflow: hidden;
-		clip-path: inset(50%);
-	}
-
-	.dashboard-orders__table tbody {
-		display: block;
-	}
-
-	.dashboard-orders__row {
-		display: grid;
-		grid-template-columns: minmax(0, 1fr) 64px 64px;
-		grid-template-areas: "number total action" "date status action";
-		align-items: center;
-		column-gap: 16px;
-		row-gap: 4px;
-		padding: 20px 8px;
-		min-height: 90px;
-
-		th,
-		td {
-			padding: 0;
-		}
-	}
-
-	.dashboard-orders__number {
-		grid-area: number;
-		font-size: 16px;
-	}
-
-	.dashboard-orders__date {
-		grid-area: date;
-		color: #666;
-	}
-
-	.dashboard-orders__total {
-		grid-area: total;
-		font-size: 16px;
-		font-weight: 700;
-	}
-
-	.dashboard-orders__status {
-		grid-area: status;
-	}
-
-	.dashboard-orders__paid {
-		font-weight: 400;
-	}
-
-	.dashboard-orders__action {
-		grid-area: action;
-	}
-
-	.dashboard-orders__details {
-		width: 64px;
-		padding-inline: 0;
-	}
-
-	.dashboard-orders__details-text {
-		display: none;
-	}
 }
 
 @media (max-width: $mobileX) {
-	.dashboardsection__container {
-		padding-inline: 8px;
-	}
-
 	.dashboard-stats {
 		grid-template-columns: minmax(0, 1fr);
 	}
@@ -574,21 +257,8 @@
 	}
 }
 
-@media (max-width: 374.98px) {
-	.dashboard-orders__row {
-		grid-template-columns: minmax(0, 1fr) 58px 48px;
-		column-gap: 8px;
-	}
-
-	.dashboard-orders__details {
-		width: 48px;
-	}
-}
-
 @media (prefers-reduced-motion: reduce) {
-	.dashboardsection__view-all,
-	.dashboard-orders__details,
-	.dashboard-orders__details img {
+	.dashboardsection__view-all {
 		transition: none;
 	}
 }

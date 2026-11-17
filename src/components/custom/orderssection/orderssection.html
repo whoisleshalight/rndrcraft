@@ -1,5 +1,99 @@
-<section data-fls-orderssection class="orderssection">
-	<div class="orderssection__container">
-		
+<section data-fls-orderssection data-fls-accountlayout class="orderssection accountLayout accountLayout--orders" aria-labelledby="orders-title">
+	<div class="accountLayout__container">
+		<div class="accountLayout__grid">
+			<include src="@components/custom/accountsidebar/accountsidebar.html"
+				locals='{
+				  "currentPage": "orders",
+				  "currentHref": "orders.html",
+				  "currentLabel": "Orders",
+				  "mobileLabel": "Orders",
+				  "navigationId": "orders-navigation"
+				}'>
+			</include>
+			<div class="accountLayout__main orderssection__main">
+				<include src="@components/custom/accountheading/accountheading.html"
+					locals='{
+					  "variant": "orders",
+					  "titleId": "orders-title",
+					  "title": "Orders",
+					  "description": "View your purchase history and order details."
+					}'>
+				</include>
+				<div class="orderssection__orders" role="group" aria-labelledby="orders-list-title">
+					<include src="@components/custom/accountlistheading/accountlistheading.html"
+						locals='{
+						  "variant": "orders",
+						  "headingId": "orders-list-title",
+						  "title": "Recent orders",
+						  "total": 12,
+						  "summary": "Showing 6 of 12 orders"
+						}'>
+					</include>
+					<include src="@components/custom/ordertable/ordertable.html"
+						locals='{
+						  "variant": "orders",
+						  "tableId": "orders-list",
+						  "caption": "Order numbers, purchase dates, totals and payment status",
+						  "orders": [
+						    {
+						      "number": "RC-10241",
+						      "date": "2025-02-03",
+						      "formattedDate": "February 03, 2025",
+						      "total": "$24.00",
+						      "status": "Paid",
+						      "href": "order-details.html"
+						    },
+						    {
+						      "number": "RC-10241",
+						      "date": "2025-02-03",
+						      "formattedDate": "February 03, 2025",
+						      "total": "$24.00",
+						      "status": "Paid",
+						      "href": "order-details.html"
+						    },
+						    {
+						      "number": "RC-10241",
+						      "date": "2025-02-03",
+						      "formattedDate": "February 03, 2025",
+						      "total": "$24.00",
+						      "status": "Paid",
+						      "href": "order-details.html"
+						    },
+						    {
+						      "number": "RC-10241",
+						      "date": "2025-02-03",
+						      "formattedDate": "February 03, 2025",
+						      "total": "$24.00",
+						      "status": "Paid",
+						      "href": "order-details.html"
+						    },
+						    {
+						      "number": "RC-10241",
+						      "date": "2025-02-03",
+						      "formattedDate": "February 03, 2025",
+						      "total": "$24.00",
+						      "status": "Paid",
+						      "href": "order-details.html"
+						    },
+						    {
+						      "number": "RC-10241",
+						      "date": "2025-02-03",
+						      "formattedDate": "February 03, 2025",
+						      "total": "$24.00",
+						      "status": "Paid",
+						      "href": "order-details.html"
+						    }
+						  ]
+						}'>
+					</include>
+				</div>
+				<include src="@components/custom/accountpagination/accountpagination.html"
+					locals='{
+					  "listId": "orders-list",
+					  "summary": "Showing 6 of 12 orders"
+					}'>
+				</include>
+			</div>
+		</div>
 	</div>
 </section>
