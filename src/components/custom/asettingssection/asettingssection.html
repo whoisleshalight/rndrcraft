@@ -1,0 +1,125 @@
+<section data-fls-asettingssection data-fls-accountlayout class="settings accountLayout accountLayout--settings" aria-labelledby="settings-title">
+	<div class="accountLayout__container">
+		<div class="accountLayout__grid">
+			<include src="@components/custom/accountsidebar/accountsidebar.html"
+				locals='{
+					"currentPage": "settings",
+					"currentHref": "asettings.html",
+					"currentLabel": "Account Settings",
+					"mobileLabel": "Account Settings",
+					"navigationId": "settings-navigation"
+				}'>
+			</include>
+			<div class="accountLayout__main settings__main">
+				<div class="settings__heading">
+					<include src="@components/custom/accountheading/accountheading.html"
+						locals='{
+							"variant": "settings",
+							"titleId": "settings-title",
+							"title": "Account Settings",
+							"description": "Manage your personal information and account security."
+						}'>
+					</include>
+				</div>
+				<include src="@components/custom/accountform/accountform.html"
+					locals='{
+						"formId": "personal-information",
+						"title": "Personal information",
+						"description": "Update your name and email address.",
+						"submitLabel": "Save changes",
+						"fields": [
+							{
+								"id": "settings-first-name",
+								"name": "first_name",
+								"label": "First name",
+								"type": "text",
+								"autocomplete": "given-name",
+								"value": "Alex",
+								"placeholder": "",
+								"minLength": 1,
+								"hint": "",
+								"match": "",
+								"separate": false
+							},
+							{
+								"id": "settings-last-name",
+								"name": "last_name",
+								"label": "Last name",
+								"type": "text",
+								"autocomplete": "family-name",
+								"value": "Morgan",
+								"placeholder": "",
+								"minLength": 1,
+								"hint": "",
+								"match": "",
+								"separate": false
+							},
+							{
+								"id": "settings-email",
+								"name": "email",
+								"label": "Email address",
+								"type": "email",
+								"autocomplete": "email",
+								"value": "alex@example.com",
+								"placeholder": "",
+								"minLength": 1,
+								"hint": "",
+								"match": "",
+								"separate": true
+							}
+						]
+					}'>
+				</include>
+				<include src="@components/custom/accountform/accountform.html"
+					locals='{
+						"formId": "password",
+						"title": "Password",
+						"description": "Change your password to keep your account secure.",
+						"submitLabel": "Update password",
+						"fields": [
+							{
+								"id": "settings-current-password",
+								"name": "current_password",
+								"label": "Current password",
+								"type": "password",
+								"autocomplete": "current-password",
+								"value": "",
+								"placeholder": "Enter your current password",
+								"minLength": 1,
+								"hint": "",
+								"match": "",
+								"separate": false
+							},
+							{
+								"id": "settings-new-password",
+								"name": "new_password",
+								"label": "New password",
+								"type": "password",
+								"autocomplete": "new-password",
+								"value": "",
+								"placeholder": "Enter your new password",
+								"minLength": 8,
+								"hint": "Use at least 8 characters.",
+								"match": "",
+								"separate": false
+							},
+							{
+								"id": "settings-confirm-password",
+								"name": "password_confirmation",
+								"label": "Confirm new password",
+								"type": "password",
+								"autocomplete": "new-password",
+								"value": "",
+								"placeholder": "Confirm your new password",
+								"minLength": 8,
+								"hint": "",
+								"match": "new_password",
+								"separate": true
+							}
+						]
+					}'>
+				</include>
+			</div>
+		</div>
+	</div>
+</section>

@@ -42,10 +42,14 @@
 					</a>
 				</li>
 				<li>
-					<a class="dashboard-nav__link" href="account-settings.html">
+					<a class="dashboard-nav__link [[currentPage === 'settings' ? 'dashboard-nav__link--active' : '']]" href="asettings.html"
+						aria-current="[[currentPage === 'settings' ? 'page' : 'false']]">
 						<span class="dashboard-nav__icon" aria-hidden="true"><img src="@img/dashboard/user.svg"
 								alt=""></span>
 						<span>Account Settings</span>
+						<if condition="currentPage === 'settings'">
+							<span class="dashboard-nav__arrow" aria-hidden="true"><img src="@img/dashboard/arrow.svg" alt=""></span>
+						</if>
 					</a>
 				</li>
 				<li>

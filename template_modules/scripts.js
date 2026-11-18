@@ -28,8 +28,8 @@ export const scriptsPlugins = [
 			if (file.endsWith(".js")) {
 				Object.keys(finalAliases).forEach((alias) => {
 					if (html.includes(alias)) {
-						finalAliases[alias] = finalAliases[alias].replace(new RegExp(`src`, "g"), ``)
-						html = html.replace(new RegExp(alias, "g"), finalAliases[alias])
+						const replacementPath = finalAliases[alias].replace(new RegExp(`src`, "g"), ``)
+						html = html.replace(new RegExp(alias, "g"), replacementPath)
 					}
 				})
 			}

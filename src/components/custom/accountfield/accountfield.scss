@@ -1,0 +1,123 @@
+.accountField {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	min-width: 0;
+
+	&--separate {
+		margin-top: 12px;
+	}
+
+	&__label {
+		font-size: 16px;
+		font-weight: 500;
+		line-height: 1.2;
+	}
+
+	&__control {
+		position: relative;
+		min-width: 0;
+	}
+
+	&__input {
+		display: block;
+		width: 100%;
+		min-width: 0;
+		height: 65px;
+		padding-inline: 24px;
+		border: 1.5px solid rgba(0, 0, 0, 0.45);
+		border-radius: 24px;
+		background-color: rgba(255, 255, 255, 0.78);
+		font-size: 20px;
+		font-weight: 600;
+		line-height: 1.2;
+		transition: border-color 0.2s;
+
+		&::placeholder {
+			color: #767676;
+			opacity: 1;
+		}
+
+		&[aria-invalid="true"] {
+			border-color: #920000;
+		}
+	}
+
+	&__inputPassword {
+		height: 58px;
+		padding-right: 60px;
+		font-size: 16px;
+		font-weight: 400;
+	}
+
+	&__passwordToggle {
+		position: absolute;
+		top: 7px;
+		right: 12px;
+		width: 44px;
+		height: 44px;
+		overflow: hidden;
+		border-radius: 50%;
+
+		img {
+			display: block;
+		}
+	}
+
+	&__hint {
+		margin-top: -4px;
+		font-size: 16px;
+		line-height: 1.2;
+	}
+
+	[data-fls-form-error] {
+		position: absolute;
+		top: calc(100% + 4px);
+		left: 24px;
+		max-width: calc(100% - 48px);
+		color: #920000;
+		font-size: 14px;
+		line-height: 1.2;
+	}
+}
+
+.accountField__control.--form-error + .accountField__hint {
+	visibility: hidden;
+}
+
+@media (max-width: $mobile) {
+	.accountField {
+		gap: 8px;
+	}
+
+	.accountField--separate {
+		margin-top: 0;
+	}
+
+	.accountField__input {
+		height: 58px;
+		font-size: 16px;
+	}
+
+	.accountField__hint {
+		font-size: 14px;
+	}
+
+	.accountField [data-fls-form-error] {
+		top: calc(100% + 2px);
+		font-size: 12px;
+		line-height: 1;
+	}
+}
+
+@media (max-width: $mobileSmall) {
+	.accountField__hint {
+		font-size: 12px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.accountField__input {
+		transition: none;
+	}
+}

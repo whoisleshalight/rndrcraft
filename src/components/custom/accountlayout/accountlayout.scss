@@ -29,10 +29,6 @@
 	&--dashboard::before {
 		opacity: 1;
 	}
-
-	&--downloads {
-		padding-top: 208px;
-	}
 }
 
 @media (max-width: $pc) {
@@ -71,6 +67,11 @@
 @media (max-width: $tablet) {
 	.accountLayout {
 		padding-block: 80px 64px;
+
+		&::before {
+			bottom: auto;
+			height: 100svh;
+		}
 	}
 
 	.accountLayout__grid {

@@ -1,0 +1,37 @@
+.settings__main {
+	display: flex;
+	flex-direction: column;
+	gap: 48px;
+}
+
+@media (max-width: $pc) {
+	.settings__main {
+		gap: 36px;
+	}
+}
+
+@media (max-width: $mobile) {
+	.settings__main {
+		gap: 32px;
+	}
+
+	.settings__heading .accountHeading__description {
+		font-size: 16px;
+		line-height: 1.25;
+	}
+}
+
+@media (max-width: $mobileSmall) {
+	.settings__main {
+		gap: 24px;
+	}
+
+	.settings__heading {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		overflow: hidden;
+		clip-path: inset(50%);
+		white-space: nowrap;
+	}
+}

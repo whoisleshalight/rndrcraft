@@ -3,7 +3,6 @@
 		<div class="accountLayout__grid">
 			<include src="@components/custom/accountsidebar/accountsidebar.html"
 				locals='{"currentPage":"dashboard","currentHref":"dashboard.html","currentLabel":"Dashboard","mobileLabel":"Menu","navigationId":"dashboard-navigation"}'></include>
-
 			<div class="accountLayout__main dashboardsection__main">
 				<include src="@components/custom/accountheading/accountheading.html"
 					locals='{
@@ -13,7 +12,6 @@
 						"description": "Here’s an overview of your account and recent activity."
 					}'>
 				</include>
-
 				<div class="dashboard-welcome">
 					<div class="dashboard-welcome__content">
 						<p class="dashboard-welcome__label">Welcome back</p>
@@ -22,7 +20,6 @@
 					<div class="dashboard-welcome__decoration" aria-hidden="true"><img src="@img/dashboard/welcome-mark.svg"
 							alt="" width="170" height="157"></div>
 				</div>
-
 				<dl class="dashboard-stats" aria-label="Account overview">
 					<div class="dashboard-stats__item">
 						<dt class="dashboard-stats__label">Purchased products</dt>
@@ -37,7 +34,6 @@
 						<dd class="dashboard-stats__value"><time datetime="2025-05-18">May 18</time></dd>
 					</div>
 				</dl>
-
 				<div class="dashboard-purchases" role="group" aria-labelledby="dashboard-purchases-title">
 					<div class="dashboardsection__section-heading">
 						<h2 class="dashboardsection__section-title" id="dashboard-purchases-title">Recent purchases</h2>
@@ -62,7 +58,6 @@
 						</each>
 					</ul>
 				</div>
-
 				<div class="dashboard-orders" role="group" aria-labelledby="dashboard-orders-title">
 					<div class="dashboardsection__section-heading">
 						<h2 class="dashboardsection__section-title" id="dashboard-orders-title">Recent orders</h2>

@@ -23,6 +23,12 @@
  		html[data-fls-webpreloader-loading] body {
  			overflow: hidden;
  		}
+		html:not(:has(.page--home)) body {
+		opacity: 0;
+		}
+		html[data-fls-loaded]:not(:has(.page--home)) body {
+		opacity: 1;
+		}
 
  		.webpreloader {
  			position: fixed;

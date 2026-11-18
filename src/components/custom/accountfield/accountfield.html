@@ -1,0 +1,19 @@
+<div data-fls-accountfield class="accountField [[field.separate ? 'accountField--separate' : '']]">
+	<label class="accountField__label" for="[[field.id]]">[[field.label]]</label>
+	<div class="accountField__control">
+		<input class="accountField__input [[field.type === 'password' ? 'accountField__inputPassword' : '']]"
+			id="[[field.id]]" name="[[field.name]]" type="[[field.type]]" autocomplete="[[field.autocomplete]]"
+			value="[[field.value]]" placeholder="[[field.placeholder]]" minlength="[[field.minLength]]"
+			data-account-match="[[field.match]]" required
+			aria-describedby="[[field.hint ? field.id + '-hint' : '']]">
+		<if condition="field.type === 'password'">
+			<button class="accountField__passwordToggle" type="button" data-account-password-toggle
+				aria-controls="[[field.id]]" aria-label="Show password" aria-pressed="false">
+				<img src="@img/dashboard/show-password.svg" width="44" height="88" alt="">
+			</button>
+		</if>
+	</div>
+	<if condition="field.hint">
+		<p class="accountField__hint" id="[[field.id]]-hint">[[field.hint]]</p>
+	</if>
+</div>

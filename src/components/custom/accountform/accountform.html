@@ -1,0 +1,16 @@
+<form data-fls-accountform data-account-form="[[formId]]" data-account-form-endpoint=""
+	class="accountForm" action="#" method="post" aria-labelledby="[[formId]]-title">
+	<div class="accountForm__heading">
+		<h2 class="accountForm__title" id="[[formId]]-title">[[title]]</h2>
+		<p class="accountForm__description">[[description]]</p>
+	</div>
+	<div class="accountForm__body">
+		<div class="accountForm__fields">
+			<each loop="field in fields">
+				<include src="@components/custom/accountfield/accountfield.html" locals='{"field": [[JSON.stringify(field)]]}'></include>
+			</each>
+		</div>
+		<button data-fls-buttons class="btn-2l accountForm__submit" type="submit">[[submitLabel]]</button>
+		<p class="accountForm__feedback" data-account-form-feedback role="status" aria-live="polite" aria-atomic="true" hidden></p>
+	</div>
+</form>

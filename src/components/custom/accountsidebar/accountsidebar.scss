@@ -208,7 +208,7 @@
 	}
 
 	.dashboard-nav--collapsed {
-		background-color: $mainColor;
+		background-color: transparent;
 	}
 
 	.dashboard-nav--expanded .dashboard-nav__link--active {
@@ -300,7 +300,9 @@
 
 	.dashboard-nav__current .dashboard-nav__link {
 		min-height: 60px;
+		margin: 4px;
 		padding-block: 14px;
+		border-width: 1px;
 		border-radius: 22px;
 	}
 
