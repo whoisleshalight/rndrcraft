@@ -68,6 +68,9 @@ class SelectConstructor {
 			selectElement: selectItem.querySelector(this.getSelectClass(className)),
 		}
 	}
+	getSelectControl(selectItem) {
+		return selectItem.querySelector('.select__input') || selectItem.querySelector('.select__title');
+	}
 	// Функція ініціалізації всіх селектів
 	selectsInit(selectItems) {
 		selectItems.forEach((originalSelect, index) => {
@@ -127,7 +130,7 @@ class SelectConstructor {
 				const label = document.querySelector(`label[for="${CSS.escape(selectItem.id)}"]`);
 				label?.addEventListener('click', (event) => {
 					event.preventDefault();
-					this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement?.focus();
+					this.getSelectControl(selectItem)?.focus();
 				});
 			}
 
@@ -161,12 +164,11 @@ class SelectConstructor {
 		this.setSelectTitleValue(selectItem, originalSelect);
 		// Сеттер елементів списку (options)
 		this.setOptions(selectItem, originalSelect);
-		// Якщо увімкнено опцію пошуку data-search, запускаємо обробник
-		originalSelect.hasAttribute('data-fls-select-search') ? this.searchActions(selectItem) : null;
 		// Якщо вказано налаштування data-open, відкриваємо селект
 		originalSelect.hasAttribute('data-fls-select-open') ? this.selectAction(selectItem) : null;
 		// Обробник disabled
 		this.selectDisabled(selectItem, originalSelect);
+		originalSelect.dispatchEvent(new CustomEvent('selectBuilt', { bubbles: true }));
 	}
 	// Функція реакцій на події
 	selectsActions(e) {
@@ -213,7 +215,7 @@ class SelectConstructor {
 		const selectOptions = this.getSelectElement(selectItem, this.selectClasses.classSelectOptions).selectElement;
 		if (!selectOptions.classList.contains('_slide')) {
 			selectItem.classList.remove(this.selectClasses.classSelectOpen);
-			this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement?.setAttribute('aria-expanded', 'false');
+			this.getSelectControl(selectItem)?.setAttribute('aria-expanded', 'false');
 			slideUp(selectOptions, originalSelect.dataset.flsSelectSpeed);
 			setTimeout(() => {
 				selectItem.style.zIndex = '';
@@ -241,7 +243,7 @@ class SelectConstructor {
 		setTimeout(() => {
 			if (!selectOptions.classList.contains('--slide')) {
 				selectItem.classList.toggle(this.selectClasses.classSelectOpen);
-				this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement?.setAttribute('aria-expanded', String(selectItem.classList.contains(this.selectClasses.classSelectOpen)));
+				this.getSelectControl(selectItem)?.setAttribute('aria-expanded', String(selectItem.classList.contains(this.selectClasses.classSelectOpen)));
 				slideToggle(selectOptions, originalSelect.dataset.flsSelectSpeed);
 
 				if (selectItem.classList.contains(this.selectClasses.classSelectOpen)) {
@@ -508,10 +510,10 @@ class SelectConstructor {
 	selectDisabled(selectItem, originalSelect) {
 		if (originalSelect.disabled) {
 			selectItem.classList.add(this.selectClasses.classSelectDisabled);
-			this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement.disabled = true;
+			this.getSelectControl(selectItem).disabled = true;
 		} else {
 			selectItem.classList.remove(this.selectClasses.classSelectDisabled);
-			this.getSelectElement(selectItem, this.selectClasses.classSelectTitle).selectElement.disabled = false;
+			this.getSelectControl(selectItem).disabled = false;
 		}
 	}
 	// Обробник пошуку за елементами списку

@@ -47,7 +47,8 @@
 					</a>
 				</li>
 				<li>
-					<a class="dashboard-nav__link" href="billing-details.html">
+					<a class="dashboard-nav__link [[currentPage === 'billing' ? 'dashboard-nav__link--active' : '']]" href="billing.html"
+						aria-current="[[currentPage === 'billing' ? 'page' : 'false']]">
 						<span class="dashboard-nav__icon" aria-hidden="true"><img src="@img/dashboard/billing.svg"
 								alt=""></span>
 						<span>Billing Details</span>

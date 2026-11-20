@@ -1,0 +1,168 @@
+<section data-fls-billingsection data-fls-accountlayout class="billingsection accountLayout" aria-labelledby="billing-title">
+	<div class="accountLayout__container">
+		<div class="accountLayout__grid">
+			<include src="@components/custom/accountsidebar/accountsidebar.html"
+				locals='{
+					"currentPage": "billing",
+					"currentHref": "billing.html",
+					"currentLabel": "Billing Details",
+					"mobileLabel": "Billing Details",
+					"navigationId": "billing-navigation"
+				}'>
+			</include>
+			<div class="accountLayout__main billingsection__main">
+				<div class="billingsection__heading">
+					<include src="@components/custom/accountheading/accountheading.html"
+						locals='{
+							"variant": "billing",
+							"titleId": "billing-title",
+							"title": "Billing Details",
+							"description": "Manage the billing information used for your orders."
+						}'>
+					</include>
+				</div>
+				<!-- WP: replace sample values/country fields, set the form action and add WooCommerce nonces; remove data-ui-preview-form. -->
+				<form class="accountForm billingsection__form" data-billing-form data-billing-unsaved-guard data-ui-preview-form action="#" method="post" aria-labelledby="billing-information-title">
+					<div class="accountForm__heading">
+						<h2 class="accountForm__title" id="billing-information-title">Billing information</h2>
+						<p class="accountForm__description">Update your billing details for future orders.</p>
+					</div>
+					<div class="accountForm__body billingsection__body">
+						<fieldset class="billingsection__customerType">
+							<legend class="billingsection__visuallyHidden">Customer type</legend>
+							<label class="billingsection__customerOption">
+								<input class="billingsection__radio" type="radio" name="billing_customer_type" value="individual" checked>
+								<span>Individual</span>
+							</label>
+							<label class="billingsection__customerOption">
+								<input class="billingsection__radio" type="radio" name="billing_customer_type" value="company">
+								<span>Company</span>
+							</label>
+						</fieldset>
+						<div class="accountForm__fields">
+							<div class="billingsection__collapsible" data-billing-company-panel hidden aria-hidden="true" inert>
+								<fieldset class="billingsection__companyFields billingsection__collapsibleContent" data-billing-company disabled>
+									<legend class="billingsection__visuallyHidden">Company details</legend>
+									<include src="@components/custom/accountfield/accountfield.html"
+										locals='{"field": {
+											"id": "billing_company", "name": "billing_company",
+											"label": "Company name", "type": "text", "autocomplete": "billing organization",
+											"value": "", "placeholder": "Enter company name", "minLength": 1,
+											"hint": "", "match": "", "separate": false
+										}}'>
+									</include>
+									<!-- Tax ID and customer type are extension fields; map them to the selected WooCommerce tax plugin. -->
+									<div data-fls-accountfield class="accountField">
+										<label class="accountField__label" for="billing_tax_id">Tax ID / VAT number (optional)</label>
+										<div class="accountField__control">
+											<input class="accountField__input" id="billing_tax_id" name="billing_tax_id" type="text" placeholder="Enter tax ID or VAT number">
+										</div>
+									</div>
+								</fieldset>
+							</div>
+							<include src="@components/custom/accountfield/accountfield.html"
+								locals='{"field": {
+									"id": "billing_first_name", "name": "billing_first_name",
+									"label": "First name", "type": "text", "autocomplete": "billing given-name",
+									"value": "Alex", "placeholder": "", "minLength": 1,
+									"hint": "", "match": "", "separate": false
+								}}'>
+							</include>
+							<include src="@components/custom/accountfield/accountfield.html"
+								locals='{"field": {
+									"id": "billing_last_name", "name": "billing_last_name",
+									"label": "Last name", "type": "text", "autocomplete": "billing family-name",
+									"value": "Morgan", "placeholder": "", "minLength": 1,
+									"hint": "", "match": "", "separate": false
+								}}'>
+							</include>
+							<include src="@components/custom/accountfield/accountfield.html"
+								locals='{"field": {
+									"id": "billing_email", "name": "billing_email",
+									"label": "Email address", "type": "email", "autocomplete": "billing email",
+									"value": "alex.morgan@example.com", "placeholder": "", "minLength": 1,
+									"hint": "", "match": "", "separate": false
+								}}'>
+							</include>
+							<div data-fls-accountfield class="accountField">
+								<label class="accountField__label" for="billing_phone">Phone (optional)</label>
+								<div class="accountField__control">
+									<input class="accountField__input" id="billing_phone" name="billing_phone" type="tel" autocomplete="billing tel">
+								</div>
+							</div>
+							<div data-fls-accountfield class="accountField billingsection__selectField">
+								<label class="accountField__label" for="billing_country">Country or region</label>
+								<div class="accountField__control">
+									<select data-fls-select data-fls-select-modif="billing" data-fls-select-scroll data-fls-select-search
+										data-fls-select-countries-auto data-fls-select-countries-locale="en"
+										id="billing_country" name="billing_country" autocomplete="billing country" required>
+										<option value="" selected>Select your country</option>
+									</select>
+								</div>
+							</div>
+							<include src="@components/custom/accountfield/accountfield.html"
+								locals='{"field": {
+									"id": "billing_address_1", "name": "billing_address_1",
+									"label": "Address line 1", "type": "text", "autocomplete": "billing address-line1",
+									"value": "124 Bergen Street", "placeholder": "", "minLength": 1,
+									"hint": "", "match": "", "separate": false
+								}}'>
+							</include>
+							<div data-fls-accountfield class="accountField">
+								<label class="accountField__label" for="billing_address_2">Address line 2 (optional)</label>
+								<div class="accountField__control">
+									<input class="accountField__input" id="billing_address_2" name="billing_address_2" type="text"
+										autocomplete="billing address-line2" placeholder="Apartment, suite, unit, etc.">
+								</div>
+							</div>
+							<include src="@components/custom/accountfield/accountfield.html"
+								locals='{"field": {
+									"id": "billing_city", "name": "billing_city",
+									"label": "City", "type": "text", "autocomplete": "billing address-level2",
+									"value": "Brooklyn", "placeholder": "", "minLength": 1,
+									"hint": "", "match": "", "separate": false
+								}}'>
+							</include>
+							<div data-fls-accountfield class="accountField">
+								<label class="accountField__label" for="billing_state">State / region (optional)</label>
+								<div class="accountField__control">
+									<input class="accountField__input" id="billing_state" name="billing_state" type="text"
+										autocomplete="billing address-level1" value="New York">
+								</div>
+							</div>
+							<include src="@components/custom/accountfield/accountfield.html"
+								locals='{"field": {
+									"id": "billing_postcode", "name": "billing_postcode",
+									"label": "Postal code", "type": "text", "autocomplete": "billing postal-code",
+									"value": "11201", "placeholder": "", "minLength": 1,
+									"hint": "", "match": "", "separate": false
+								}}'>
+							</include>
+						</div>
+						<p class="billingsection__note">Fields marked optional can be left blank. Address fields and tax requirements may vary by country.</p>
+						<button data-fls-buttons class="btn-2l accountForm__submit" type="submit" name="save_address" value="Save address">Save billing details</button>
+						<!-- WP: render the server notice here using the feedback success/error modifier, and remove hidden. -->
+						<p class="billingsection__feedback" data-billing-notices role="status" hidden></p>
+					</div>
+				</form>
+				<section class="accountForm billingsection__payments" aria-labelledby="billing-payment-title">
+					<div class="accountForm__heading billingsection__paymentHeading">
+						<h2 class="accountForm__title" id="billing-payment-title">Payment methods</h2>
+						<p class="accountForm__description">Manage your saved payment methods.</p>
+					</div>
+					<include src="@components/custom/paymentmethods/paymentmethods.html"></include>
+				</section>
+			</div>
+		</div>
+	</div>
+	<dialog class="billingsection__leaveDialog" data-billing-leave-dialog
+		aria-labelledby="billing-leave-title" aria-describedby="billing-leave-description">
+		<h2 class="billingsection__leaveTitle" id="billing-leave-title">Leave without saving?</h2>
+		<p class="billingsection__leaveDescription" id="billing-leave-description">You have unsaved changes. If you leave this page, your changes will be lost.</p>
+		<div class="billingsection__leaveActions">
+			<button data-fls-buttons class="btn-2l billingsection__leaveButton" type="button" data-billing-keep-editing autofocus>Keep editing</button>
+			<button data-fls-buttons class="btn-2l billingsection__leaveButton billingsection__leaveButtonSecondary"
+				type="button" data-billing-leave>Leave page</button>
+		</div>
+	</dialog>
+</section>
