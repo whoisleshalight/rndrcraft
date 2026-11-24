@@ -29,12 +29,34 @@ export function addTouchAttr() {
 }
 // Додавання loaded для HTML після повного завантаження сторінки
 export function addLoadedAttr() {
-	if (!document.documentElement.hasAttribute('data-fls-preloader-loading')) {
-		window.addEventListener("load", function () {
-			setTimeout(function () {
-				document.documentElement.setAttribute('data-fls-loaded', '')
-			}, 0);
-		});
+	const htmlElement = document.documentElement;
+
+	if (htmlElement.hasAttribute('data-fls-preloader-loading')) {
+		return;
+	}
+
+	const minimumLoadingDuration = 1000;
+	const loadingStartedAt = performance.now();
+
+	htmlElement.classList.add('load');
+
+	function handlePageLoad() {
+		const elapsedLoadingTime = performance.now() - loadingStartedAt;
+		const remainingLoadingTime = Math.max(0, minimumLoadingDuration - elapsedLoadingTime);
+
+		setTimeout(() => {
+			htmlElement.setAttribute('data-fls-loaded', '');
+
+			setTimeout(() => {
+				htmlElement.classList.remove('load');
+			}, 1000);
+		}, remainingLoadingTime);
+	}
+
+	if (document.readyState === 'complete') {
+		handlePageLoad();
+	} else {
+		window.addEventListener('load', handlePageLoad, { once: true });
 	}
 }
 // Отримання хешу на адресі сайту

@@ -23,16 +23,29 @@
  		html[data-fls-webpreloader-loading] body {
  			overflow: hidden;
  		}
-		html:not(:has(.page--home)) body {
-		opacity: 0;
-		}
-		html[data-fls-loaded]:not(:has(.page--home)) body {
-		opacity: 1;
-		}
+
+ 		html:not(:has(.page--home)) body {
+ 			opacity: 0;
+ 		}
+
+ 		html[data-fls-loaded]:not(:has(.page--home)) body {
+ 			opacity: 1;
+ 		}
+
+ 		html:not([data-fls-loaded]) body {
+ 			overflow-y: hidden;
+ 		}
+
+ 		html:not([data-fls-loaded]) *:not(.webpreloader, .webpreloader *) {
+ 			transition: none !important;
+ 		}
 
  		.webpreloader {
  			position: fixed;
- 			inset: 0;
+ 			top: 0;
+ 			left: 0;
+ 			width: 100vw;
+ 			height: 100vh;
  			z-index: 9999;
  			display: flex;
  			flex-direction: column;
@@ -43,15 +56,28 @@
  			position: fixed;
  			top: 0;
  			left: 0;
- 			width: 100%;
- 			height: 100%;
+ 			width: 100vw;
+ 			height: 100vh;
  			background-color: #000000;
  			opacity: 1;
+ 			transition: opacity 850ms ease-in-out;
+
+ 			[data-fls-loaded] & {}
  		}
 
- 		.webpreloader[data-fls-webpreloader-closing]::before {
- 			animation: webpreloaderBackdropFade 850ms ease-in-out forwards;
+ 		[data-fls-loaded] .webpreloader::before {
+ 			opacity: 0;
+ 			/* visibility: hidden; */
  		}
+
+ 		.webpreloader--loaded {
+ 			visibility: hidden;
+ 			transition: visibility 0s 850ms;
+ 		}
+
+ 		/* .webpreloader--loaded::before { */
+ 		/* opacity: 0; */
+ 		/* } */
 
  		.webpreloader .webpreloader__wrapper {
  			position: relative;
@@ -61,6 +87,15 @@
  			flex-direction: column;
  			background-color: #fff;
  			will-change: transform;
+ 			transition: transform 850ms cubic-bezier(0.76, 0, 0.24, 1);
+
+ 			[data-fls-loaded] & {
+ 				transform: translateY(-100%);
+ 			}
+ 		}
+
+ 		.webpreloader--loaded .webpreloader__wrapper {
+ 			/* transform: translateY(-100%); */
  		}
 
  		.webpreloader__main {
@@ -71,105 +106,152 @@
  			justify-content: center;
  		}
 
- 		.webpreloader__main svg {
+ 		.webpreloader__logo {
  			display: block;
  			width: 16vw;
  			max-width: calc(100% - 48px);
  			height: auto;
+ 			overflow: visible;transition: all 0.4s;
+ 			color: #000;
+ 		}
+[data-fls-loaded] .webpreloader__logo {
+	transform: translateY(-40px);opacity: 0;
+}
+ 		.webpreloader__cube {}
+
+ 		.webpreloader__cube .webpreloader__cubePart:nth-child(1) {
+ 			transform: translate(20px, -20px);
+
+
  		}
 
+ 		.webpreloader__cube .webpreloader__cubePart:nth-child(2) {
+ 			transform: translate(-20px, 6px);
 
-
- 		.webpreloader__cubePart {
- 			animation: webpreloaderCubeShimmer 3.4s ease-in-out infinite;
  		}
 
- 		.webpreloader__cubePart:nth-child(1) {
- 			animation-delay: 0s;
+ 		.webpreloader__cube .webpreloader__cubePart:nth-child(3) {}
+
+ 		.webpreloader__cube .webpreloader__cubePart:nth-child(4) {
+ 			transform: translate(-14px, -20px);
+
+
  		}
 
- 		.webpreloader__cubePart:nth-child(2) {
- 			animation-delay: -0.18s;
+ 		.webpreloader__cube .webpreloader__cubePart:nth-child(5) {
+ 			transform: translate(-8px, 20px);
+
  		}
 
- 		.webpreloader__cubePart:nth-child(3) {
- 			animation-delay: -0.36s;
+ 		.webpreloader__cube .webpreloader__cubePart:nth-child(6) {
+ 			transform: translate(20px, -8px);
  		}
 
- 		.webpreloader__cubePart:nth-child(4) {
- 			animation-delay: -0.54s;
+ 		.webpreloader__cube .webpreloader__cubePart:nth-child(7) {
+ 			transform: translate(20px, 20px);
  		}
 
- 		.webpreloader__cubePart:nth-child(5) {
- 			animation-delay: -0.72s;
- 		}
+ 		.webpreloader__cube .webpreloader__cubePart {
+ 			opacity: 0;
+ 			transition: all 0.4s linear;
+ 			filter: blur(6px);
 
- 		.webpreloader__cubePart:nth-child(6) {
- 			animation-delay: -0.9s;
- 		}
-
- 		.webpreloader__cubePart:nth-child(7) {
- 			animation-delay: -1.08s;
- 		}
-
- 		.webpreloader__progress {
- 			position: relative;
- 			flex: 0 0 8px;
- 			width: 100%;
- 			height: 8px;
- 			overflow: hidden;
- 			background-color: #000;
- 		}
-
- 		.webpreloader__progress span {
- 			position: absolute;
- 			inset: 0;
- 			display: block;
- 			background-color: #caf749;
- 			transform: scaleX(0);
- 			transform-origin: left center;
- 		}
-
- 		@keyframes webpreloaderCubeShimmer {
-
- 			0%,
- 			65%,
- 			100% {
- 				fill: #000;
- 			}
-
- 			30% {
- 				fill: #caf749;
- 			}
- 		}
-
- 		@keyframes webpreloaderBackdropFade {
- 			from {
+ 			.load & {
  				opacity: 1;
- 			}
+ 				transform: translate(0px, 0px);
+ 				filter: blur(0px);
 
- 			to {
- 				opacity: 0;
  			}
  		}
 
- 		@media (prefers-reduced-motion: reduce) {
+ 		.webpreloader__wordmark path:nth-child(1) {
+ 			transition: all 0.4s ease 0.1s;
+ 			transform: translateY(20px);
+
+ 		}
+
+ 		.webpreloader__wordmark path:nth-child(2) {
+ 			transition: all 0.4s ease 0.15s;
+ 			transform: translateY(-20px);
+
+ 		}
+
+ 		.webpreloader__wordmark path:nth-child(3) {
+ 			transition: all 0.4s ease 0.2s;
+ 			transform: translateY(20px);
+
+ 		}
+
+ 		.webpreloader__wordmark path:nth-child(4) {
+ 			transform: translateY(-20px);
+
+ 			transition: all 0.4s ease 0.25s;
+ 		}
+
+ 		.webpreloader__wordmark path:nth-child(5) {
+ 			transform: translateY(20px);
+
+ 			transition: all 0.4s ease 0.3s;
+ 		}
+
+ 		.webpreloader__wordmark path:nth-child(6) {
+ 			transform: translateY(-20px);
+
+ 			transition: all 0.4s ease 0.35s;
+ 		}
+
+ 		.webpreloader__wordmark path:nth-child(7) {
+ 			transition: all 0.4s ease 0.4s;
+ 			transform: translateY(20px);
+
+ 		}
+
+ 		.webpreloader__wordmark path:nth-child(8) {
+ 			transition: all 0.4s ease 0.45s;
+ 			transform: translateY(-20px);
+
+ 		}
+
+ 		.webpreloader__wordmark path:nth-child(9) {
+ 			transition: all 0.4s ease 0.5s;
+ 			transform: translateY(20px);
+
+ 		}
+
+ 		.webpreloader__wordmark path {
+ 			filter: blur(6px);
+ 			opacity: 0;
+
+ 			.load & {
+ 				opacity: 1;
+ 				transform: translate(0px, 0px);
+ 				filter: blur(0px);
+
+ 			}
+
+ 			/* path{ */
+ 			/*  */
+
+ 			/* } */
+ 		}
+
+
+ 		/* @media (prefers-reduced-motion: reduce) {
+ 			.webpreloader--loaded {
+ 				transition-delay: 0s;
+ 			}
+
+ 			.webpreloader--loaded .webpreloader__wrapper,
+ 			.webpreloader--loaded::before {
+ 				transition: none;
+ 			}
+
  			.webpreloader__wrapper {
  				will-change: auto;
  			}
 
- 			.webpreloader__cubePart {
- 				animation: none;
- 			}
- 		}
+ 		} */
 
- 		html:not([data-fls-loaded]) body {
- 			overflow-y: hidden;
- 		}
-
- 		html:not([data-fls-loaded]) * {
- 			transition: none !important;
- 		}
 
  		@media (max-width: 991.98px) {
  			.webpreloader__main svg {
@@ -183,4 +265,5 @@
  			}
  		}
  	</style>
+
  </head>
