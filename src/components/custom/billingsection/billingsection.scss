@@ -111,14 +111,6 @@
 			background-color 240ms ease;
 	}
 
-	.btn-2l {
-		transition:
-			background-color 240ms ease,
-			border-color 240ms ease,
-			color 240ms ease,
-			opacity 240ms ease;
-	}
-
 	[data-fls-form-error] {
 		animation: billingMessageEnter 180ms ease both;
 	}
@@ -244,13 +236,7 @@
 
 	&__leaveButton {
 		flex: 1 1 auto;
-		min-height: 56px;
-		padding: 16px 24px;
-		font-size: 16px;
-	}
-
-	&__leaveButtonSecondary {
-		background-color: transparent;
+		min-width: 0;
 	}
 }
 
@@ -306,8 +292,7 @@
 	}
 
 	.billingsection__radio,
-	.billingsection .accountField__input,
-	.billingsection .btn-2l {
+	.billingsection .accountField__input {
 		transition: none;
 	}
 

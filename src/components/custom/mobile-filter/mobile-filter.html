@@ -19,42 +19,44 @@
 			<div class="menu-mobile-filter__body">
 				<div class="menu-mobile-filter__wrapper">
 
-					<div class="menu-mobile-filter__item item-menu-mobile-filter">
-						<div class="item-menu-mobile-filter__title">Categories</div>
-						<div class="item-menu-mobile-filter__content">
-							<div data-fls-checkbox class="checkbox">
-								<input id="filter-category-devices" class="checkbox__input" type="checkbox" value="1" name="form[]">
-								<label for="filter-category-devices" class="checkbox__label"><span class="checkbox__text">Devices</span></label>
-							</div>
-							<div data-fls-checkbox class="checkbox">
-								<input id="filter-category-branding" class="checkbox__input" type="checkbox" value="1" name="form[]">
-								<label for="filter-category-branding" class="checkbox__label"><span class="checkbox__text">Branding</span></label>
-							</div>
-							<div data-fls-checkbox class="checkbox">
-								<input id="filter-category-posters" class="checkbox__input" type="checkbox" value="1" name="form[]">
-								<label for="filter-category-posters" class="checkbox__label"><span class="checkbox__text">Posters</span></label>
-							</div>
-							<div data-fls-checkbox class="checkbox">
-								<input id="filter-category-outdoor" class="checkbox__input" type="checkbox" value="1" name="form[]">
-								<label for="filter-category-outdoor" class="checkbox__label"><span class="checkbox__text">Out
-										of home</span></label>
-							</div>
-							<div data-fls-checkbox class="checkbox">
-								<input id="filter-category-packaging" class="checkbox__input" type="checkbox" value="1" name="form[]">
-								<label for="filter-category-packaging" class="checkbox__label"><span class="checkbox__text">Packaging</span></label>
-							</div>
-							<div data-fls-checkbox class="checkbox">
-								<input id="filter-category-templates" class="checkbox__input" type="checkbox" value="1" name="form[]">
-								<label for="filter-category-templates" class="checkbox__label"><span class="checkbox__text">UX/UI
-										Templates</span></label>
-							</div>
-							<div data-fls-checkbox class="checkbox">
-								<input id="filter-category-graphics" class="checkbox__input" type="checkbox" value="1" name="form[]">
-								<label for="filter-category-graphics" class="checkbox__label"><span class="checkbox__text">Graphic
-										Elements</span></label>
+					<if condition="typeof hideCategories === 'undefined' || !hideCategories">
+						<div class="menu-mobile-filter__item item-menu-mobile-filter">
+							<div class="item-menu-mobile-filter__title">Categories</div>
+							<div class="item-menu-mobile-filter__content">
+								<div data-fls-checkbox class="checkbox">
+									<input id="filter-category-devices" class="checkbox__input" type="checkbox" value="1" name="form[]">
+									<label for="filter-category-devices" class="checkbox__label"><span class="checkbox__text">Devices</span></label>
+								</div>
+								<div data-fls-checkbox class="checkbox">
+									<input id="filter-category-branding" class="checkbox__input" type="checkbox" value="1" name="form[]">
+									<label for="filter-category-branding" class="checkbox__label"><span class="checkbox__text">Branding</span></label>
+								</div>
+								<div data-fls-checkbox class="checkbox">
+									<input id="filter-category-posters" class="checkbox__input" type="checkbox" value="1" name="form[]">
+									<label for="filter-category-posters" class="checkbox__label"><span class="checkbox__text">Posters</span></label>
+								</div>
+								<div data-fls-checkbox class="checkbox">
+									<input id="filter-category-outdoor" class="checkbox__input" type="checkbox" value="1" name="form[]">
+									<label for="filter-category-outdoor" class="checkbox__label"><span class="checkbox__text">Out
+											of home</span></label>
+								</div>
+								<div data-fls-checkbox class="checkbox">
+									<input id="filter-category-packaging" class="checkbox__input" type="checkbox" value="1" name="form[]">
+									<label for="filter-category-packaging" class="checkbox__label"><span class="checkbox__text">Packaging</span></label>
+								</div>
+								<div data-fls-checkbox class="checkbox">
+									<input id="filter-category-templates" class="checkbox__input" type="checkbox" value="1" name="form[]">
+									<label for="filter-category-templates" class="checkbox__label"><span class="checkbox__text">UX/UI
+											Templates</span></label>
+								</div>
+								<div data-fls-checkbox class="checkbox">
+									<input id="filter-category-graphics" class="checkbox__input" type="checkbox" value="1" name="form[]">
+									<label for="filter-category-graphics" class="checkbox__label"><span class="checkbox__text">Graphic
+											Elements</span></label>
+								</div>
 							</div>
 						</div>
-					</div>
+					</if>
 					<div class="menu-mobile-filter__item item-menu-mobile-filter">
 						<div class="item-menu-mobile-filter__title">Type of resource</div>
 						<div class="item-menu-mobile-filter__content">

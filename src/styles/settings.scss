@@ -1,5 +1,5 @@
 @use "sass:math";
-$fontFamily: "Safiro";
+$fontFamily: "Safiro", "Inter", sans-serif;
 $fontSize: 1rem; // де 14(px) - розмір шрифту за замовчуванням з макету
 
 $mainColor: #000; // Колір шрифту за замовчуванням

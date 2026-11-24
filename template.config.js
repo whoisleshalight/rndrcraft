@@ -122,10 +122,10 @@ export default {
 		},
 	},
 	projectpage: {
-		enable: false,
-		projectname: '',
+		enable: true,
+		projectname: 'pages',
 		template: 'src/projectpage/projectpage.html',
-		outfilename: '',
+		outfilename: 'pages2',
 	},
 	aliases: {
 		// HTML/SCSS/JS components

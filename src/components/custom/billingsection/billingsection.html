@@ -140,7 +140,7 @@
 							</include>
 						</div>
 						<p class="billingsection__note">Fields marked optional can be left blank. Address fields and tax requirements may vary by country.</p>
-						<button data-fls-buttons class="btn-2l accountForm__submit" type="submit" name="save_address" value="Save address">Save billing details</button>
+						<button class="accountButton accountForm__submit" type="submit" name="save_address" value="Save address">Save billing details</button>
 						<!-- WP: render the server notice here using the feedback success/error modifier, and remove hidden. -->
 						<p class="billingsection__feedback" data-billing-notices role="status" hidden></p>
 					</div>
@@ -160,8 +160,8 @@
 		<h2 class="billingsection__leaveTitle" id="billing-leave-title">Leave without saving?</h2>
 		<p class="billingsection__leaveDescription" id="billing-leave-description">You have unsaved changes. If you leave this page, your changes will be lost.</p>
 		<div class="billingsection__leaveActions">
-			<button data-fls-buttons class="btn-2l billingsection__leaveButton" type="button" data-billing-keep-editing autofocus>Keep editing</button>
-			<button data-fls-buttons class="btn-2l billingsection__leaveButton billingsection__leaveButtonSecondary"
+			<button class="accountButton billingsection__leaveButton" type="button" data-billing-keep-editing autofocus>Keep editing</button>
+			<button class="accountButton accountButton--secondary billingsection__leaveButton billingsection__leaveButtonSecondary"
 				type="button" data-billing-leave>Leave page</button>
 		</div>
 	</dialog>

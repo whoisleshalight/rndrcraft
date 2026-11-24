@@ -5,25 +5,6 @@
 	gap: 24px;
 	margin-top: 36px;
 
-	&__button {
-		padding: 16px 68px;
-		border: 3px solid $mainColor;
-		border-radius: 24px;
-		background-color: $greenColor;
-		font-size: 18px;
-		font-weight: 600;
-		line-height: 1.2;
-		text-transform: uppercase;
-		transition: color 0.3s, background-color 0.3s;
-
-		@media (any-hover: hover) {
-			&:hover {
-				background-color: $mainColor;
-				color: $greenColor;
-			}
-		}
-	}
-
 	&__progress {
 		color: #979594;
 		font-size: 18px;
@@ -36,19 +17,7 @@
 		gap: 16px;
 	}
 
-	.accountPagination__button {
-		width: 100%;
-		padding-inline: 24px;
-		font-size: 16px;
-	}
-
 	.accountPagination__progress {
 		font-size: 14px;
-	}
-}
-
-@media (prefers-reduced-motion: reduce) {
-	.accountPagination__button {
-		transition: none;
 	}
 }

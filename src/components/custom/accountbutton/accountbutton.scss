@@ -1,0 +1,54 @@
+@use "@styles/settings.scss" as *;
+
+.accountButton {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 100%;
+	padding: 16px 68px;
+	border: 3px solid $mainColor;
+	border-radius: 24px;
+	background-color: $greenColor;
+	color: $mainColor;
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 1.2;
+	text-align: center;
+	text-transform: uppercase;
+	white-space: normal;
+	transition: color 0.3s, background-color 0.3s;
+
+	&--secondary {
+		background-color: transparent;
+	}
+
+	&:disabled {
+		cursor: wait;
+		opacity: 0.65;
+	}
+
+	@media (any-hover: hover) {
+		&:hover {
+			background-color: $mainColor;
+			color: $greenColor;
+		}
+	}
+}
+
+dialog .accountButton {
+	padding-inline: 16px;
+}
+
+@media (max-width: $mobile) {
+	.accountButton {
+		width: 100%;
+		padding-inline: 24px;
+		font-size: 16px;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.accountButton {
+		transition: none;
+	}
+}

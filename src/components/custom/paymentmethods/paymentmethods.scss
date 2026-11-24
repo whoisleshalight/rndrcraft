@@ -34,13 +34,6 @@
 
 	&__addButton {
 		align-self: center;
-		max-width: 100%;
-		min-height: 72px;
-		padding: 20px 48px;
-		background-color: transparent;
-		font-size: 20px;
-		line-height: 1.2;
-		text-align: center;
 	}
 
 	&__formPanel {
@@ -99,13 +92,7 @@
 
 	&__formButton {
 		flex: 1 1 auto;
-		min-height: 56px;
-		padding: 16px 24px;
-		font-size: 16px;
-	}
-
-	&__cancelButton {
-		background-color: transparent;
+		min-width: 0;
 	}
 
 	&__list {
@@ -255,16 +242,6 @@
 	to {
 		opacity: 1;
 		transform: translateY(0);
-	}
-}
-
-@media (max-width: $mobile) {
-	.paymentMethods__addButton {
-		min-height: 56px;
-		padding: 16px 24px;
-		border-width: 2px;
-		border-radius: 16px;
-		font-size: 16px;
 	}
 }
 
