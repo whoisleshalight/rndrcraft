@@ -6,16 +6,6 @@
 	padding-block: 184px 100px;
 	color: #0a0a0a;
 
-	&::before {
-		content: "";
-		position: absolute;
-		inset: 0;
-		z-index: -1;
-		pointer-events: none;
-		opacity: 0.8;
-		background: linear-gradient(to bottom, transparent, #fff), url("@img/dashboard/background.webp") top center / cover no-repeat;
-	}
-
 	&__grid {
 		display: grid;
 		grid-template-columns: minmax(0, 18.8125rem) minmax(0, 54.6875rem);
@@ -26,10 +16,6 @@
 
 	&__main {
 		min-width: 0;
-	}
-
-	&--dashboard::before {
-		opacity: 1;
 	}
 }
 
@@ -69,11 +55,6 @@
 @media (max-width: $tablet) {
 	.accountLayout {
 		padding-block: 80px 64px;
-
-		&::before {
-			bottom: auto;
-			height: 100svh;
-		}
 	}
 
 	.accountLayout__grid {

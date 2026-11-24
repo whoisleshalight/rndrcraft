@@ -9,8 +9,8 @@
 		top: 0;
 		left: 0;
 		width: 100vw;
-		height: 100vh;
-		z-index: -1;
+		height: auto;
+		z-index: -1;aspect-ratio: 16 / 10;
 
 		@media (min-width: toEm(1940)) {
 			// height: auto;

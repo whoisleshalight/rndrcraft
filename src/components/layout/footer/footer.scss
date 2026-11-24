@@ -51,7 +51,7 @@
 .footer {
 	background-color: $mainColor;
 	color: $whiteColor;
-
+position: relative;z-index: 2;
 	&__container {
 	}
 
