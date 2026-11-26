@@ -5,7 +5,7 @@
 
 	&__overlay {
 		position: absolute;
-		inset: 0;
+		inset: toRem(-8) -2%;
 		z-index: 5;
 		padding: clamp(toRem(32), 8vh, toRem(80)) toRem(16);
 		border-radius: toRem(24);
@@ -75,7 +75,14 @@
 
 	@media (min-width: toEm(767.98)) {
 		&__overlay {
+			inset-block: toRem(-16);
 			border-radius: toRem(32);
+		}
+	}
+
+	@media (min-width: toEm(1279.98)) {
+		&__overlay {
+			inset-block: toRem(-24);
 		}
 	}
 
