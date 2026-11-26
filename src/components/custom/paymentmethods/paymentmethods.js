@@ -2,6 +2,7 @@ import Inputmask from "inputmask/lib/inputmask.js";
 import "inputmask/lib/extensions/inputmask.date.extensions.js";
 
 import { formValidate } from "@components/forms/_functions.js";
+import { createConfirmationModal } from "../confirmationmodal/confirmationmodal.js";
 
 import "./paymentmethods.scss";
 
@@ -19,132 +20,33 @@ document.querySelectorAll("[data-fls-paymentmethods]").forEach((component) => {
 	const eventOptions = { signal: eventController.signal };
 	const isPreview = Boolean(form?.hasAttribute("data-ui-preview-form"));
 	const inputs = form ? Array.from(form.querySelectorAll("input")) : [];
-	const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+	const modalControllers = [];
 	confirmationDialogs.forEach(({ element: dialog, action }) => {
 		if (!dialog) {
 			return;
 		}
 
-		let confirmationContext = null;
-
-		function getActionUrl(trigger) {
-			const rawUrl = trigger.dataset.paymentActionUrl || trigger.getAttribute("href");
-
-			if (!rawUrl || rawUrl === "#") {
-				return null;
-			}
-
-			try {
-				const actionUrl = new URL(rawUrl, window.location.href);
-
-				if (!/^https?:$/.test(actionUrl.protocol) || actionUrl.origin !== window.location.origin) {
-					console.warn("Payment method actions must use a WooCommerce URL on this site.");
-					return null;
-				}
-
-				return actionUrl.href;
-			} catch {
-				console.warn("The payment method action URL is invalid.");
-				return null;
-			}
-		}
-
-		function closeConfirmation(result = "cancel") {
-			if (!dialog.open || dialog.classList.contains("paymentMethods__confirmation--closing")) {
-				return;
-			}
-
-			dialog.returnValue = result;
-
-			if (reducedMotion.matches) {
-				dialog.close(result);
-				return;
-			}
-
-			dialog.classList.add("paymentMethods__confirmation--closing");
-		}
+		const confirmation = createConfirmationModal(dialog);
+		modalControllers.push(confirmation);
 
 		component.addEventListener("click", (event) => {
 			const trigger = event.target instanceof Element
-				? event.target.closest('button[data-payment-action="' + action + '"], a[data-payment-action="' + action + '"]')
+				? event.target.closest(`button[data-payment-action="${action}"]`)
 				: null;
 
 			if (!trigger || event.defaultPrevented) {
 				return;
 			}
 
-			// Prevent the native WooCommerce link from running before confirmation.
 			event.preventDefault();
-
-			if (dialog.open) {
-				return;
-			}
-
-			confirmationContext = {
-				action,
-				tokenId: trigger.dataset.paymentTokenId || trigger.closest("[data-payment-token-id]")?.dataset.paymentTokenId || null,
-				actionUrl: getActionUrl(trigger),
-				trigger,
-			};
-			dialog.returnValue = "";
-			dialog.showModal();
-		}, eventOptions);
-
-		dialog.querySelector("[data-payment-dialog-cancel]").addEventListener("click", () => {
-			closeConfirmation();
-		}, eventOptions);
-
-		dialog.querySelector("[data-payment-dialog-confirm]").addEventListener("click", () => {
-			closeConfirmation("confirm");
-		}, eventOptions);
-
-		dialog.addEventListener("cancel", (event) => {
-			event.preventDefault();
-			closeConfirmation();
-		}, eventOptions);
-
-		dialog.addEventListener("animationend", (event) => {
-			if (event.target === dialog && event.animationName === "paymentConfirmationExit") {
-				dialog.close(dialog.returnValue);
-			}
-		}, eventOptions);
-
-		dialog.addEventListener("close", () => {
-			dialog.classList.remove("paymentMethods__confirmation--closing");
-			const confirmedContext = confirmationContext;
-			confirmationContext = null;
-
-			if (confirmedContext?.trigger.isConnected) {
-				confirmedContext.trigger.focus({ preventScroll: true });
-			}
-
-			if (dialog.returnValue !== "confirm" || !confirmedContext) {
-				return;
-			}
-
-			// An AJAX adapter can preventDefault synchronously and handle the real action itself.
-			const shouldNavigate = component.dispatchEvent(new CustomEvent("paymentMethodConfirm", {
-				bubbles: true,
-				cancelable: true,
-				detail: confirmedContext,
-			}));
-
-			if (shouldNavigate && confirmedContext.actionUrl) {
-				window.location.assign(confirmedContext.actionUrl);
-			}
-		}, eventOptions);
-
-		reducedMotion.addEventListener("change", () => {
-			if (reducedMotion.matches && dialog.classList.contains("paymentMethods__confirmation--closing")) {
-				dialog.close(dialog.returnValue);
-			}
+			confirmation.open(trigger);
 		}, eventOptions);
 	});
 
 	if (import.meta.hot) {
 		import.meta.hot.dispose(() => {
 			eventController.abort();
-			confirmationDialogs.forEach(({ element }) => element?.close());
+			modalControllers.forEach((confirmation) => confirmation.destroy());
 
 			if (isPreview) {
 				inputs.forEach((input) => input.inputmask?.remove());
@@ -158,9 +60,11 @@ document.querySelectorAll("[data-fls-paymentmethods]").forEach((component) => {
 		return;
 	}
 
-	function setFormExpanded(isExpanded) {
+	function setFormExpanded(isExpanded, shouldMoveFocus = true) {
 		if (!isExpanded) {
-			toggleButton.focus({ preventScroll: true });
+			if (shouldMoveFocus) {
+				toggleButton.focus({ preventScroll: true });
+			}
 
 			if (isPreview) {
 				form.reset();
@@ -173,10 +77,12 @@ document.querySelectorAll("[data-fls-paymentmethods]").forEach((component) => {
 		formPanel.classList.toggle("paymentMethods__formPanel--expanded", isExpanded);
 		toggleButton.setAttribute("aria-expanded", String(isExpanded));
 
-		if (isExpanded) {
+		if (isExpanded && shouldMoveFocus) {
 			form.querySelector('input:not([type="hidden"]):not(:disabled), iframe')?.focus({ preventScroll: true });
 		}
 	}
+
+	setFormExpanded(toggleButton.getAttribute("aria-expanded") === "true", false);
 
 	toggleButton.addEventListener("click", () => {
 		setFormExpanded(toggleButton.getAttribute("aria-expanded") !== "true");

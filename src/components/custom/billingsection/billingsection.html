@@ -4,7 +4,7 @@
 			<include src="@components/custom/accountsidebar/accountsidebar.html"
 				locals='{
 					"currentPage": "billing",
-					"currentHref": "billing.html",
+					"currentHref": "[[billingHref]]",
 					"currentLabel": "Billing Details",
 					"mobileLabel": "Billing Details",
 					"navigationId": "billing-navigation"
@@ -150,19 +150,20 @@
 						<h2 class="accountForm__title" id="billing-payment-title">Payment methods</h2>
 						<p class="accountForm__description">Manage your saved payment methods.</p>
 					</div>
-					<include src="@components/custom/paymentmethods/paymentmethods.html"></include>
+					<include src="@components/custom/paymentmethods/paymentmethods.html"
+						locals='{"paymentState": [[JSON.stringify(paymentState)]]}'></include>
 				</section>
 			</div>
 		</div>
 	</div>
-	<dialog class="billingsection__leaveDialog" data-billing-leave-dialog
+	<dialog class="confirmationModal confirmationModal--wide" data-billing-leave-dialog
 		aria-labelledby="billing-leave-title" aria-describedby="billing-leave-description">
-		<h2 class="billingsection__leaveTitle" id="billing-leave-title">Leave without saving?</h2>
-		<p class="billingsection__leaveDescription" id="billing-leave-description">You have unsaved changes. If you leave this page, your changes will be lost.</p>
-		<div class="billingsection__leaveActions">
-			<button class="accountButton billingsection__leaveButton" type="button" data-billing-keep-editing autofocus>Keep editing</button>
-			<button class="accountButton accountButton--secondary billingsection__leaveButton billingsection__leaveButtonSecondary"
-				type="button" data-billing-leave>Leave page</button>
-		</div>
+		<include src="@components/custom/confirmationmodal/confirmationmodal.html"
+			locals='{"modal": {
+				"id": "billing-leave", "title": "Leave without saving?",
+				"description": "You have unsaved changes. If you leave this page, your changes will be lost.",
+				"cancelLabel": "Keep editing", "cancelIsPrimary": true,
+				"confirmLabel": "Leave page"
+			}}'></include>
 	</dialog>
 </section>

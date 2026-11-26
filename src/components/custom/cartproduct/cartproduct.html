@@ -1,0 +1,21 @@
+<article data-fls-cartproduct class="cartProduct" aria-label="[[product.title]]">
+	<a class="cartProduct__preview" href="product-single.html" aria-label="View [[product.title]]">
+		<img class="cartProduct__image" src="[[product.image]]" alt="[[product.alt]]" width="368" height="228">
+	</a>
+	<div class="cartProduct__details">
+		<div class="cartProduct__heading">
+			<div class="cartProduct__information">
+				<h2 class="cartProduct__title"><a href="product-single.html">[[product.title]]</a></h2>
+				<div class="cartProduct__license">
+					<span class="cartProduct__licenseName">Standard license</span>
+					<a class="cartProduct__licenseLink" href="documents-template.html#tab-0-1">View license</a>
+				</div>
+			</div>
+			<p class="cartProduct__price">[[product.price]]</p>
+		</div>
+		<button class="cartProduct__remove" type="button" data-cart-remove aria-haspopup="dialog" aria-controls="cart-remove-dialog" aria-label="Remove [[product.title]] from cart">
+			<span class="cartProduct__removeIcon" aria-hidden="true"><img src="@img/cart/trash.svg" alt=""></span>
+			<span class="cartProduct__removeText">Remove</span>
+		</button>
+	</div>
+</article>

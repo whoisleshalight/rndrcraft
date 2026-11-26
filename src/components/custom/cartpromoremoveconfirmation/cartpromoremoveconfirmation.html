@@ -1,0 +1,10 @@
+<dialog data-fls-cartpromoremoveconfirmation class="confirmationModal" id="cart-promo-remove-dialog"
+	aria-labelledby="cart-promo-remove-title" aria-describedby="cart-promo-remove-description">
+	<include src="@components/custom/confirmationmodal/confirmationmodal.html"
+		locals='{"modal": {
+			"id": "cart-promo-remove", "title": "Remove promo code?",
+			"description": "Are you sure you want to remove [[promoCode]] from your cart? Your discount will no longer apply.",
+			"cancelLabel": "Cancel", "cancelIsPrimary": false,
+			"confirmLabel": "Remove code"
+		}}'></include>
+</dialog>

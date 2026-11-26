@@ -1,10 +1,11 @@
 <template src="@components/templates/main/main.html"
-	locals='{"title": "Billing Details | RNDRCRAFT", "lang": "en", "preloader": {"enable": "false", "once": "false"}, "keywords": "", "description": "Manage your billing information and account payment details."}'>
+	locals='{"title": "Your cart | RNDRCRAFT", "lang": "en", "preloader": {"enable": "false", "once": "false"}, "keywords": "", "description": "Review your mockups before checkout."}'>
 	<block name="header">
 		<include src="@components/layout/header/header.html"></include>
 	</block>
 	<block name="main">
-		<include src="@components/pages/cartsingle/cartsingle.html"></include>
+		<include src="@components/pages/cartsingle/cartsingle.html"
+			locals='{"cartPromo": {"code": "", "label": "", "discount": "", "total": ""}}'></include>
 	</block>
 	<block name="footer">
 		<include src="@components/layout/footer/footer.html"></include>

@@ -1,4 +1,5 @@
 import { formValidate } from "@components/forms/_functions.js";
+import { createConfirmationModal } from "../confirmationmodal/confirmationmodal.js";
 
 import "@components/custom/accountform/accountform.scss";
 import "./billingsection.scss";
@@ -107,11 +108,10 @@ document.querySelectorAll("[data-fls-billingsection]").forEach((section) => {
 
 	updateCompanyFields();
 	const leaveDialog = section.querySelector("[data-billing-leave-dialog]");
+	let leaveConfirmation = null;
 
 	if (leaveDialog && form.hasAttribute("data-billing-unsaved-guard")) {
-		const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-		let pendingDestination = null;
-		let navigationTrigger = null;
+		leaveConfirmation = createConfirmationModal(leaveDialog);
 		let shouldAllowNavigation = false;
 
 		function getFormSnapshot() {
@@ -131,21 +131,6 @@ document.querySelectorAll("[data-fls-billingsection]").forEach((section) => {
 
 		function hasUnsavedChanges() {
 			return form.hasAttribute("data-billing-unsaved-guard") && getFormSnapshot() !== initialSnapshot;
-		}
-
-		function closeLeaveDialog(result = "stay") {
-			if (!leaveDialog.open || leaveDialog.classList.contains("billingsection__leaveDialog--closing")) {
-				return;
-			}
-
-			leaveDialog.returnValue = result;
-
-			if (reducedMotion.matches) {
-				leaveDialog.close(result);
-				return;
-			}
-
-			leaveDialog.classList.add("billingsection__leaveDialog--closing");
 		}
 
 		document.addEventListener("click", (event) => {
@@ -175,49 +160,7 @@ document.querySelectorAll("[data-fls-billingsection]").forEach((section) => {
 				return;
 			}
 
-			pendingDestination = destination.href;
-			navigationTrigger = link;
-			leaveDialog.returnValue = "";
-			leaveDialog.showModal();
-		}, eventOptions);
-
-		section.querySelector("[data-billing-keep-editing]").addEventListener("click", () => {
-			closeLeaveDialog();
-		}, eventOptions);
-
-		section.querySelector("[data-billing-leave]").addEventListener("click", () => {
-			closeLeaveDialog("leave");
-		}, eventOptions);
-
-		leaveDialog.addEventListener("cancel", (event) => {
-			event.preventDefault();
-			closeLeaveDialog();
-		}, eventOptions);
-
-		leaveDialog.addEventListener("animationend", (event) => {
-			if (event.target === leaveDialog && event.animationName === "billingLeaveExit") {
-				leaveDialog.close(leaveDialog.returnValue);
-			}
-		}, eventOptions);
-
-		leaveDialog.addEventListener("close", () => {
-			leaveDialog.classList.remove("billingsection__leaveDialog--closing");
-
-			if (leaveDialog.returnValue === "leave" && pendingDestination) {
-				shouldAllowNavigation = true;
-				window.location.assign(pendingDestination);
-			} else if (navigationTrigger?.isConnected) {
-				navigationTrigger.focus({ preventScroll: true });
-			}
-
-			pendingDestination = null;
-			navigationTrigger = null;
-		}, eventOptions);
-
-		reducedMotion.addEventListener("change", () => {
-			if (reducedMotion.matches && leaveDialog.classList.contains("billingsection__leaveDialog--closing")) {
-				leaveDialog.close(leaveDialog.returnValue);
-			}
+			leaveConfirmation.open(link);
 		}, eventOptions);
 
 		form.addEventListener("submit", (event) => {
@@ -239,7 +182,7 @@ document.querySelectorAll("[data-fls-billingsection]").forEach((section) => {
 	if (import.meta.hot) {
 		import.meta.hot.dispose(() => {
 			eventController.abort();
-			leaveDialog?.close();
+			leaveConfirmation?.destroy();
 		});
 	}
 });

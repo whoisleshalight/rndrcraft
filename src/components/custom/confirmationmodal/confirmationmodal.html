@@ -1,0 +1,8 @@
+<h2 class="confirmationModal__title" id="[[modal.id]]-title">[[modal.title]]</h2>
+<p class="confirmationModal__description" id="[[modal.id]]-description" data-confirmation-description>[[modal.description]]</p>
+<div class="confirmationModal__actions">
+	<button class="accountButton confirmationModal__button [[modal.cancelIsPrimary ? '' : 'accountButton--secondary']]"
+		type="button" data-confirmation-cancel autofocus>[[modal.cancelLabel]]</button>
+	<button class="accountButton confirmationModal__button [[modal.cancelIsPrimary ? 'accountButton--secondary' : '']]"
+		type="button">[[modal.confirmLabel]]</button>
+</div>

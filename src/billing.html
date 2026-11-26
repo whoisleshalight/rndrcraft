@@ -4,7 +4,8 @@
 		<include src="@components/layout/header/header.html"></include>
 	</block>
 	<block name="main">
-		<include src="@components/pages/billing/billing.html"></include>
+		<include src="@components/pages/billing/billing.html"
+			locals='{"billingHref": "billing.html", "paymentState": {"cards": [], "isFormExpanded": false}}'></include>
 	</block>
 	<block name="footer">
 		<include src="@components/layout/footer/footer.html"></include>

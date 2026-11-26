@@ -1,3 +1,4 @@
 <main class="page page--dashboard">
-<include src="@components/custom/billingsection/billingsection.html"></include>
+	<include src="@components/custom/billingsection/billingsection.html"
+		locals='{"billingHref": "[[billingHref]]", "paymentState": [[JSON.stringify(paymentState)]]}'></include>
 </main>

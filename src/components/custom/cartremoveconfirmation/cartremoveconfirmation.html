@@ -1,0 +1,10 @@
+<dialog data-fls-cartremoveconfirmation class="confirmationModal" id="cart-remove-dialog"
+	aria-labelledby="cart-remove-title" aria-describedby="cart-remove-description">
+	<include src="@components/custom/confirmationmodal/confirmationmodal.html"
+		locals='{"modal": {
+			"id": "cart-remove", "title": "Remove product?",
+			"description": "Are you sure you want to remove this product from your cart?",
+			"cancelLabel": "Cancel", "cancelIsPrimary": false,
+			"confirmLabel": "Remove"
+		}}'></include>
+</dialog>

@@ -1,0 +1,19 @@
+<section data-fls-curtsinglesection data-fls-cartlayout data-fls-background class="cart-main _background" aria-labelledby="cart-title">
+	<div class="cart-main__container">
+		<include src="@components/custom/cartlayout/cartheading.html"></include>
+		<div class="cart-main__content">
+			<ul class="cart-main__items" aria-label="Cart items">
+				<each loop="product in [
+					{ title: 'iPhone 15 Device Mockup', image: '@img/cart/iphone-preview.webp', alt: 'iPhone mockup on a circular display stand', price: '$12.00' },
+					{ title: 'MacBook Pro Device Mockup', image: '@img/cart/macbook-preview.webp', alt: 'MacBook Pro mockup on a dark stone surface', price: '$18.00' }
+				]">
+					<li>
+						<include src="@components/custom/cartproduct/cartproduct.html" locals='{"product": [[product]]}'></include>
+					</li>
+				</each>
+			</ul>
+			<include src="@components/custom/cartsummary/cartsummary.html" locals='{"cartPromo": [[JSON.stringify(cartPromo)]]}'></include>
+		</div>
+	</div>
+	<include src="@components/custom/cartremoveconfirmation/cartremoveconfirmation.html"></include>
+</section>

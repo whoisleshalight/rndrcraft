@@ -1,0 +1,22 @@
+<template src="@components/templates/main/main.html"
+	locals='{"title": "Billing Details — Add Card | RNDRCRAFT", "lang": "en", "preloader": {"enable": "false", "once": "false"}, "keywords": "", "description": "Billing details with saved cards and an expanded add-payment form."}'>
+	<block name="header">
+		<include src="@components/layout/header/header.html"></include>
+	</block>
+	<block name="main">
+		<include src="@components/pages/billing/billing.html"
+			locals='{"billingHref": "billingaddcard.html", "paymentState": {
+				"cards": [
+					{"brand": "Visa", "lastFour": "4242", "expiry": "08/2028", "isDefault": true},
+					{"brand": "Mastercard", "lastFour": "4444", "expiry": "11/2029", "isDefault": false}
+				],
+				"isFormExpanded": true
+			}}'></include>
+	</block>
+	<block name="footer">
+		<include src="@components/layout/footer/footer.html"></include>
+	</block>
+	<block name="popup">
+		<include src="@components/custom/search/search.html"></include>
+	</block>
+</template>

@@ -1,0 +1,19 @@
+<li class="paymentMethods__card">
+	<div class="paymentMethods__cardHeader">
+		<h3 class="paymentMethods__cardTitle">[[card.brand]] &#8226;&#8226;&#8226;&#8226; [[card.lastFour]]</h3>
+		<if condition="card.isDefault">
+			<span class="paymentMethods__defaultBadge">Default</span>
+		</if>
+	</div>
+	<p class="paymentMethods__description">Expires [[card.expiry]]</p>
+	<div class="paymentMethods__cardActions">
+		<if condition="!card.isDefault">
+			<button class="paymentMethods__textButton" type="button" data-payment-action="default"
+				aria-haspopup="dialog" aria-controls="payment-default-dialog"
+				aria-label="Make [[card.brand]] ending in [[card.lastFour]] default">Make default</button>
+		</if>
+		<button class="paymentMethods__textButton" type="button" data-payment-action="remove"
+			aria-haspopup="dialog" aria-controls="payment-remove-dialog"
+			aria-label="Remove [[card.brand]] ending in [[card.lastFour]]">Remove</button>
+	</div>
+</li>

@@ -11,7 +11,6 @@
 		gap: 20px;
 		padding-block: 12px;
 		text-align: center;
-		animation: paymentMethodEnter 240ms ease both;
 
 		&[hidden] {
 			display: none;
@@ -78,9 +77,14 @@
 	}
 
 	&__fieldRow {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+		display: flex;
+		flex-wrap: wrap;
 		gap: 24px;
+
+		> .accountField {
+			flex: 1 1 220px;
+			min-width: 0;
+		}
 	}
 
 	&__actions {
@@ -112,8 +116,10 @@
 		gap: 16px;
 		min-width: 0;
 		min-height: 0;
+		padding: 24px;
 		overflow: hidden;
-		animation: paymentMethodEnter 240ms ease both;
+		border: 1px solid rgba(0, 0, 0, 0.3);
+		border-radius: 24px;
 	}
 
 	&__cardHeader {
@@ -166,99 +172,9 @@
 		}
 	}
 
-	&__confirmation {
-		position: fixed;
-		inset: 0;
-		width: min(520px, calc(100% - 32px));
-		max-height: calc(100svh - 32px);
-		margin: auto;
-		padding: 24px;
-		overflow: auto;
-		border: 1px solid $mainColor;
-		border-radius: 24px;
-		background-color: $whiteColor;
-		color: $mainColor;
-
-		&[open] {
-			animation: paymentMethodEnter 240ms ease both;
-		}
-
-		&::backdrop {
-			background-color: rgba(0, 0, 0, 0.45);
-			animation: paymentBackdropEnter 240ms ease both;
-		}
-
-		&--closing[open] {
-			animation: paymentConfirmationExit 240ms ease both;
-		}
-
-		&--closing::backdrop {
-			animation: paymentBackdropEnter 240ms ease reverse both;
-		}
-	}
-
-	&__confirmationTitle {
-		margin-bottom: 16px;
-		font-size: 28px;
-		font-weight: 600;
-		line-height: 1.2;
-	}
-
-	&__confirmation .paymentMethods__actions {
-		margin-top: 24px;
-		padding-top: 0;
-	}
-
-}
-
-@keyframes paymentConfirmationExit {
-	from {
-		opacity: 1;
-		transform: translateY(0);
-	}
-
-	to {
-		opacity: 0;
-		transform: translateY(8px);
-	}
-}
-
-@keyframes paymentBackdropEnter {
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: 1;
-	}
-}
-
-@keyframes paymentMethodEnter {
-	from {
-		opacity: 0;
-		transform: translateY(8px);
-	}
-
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-@media (max-width: $mobileSmall) {
-	.paymentMethods__fieldRow {
-		grid-template-columns: minmax(0, 1fr);
-	}
 }
 
 @media (prefers-reduced-motion: reduce) {
-	.paymentMethods__empty,
-	.paymentMethods__card,
-	.paymentMethods__confirmation[open],
-	.paymentMethods__confirmation::backdrop {
-		animation: none;
-	}
-
 	.paymentMethods__textButton,
 	.paymentMethods__formPanel {
 		transition: none;

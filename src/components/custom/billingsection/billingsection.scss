@@ -2,10 +2,10 @@
 	--billing-transition-duration: 360ms;
 	--billing-transition-easing: cubic-bezier(0.22, 1, 0.36, 1);
 
-	&.accountLayout::before {
-		bottom: auto;
-		height: 100svh;
-	}
+	// &.accountLayout::before {
+	// 	bottom: auto;
+	// 	height: 100svh;
+	// }
 
 	&__main {
 		display: flex;
@@ -183,95 +183,6 @@
 		white-space: nowrap;
 	}
 
-	&__leaveDialog {
-		position: fixed;
-		inset: 0;
-		width: min(560px, calc(100% - 32px));
-		max-height: calc(100svh - 32px);
-		margin: auto;
-		padding: 24px;
-		overflow: auto;
-		border: 1px solid $mainColor;
-		border-radius: 24px;
-		background-color: $whiteColor;
-		color: $mainColor;
-
-		&[open] {
-			animation: billingLeaveEnter 240ms ease both;
-		}
-
-		&::backdrop {
-			background-color: rgba(0, 0, 0, 0.45);
-			animation: billingLeaveBackdrop 240ms ease both;
-		}
-
-		&--closing[open] {
-			animation: billingLeaveExit 240ms ease both;
-		}
-
-		&--closing::backdrop {
-			animation: billingLeaveBackdrop 240ms ease reverse both;
-		}
-	}
-
-	&__leaveTitle {
-		margin-bottom: 16px;
-		font-size: 28px;
-		font-weight: 600;
-		line-height: 1.2;
-	}
-
-	&__leaveDescription {
-		color: #5c5c5c;
-		font-size: 16px;
-		line-height: 1.3;
-	}
-
-	&__leaveActions {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 12px;
-		margin-top: 24px;
-	}
-
-	&__leaveButton {
-		flex: 1 1 auto;
-		min-width: 0;
-	}
-}
-
-@keyframes billingLeaveEnter {
-	from {
-		opacity: 0;
-		transform: translateY(8px);
-	}
-
-	to {
-		opacity: 1;
-		transform: translateY(0);
-	}
-}
-
-@keyframes billingLeaveExit {
-	from {
-		opacity: 1;
-		transform: translateY(0);
-	}
-
-	to {
-		opacity: 0;
-		transform: translateY(8px);
-	}
-}
-
-@keyframes billingLeaveBackdrop {
-	from {
-		opacity: 0;
-	}
-
-	to {
-		opacity: 1;
-	}
 }
 
 @keyframes billingMessageEnter {
@@ -296,9 +207,7 @@
 		transition: none;
 	}
 
-	.billingsection [data-fls-form-error],
-	.billingsection__leaveDialog[open],
-	.billingsection__leaveDialog::backdrop {
+	.billingsection [data-fls-form-error] {
 		animation: none;
 	}
 }

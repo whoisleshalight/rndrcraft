@@ -1,0 +1,65 @@
+<aside data-fls-cartsummary class="cartSummary" aria-labelledby="cart-summary-title">
+	<h2 class="cartSummary__title" id="cart-summary-title">Order Summary</h2>
+	<dl class="cartSummary__totals">
+		<div class="cartSummary__totalRow">
+			<dt>Subtotal</dt>
+			<dd class="cartSummary__subtotal">$30.00</dd>
+		</div>
+		<if condition="cartPromo.code">
+			<div class="cartSummary__totalRow">
+				<dt>Discount <span class="cartSummary__discountLabel">([[cartPromo.label]])</span></dt>
+				<dd class="cartSummary__subtotal">[[cartPromo.discount]]</dd>
+			</div>
+		</if>
+		<div class="cartSummary__totalRow cartSummary__totalRow--taxes">
+			<dt>Taxes</dt>
+			<dd class="cartSummary__taxNote">Calculated at checkout</dd>
+		</div>
+		<if condition="cartPromo.code">
+			<div class="cartSummary__totalRow cartSummary__totalRow--total">
+				<dt>Total</dt>
+				<dd>[[cartPromo.total]]</dd>
+			</div>
+		</if>
+	</dl>
+	<if condition="cartPromo.code">
+		<div class="cartSummary__appliedPromo" aria-labelledby="cart-applied-promo-title">
+			<h3 class="cartSummary__promoLabel" id="cart-applied-promo-title">Promo code applied</h3>
+			<div class="cartSummary__promoDetails">
+				<p class="cartSummary__promoCode">[[cartPromo.code]]</p>
+				<p class="cartSummary__discountLabel">[[cartPromo.label]]</p>
+			</div>
+			<button class="accountButton accountButton--secondary cartSummary__button" type="button"
+				data-cart-promo-remove aria-haspopup="dialog" aria-controls="cart-promo-remove-dialog"
+				aria-label="Remove promo code [[cartPromo.code]]">Remove code</button>
+		</div>
+	</if>
+	<else>
+		<details class="cartSummary__promo" data-cart-promo>
+			<summary class="cartSummary__promoToggle" aria-controls="cart-promo-panel">Promo code<span class="cartSummary__promoIcon" aria-hidden="true"></span></summary>
+			<div class="cartSummary__promoPanel" id="cart-promo-panel">
+				<!-- WP: remove data-ui-preview-form and connect coupon validation and application. -->
+				<form class="cartSummary__promoContent" data-fls-form data-ui-preview-form action="#" method="post">
+					<div data-fls-accountfield class="accountField">
+						<label class="accountField__label" for="cart-promo-code">Enter promo code</label>
+						<div class="accountField__control">
+							<input data-fls-input class="input accountField__input" id="cart-promo-code" name="coupon_code"
+								type="text" autocomplete="off" placeholder="Promo code" required
+								data-fls-form-validatenow data-fls-form-errtext="Enter a promo code.">
+						</div>
+					</div>
+					<button class="accountButton accountButton--secondary cartSummary__button" type="submit">Apply</button>
+				</form>
+			</div>
+		</details>
+	</else>
+	<div class="cartSummary__actions">
+		<!-- WP: replace with the real checkout URL. -->
+		<button class="accountButton cartSummary__button" type="button">Proceed to checkout</button>
+		<a class="cartSummary__continue" href="all_mockups.html">Continue shopping</a>
+	</div>
+	<if condition="cartPromo.code">
+		<include src="@components/custom/cartpromoremoveconfirmation/cartpromoremoveconfirmation.html"
+			locals='{"promoCode": "[[cartPromo.code]]"}'></include>
+	</if>
+</aside>

@@ -1,0 +1,73 @@
+@use "../accountbutton/accountbutton.scss";
+
+.cart-main {
+	position: relative;
+	isolation: isolate;
+	padding-block: 184px 80px;
+
+	&._background::before {
+		height: 100%;
+		aspect-ratio: auto;
+	}
+
+	&__heading {
+		display: flex;
+		flex-direction: column;
+		gap: 12px;
+		margin-bottom: 32px;
+		padding-bottom: 32px;
+		border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+	}
+
+	&__title {
+		font-size: 64px;
+		font-weight: 600;
+		line-height: 1.25;
+	}
+
+	&__description {
+		font-size: 28px;
+		line-height: 1.25;
+	}
+}
+
+@media (max-width: $pc) {
+	.cart-main {
+		padding-top: 136px;
+	}
+}
+
+@media (max-width: $laptopXl) {
+	.cart-main__title {
+		font-size: 56px;
+	}
+
+	.cart-main__description {
+		font-size: 24px;
+	}
+}
+
+@media (max-width: $tablet) {
+	.cart-main {
+		padding-block: 104px 48px;
+	}
+
+	.cart-main__container {
+		max-width: none;
+		padding-inline: 16px;
+	}
+
+	.cart-main__title {
+		font-size: 48px;
+	}
+
+	.cart-main__description {
+		font-size: 18px;
+	}
+}
+
+@media (max-width: $mobileX) {
+	.cart-main__title {
+		font-size: 36px;
+	}
+}

@@ -1,1 +1,1 @@
-// Home interactions are provided by the included components.
+// Cart styles are loaded by the included components.

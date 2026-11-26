@@ -1,13 +1,23 @@
 <div data-fls-paymentmethods class="paymentMethods">
-	<div class="paymentMethods__empty" data-payment-empty>
-		<h3 class="paymentMethods__emptyTitle">No saved payment methods</h3>
-		<p class="paymentMethods__description">Add a payment method to make future checkout easier.</p>
-	</div>
-	<!-- WP: render saved WooCommerce payment tokens in this list; toggle hidden on the list/empty state on the server. -->
-	<ul class="paymentMethods__list" data-payment-list aria-label="Payment methods" hidden></ul>
+	<if condition="paymentState.cards.length">
+		<ul class="paymentMethods__list" data-payment-list aria-label="Payment methods">
+			<each loop="card in paymentState.cards">
+				<include src="@components/custom/paymentmethodcard/paymentmethodcard.html"
+					locals='{"card": [[JSON.stringify(card)]]}'></include>
+			</each>
+		</ul>
+	</if>
+	<else>
+		<div class="paymentMethods__empty" data-payment-empty>
+			<h3 class="paymentMethods__emptyTitle">No saved payment methods</h3>
+			<p class="paymentMethods__description">Add a payment method to make future checkout easier.</p>
+		</div>
+		<ul class="paymentMethods__list" data-payment-list aria-label="Payment methods" hidden></ul>
+	</else>
 	<button class="accountButton paymentMethods__addButton" type="button" data-payment-toggle
-		aria-expanded="false" aria-controls="payment-method-form">Add payment method</button>
-	<div class="paymentMethods__formPanel" data-payment-panel id="payment-method-form" aria-hidden="true" inert>
+		aria-expanded="[[paymentState.isFormExpanded]]" aria-controls="payment-method-form">Add payment method</button>
+	<div class="paymentMethods__formPanel [[paymentState.isFormExpanded ? 'paymentMethods__formPanel--expanded' : '']]"
+		data-payment-panel id="payment-method-form" aria-hidden="[[!paymentState.isFormExpanded]]" inert>
 		<div class="paymentMethods__formContent">
 			<!-- WP: remove data-ui-preview-form, use the gateway's form action/nonces, and replace the visual fields with its hosted fields. -->
 			<form class="paymentMethods__form" data-payment-form data-ui-preview-form action="#" method="post" autocomplete="off" aria-labelledby="payment-method-title">
@@ -50,42 +60,24 @@
 			</form>
 		</div>
 	</div>
-	<!-- WP: render real masked token metadata. Set data-payment-token-id and use nonce-protected WooCommerce action links with the same data-payment-action attributes. -->
-	<template data-payment-card-template>
-		<li class="paymentMethods__card" data-payment-token-id="">
-			<div class="paymentMethods__cardHeader">
-				<h3 class="paymentMethods__cardTitle">Visa &#8226;&#8226;&#8226;&#8226; 4242</h3>
-				<span class="paymentMethods__defaultBadge" data-payment-default-badge>Default</span>
-			</div>
-			<p class="paymentMethods__description">Expires 08/2028</p>
-			<div class="paymentMethods__cardActions">
-				<button class="paymentMethods__textButton" type="button" data-payment-action="default" data-payment-action-url="" hidden>Make default</button>
-				<button class="paymentMethods__textButton" type="button" data-payment-action="remove" data-payment-action-url="">Remove</button>
-			</div>
-		</li>
-	</template>
-	<dialog class="paymentMethods__confirmation" data-payment-remove-dialog
+	<dialog class="confirmationModal" data-payment-remove-dialog id="payment-remove-dialog"
 		aria-labelledby="payment-remove-title" aria-describedby="payment-remove-description">
-		<h2 class="paymentMethods__confirmationTitle" id="payment-remove-title">Remove payment method?</h2>
-		<p class="paymentMethods__description" id="payment-remove-description">Are you sure you want to remove this payment method?</p>
-		<div class="paymentMethods__actions">
-			<button class="accountButton accountButton--secondary paymentMethods__formButton paymentMethods__cancelButton"
-				type="button" data-payment-remove-cancel data-payment-dialog-cancel autofocus>Cancel</button>
-			<!-- Confirm emits paymentMethodConfirm; the supplied WooCommerce URL runs unless an AJAX adapter prevents the event. -->
-			<button class="accountButton paymentMethods__formButton"
-				type="button" data-payment-remove-confirm data-payment-dialog-confirm>Remove</button>
-		</div>
+		<include src="@components/custom/confirmationmodal/confirmationmodal.html"
+			locals='{"modal": {
+				"id": "payment-remove", "title": "Remove payment method?",
+				"description": "Are you sure you want to remove this payment method?",
+				"cancelLabel": "Cancel", "cancelIsPrimary": false,
+				"confirmLabel": "Remove"
+			}}'></include>
 	</dialog>
-	<dialog class="paymentMethods__confirmation" data-payment-default-dialog
+	<dialog class="confirmationModal" data-payment-default-dialog id="payment-default-dialog"
 		aria-labelledby="payment-default-title" aria-describedby="payment-default-description">
-		<h2 class="paymentMethods__confirmationTitle" id="payment-default-title">Make default payment method?</h2>
-		<p class="paymentMethods__description" id="payment-default-description">Are you sure you want to make this your default payment method?</p>
-		<div class="paymentMethods__actions">
-			<button class="accountButton accountButton--secondary paymentMethods__formButton paymentMethods__cancelButton"
-				type="button" data-payment-dialog-cancel autofocus>Cancel</button>
-			<!-- Confirm emits paymentMethodConfirm; the supplied WooCommerce URL runs unless an AJAX adapter prevents the event. -->
-			<button class="accountButton paymentMethods__formButton"
-				type="button" data-payment-dialog-confirm>Make default</button>
-		</div>
+		<include src="@components/custom/confirmationmodal/confirmationmodal.html"
+			locals='{"modal": {
+				"id": "payment-default", "title": "Make default payment method?",
+				"description": "Are you sure you want to make this your default payment method?",
+				"cancelLabel": "Cancel", "cancelIsPrimary": false,
+				"confirmLabel": "Make default"
+			}}'></include>
 	</dialog>
 </div>
