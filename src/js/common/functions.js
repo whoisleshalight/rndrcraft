@@ -35,22 +35,30 @@ export function addLoadedAttr() {
 		return;
 	}
 
-	const minimumLoadingDuration = 1000;
+	const hasWebpreloader = document.querySelector('[data-fls-webpreloader]') !== null;
+	const minimumLoadingDuration = hasWebpreloader ? 1000 : 0;
 	const loadingStartedAt = performance.now();
 
 	htmlElement.classList.add('load');
+
+	function markPageLoaded() {
+		htmlElement.setAttribute('data-fls-loaded', '');
+
+		setTimeout(() => {
+			htmlElement.classList.remove('load');
+		}, 1000);
+	}
 
 	function handlePageLoad() {
 		const elapsedLoadingTime = performance.now() - loadingStartedAt;
 		const remainingLoadingTime = Math.max(0, minimumLoadingDuration - elapsedLoadingTime);
 
-		setTimeout(() => {
-			htmlElement.setAttribute('data-fls-loaded', '');
+		if (remainingLoadingTime > 0) {
+			setTimeout(markPageLoaded, remainingLoadingTime);
+			return;
+		}
 
-			setTimeout(() => {
-				htmlElement.classList.remove('load');
-			}, 1000);
-		}, remainingLoadingTime);
+		markPageLoaded();
 	}
 
 	if (document.readyState === 'complete') {
